@@ -1,0 +1,41 @@
+<h1>Listado de Testimonios</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Organizacion</th>
+            <th>Comentario</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('testimonio_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.nombre }}</td>
+            <td>{{ entity.organizacion }}</td>
+            <td>{{ entity.comentario }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('testimonio_show', { 'id': entity.id }) }}">Mostrar</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('testimonio_edit', { 'id': entity.id }) }}">Editar</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('testimonio_new') }}">
+            Crear nuevo Testimonio
+        </a>
+    </li>
+</ul>

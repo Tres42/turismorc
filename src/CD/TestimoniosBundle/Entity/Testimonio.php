@@ -3,16 +3,16 @@
 namespace CD\TestimoniosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * CD\TestimoniosBundle\Entity\Testimonio
  * 
- * Representa el testimonio de un viajante.
+ * Entidad que representa el testimonio de un viajante.
  *
- * @author Cristian Tosco
+ * @author Cristian Tosco <ctosco@tres42.com.ar>
  *
- * 
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="CD\TestimoniosBundle\Entity\TestimonioRepository")
  * @ORM\Table(name="testimonio")
  */
 class Testimonio 
@@ -31,7 +31,7 @@ class Testimonio
     private $nombre;
     
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */
     private $organizacion;
     
@@ -43,7 +43,7 @@ class Testimonio
 
     
     /**
-     * Get id
+     * Retorna el id
      *
      * @return integer 
      */
@@ -53,7 +53,7 @@ class Testimonio
     }
 
     /**
-     * Set nombre
+     * Asigna el nombre
      *
      * @param string $nombre
      * @return Testimonio
@@ -66,7 +66,7 @@ class Testimonio
     }
 
     /**
-     * Get nombre
+     * Retorna el nombre
      *
      * @return string 
      */
@@ -76,7 +76,7 @@ class Testimonio
     }
 
     /**
-     * Set organizacion
+     * Asigna la organizacion
      *
      * @param string $organizacion
      * @return Testimonio
@@ -89,7 +89,7 @@ class Testimonio
     }
 
     /**
-     * Get organizacion
+     * Retorna la organizacion
      *
      * @return string 
      */
@@ -99,7 +99,7 @@ class Testimonio
     }
 
     /**
-     * Set comentario
+     * Asigna el comentario
      *
      * @param string $comentario
      * @return Testimonio
@@ -112,7 +112,7 @@ class Testimonio
     }
 
     /**
-     * Get comentario
+     * Retorna el comentario
      *
      * @return string 
      */

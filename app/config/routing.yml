@@ -1,7 +1,3 @@
-# Ruta al Homepage
-#Homepage:
-    #resource: "@CDTestimoniosBundle/Controller/"
-
 CDTestimoniosBundle:
     resource: "@CDTestimoniosBundle/Controller/"
     type:     annotation    

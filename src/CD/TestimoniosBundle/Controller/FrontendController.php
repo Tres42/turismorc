@@ -9,20 +9,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * CD\TestimoniosBundle\Controller\FrontendController
  * 
- * Controlador que maneja los textos de testimonios.
+ * Controlador que maneja el frontend de testimonios.
  *
- * @author Cristian Tosco
+ * @author Cristian Tosco <ctosco@tres42.com.ar>
  */
 class FrontendController extends Controller
 {
     
     /**     
+    * @Route("/")
     * @Template()
     */
     public function indexAction()
     {        
         $repository = $this->getDoctrine()->getRepository('CDTestimoniosBundle:Testimonio');
-        $testimonio = $repository->find(1);
+        
+        // Buscamos un testimonio aleatoriamente
+        $testimonio = $repository->findOneRandom();
                         
         return array('testimonio'=> $testimonio);
     }    
