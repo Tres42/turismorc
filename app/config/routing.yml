@@ -6,5 +6,5 @@ t42_testimonios:
     resource: "@T42TestimoniosBundle/Controller/"
 
 t42_destinos:
-    resource: "@DestinosBundle/Controller/"
+    resource: "@T42DestinosBundle/Controller/"
     type:     annotation

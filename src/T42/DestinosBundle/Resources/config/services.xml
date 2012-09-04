@@ -6,11 +6,11 @@
 
     <!--
     <parameters>
-        <parameter key="destinos.example.class">CD\DestinosBundle\Example</parameter>
+        <parameter key="t42_destinos.example.class">T42\DestinosBundle\Example</parameter>
     </parameters>
 
     <services>
-        <service id="destinos.example" class="%destinos.example.class%">
+        <service id="t42_destinos.example" class="%t42_destinos.example.class%">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>

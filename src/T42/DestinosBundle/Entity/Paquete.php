@@ -1,12 +1,12 @@
 <?php
 
-namespace CD\DestinosBundle\Entity;
+namespace T42\DestinosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use CD\TestimoniosBundle\Entity\Ciudad;
 
 /**
- * CD\DestinosBundle\Entity\Paquete
+ * T42\DestinosBundle\Entity\Paquete
  * 
  * Representa un paquete de viajes.
  * 
@@ -75,7 +75,7 @@ class Paquete {
     private $categoria;
 
     /**
-     * @ORM\ManyToMany(targetEntity="CD\DestinosBundle\Entity\Ciudad")
+     * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\Ciudad")
      * @ORM\JoinTable()
      *      
      * */
@@ -311,10 +311,10 @@ class Paquete {
     /**
      * Add ciudad
      *
-     * @param CD\DestinosBundle\Entity\Ciudad $ciudad
+     * @param T42\DestinosBundle\Entity\Ciudad $ciudad
      * @return Paquete
      */
-    public function addCiudad(\CD\DestinosBundle\Entity\Ciudad $ciudad)
+    public function addCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad)
     {
         $this->ciudad[] = $ciudad;
     
@@ -324,9 +324,9 @@ class Paquete {
     /**
      * Remove ciudad
      *
-     * @param CD\DestinosBundle\Entity\Ciudad $ciudad
+     * @param T42\DestinosBundle\Entity\Ciudad $ciudad
      */
-    public function removeCiudad(\CD\DestinosBundle\Entity\Ciudad $ciudad)
+    public function removeCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad)
     {
         $this->ciudad->removeElement($ciudad);
     }

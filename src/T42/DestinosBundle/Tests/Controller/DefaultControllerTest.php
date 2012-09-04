@@ -1,6 +1,6 @@
 <?php
 
-namespace CD\DestinosBundle\Tests\Controller;
+namespace T42\DestinosBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

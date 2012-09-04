@@ -1,6 +1,6 @@
 <?php
 
-namespace CD\DestinosBundle\Controller;
+namespace T42\DestinosBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

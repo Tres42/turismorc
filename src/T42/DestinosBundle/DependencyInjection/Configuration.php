@@ -1,6 +1,6 @@
 <?php
 
-namespace CD\DestinosBundle\DependencyInjection;
+namespace T42\DestinosBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

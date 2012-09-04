@@ -1,21 +1,23 @@
 <?php
 
-namespace CD\DestinosBundle\Entity;
+namespace T42\DestinosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
- * CD\DestinosBundle\Entity\Pais
+ * T42\DestinosBundle\Entity\Ciudad
  * 
- * Representa un Pais.
+ * Representa una ciudad.
  * 
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  * 
  * @ORM\Entity
- * @ORM\Table(name="pais")
+ * @ORM\Table(name="ciudad")
  */
-class Pais 
+class Ciudad 
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -27,7 +29,12 @@ class Pais
      * @ORM\Column(type="string", length=100)
      */
     private $nombre;
-    
+
+    /** 
+     * @ORM\ManyToOne(targetEntity="T42\DestinosBundle\Entity\Pais") 
+     */
+    private $pais;
+
 
     /**
      * Get id
@@ -43,7 +50,7 @@ class Pais
      * Set nombre
      *
      * @param string $nombre
-     * @return Pais
+     * @return Ciudad
      */
     public function setNombre($nombre)
     {
@@ -60,5 +67,28 @@ class Pais
     public function getNombre()
     {
         return $this->nombre;
+    }
+
+    /**
+     * Set pais
+     *
+     * @param T42\DestinosBundle\Entity\Pais $pais
+     * @return Ciudad
+     */
+    public function setPais(\T42\DestinosBundle\Entity\Pais $pais = null)
+    {
+        $this->pais = $pais;
+    
+        return $this;
+    }
+
+    /**
+     * Get pais
+     *
+     * @return T42\DestinosBundle\Entity\Pais 
+     */
+    public function getPais()
+    {
+        return $this->pais;
     }
 }
