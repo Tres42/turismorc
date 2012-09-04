@@ -6,11 +6,11 @@
 
     <!--
     <parameters>
-        <parameter key="cd_testimonios.example.class">CD\TestimoniosBundle\Example</parameter>
+        <parameter key="t42_backend.example.class">T42\BackendBundle\Example</parameter>
     </parameters>
 
     <services>
-        <service id="cd_testimonios.example" class="%cd_testimonios.example.class%">
+        <service id="t42_backend.example" class="%t42_backend.example.class%">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>

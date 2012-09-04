@@ -1,17 +1,17 @@
 <?php
 
-namespace CD\TestimoniosBundle\Controller;
+namespace T42\TestimoniosBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use CD\TestimoniosBundle\Form\TestimonioType;
-use CD\TestimoniosBundle\Entity\Testimonio;
+use T42\TestimoniosBundle\Form\TestimonioType;
+use T42\TestimoniosBundle\Entity\Testimonio;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * CD\TestimoniosBundle\Controller\BackendController
+ * T42\TestimoniosBundle\Controller\BackendController
  * 
  * Controlador que administra ABM de Testimonios.
  *
@@ -32,7 +32,7 @@ class BackendController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('CDTestimoniosBundle:Testimonio')->findAll();
+        $entities = $em->getRepository('T42TestimoniosBundle:Testimonio')->findAll();
 
         return array(
             'entities' => $entities,
@@ -49,7 +49,7 @@ class BackendController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CDTestimoniosBundle:Testimonio')->find($id);
+        $entity = $em->getRepository('T42TestimoniosBundle:Testimonio')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Testimonio entity.');
@@ -85,7 +85,7 @@ class BackendController extends Controller
      *
      * @Route("/create", name="testimonio_create")
      * @Method("POST")
-     * @Template("CDTestimoniosBundle:Backend:new.html.twig")
+     * @Template("T42TestimoniosBundle:Backend:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -117,7 +117,7 @@ class BackendController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CDTestimoniosBundle:Testimonio')->find($id);
+        $entity = $em->getRepository('T42TestimoniosBundle:Testimonio')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Testimonio entity.');
@@ -138,13 +138,13 @@ class BackendController extends Controller
      *
      * @Route("/{id}/update", name="testimonio_update")
      * @Method("POST")
-     * @Template("CDTestimoniosBundle:Backend:edit.html.twig")
+     * @Template("T42TestimoniosBundle:Backend:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('CDTestimoniosBundle:Testimonio')->find($id);
+        $entity = $em->getRepository('T42TestimoniosBundle:Testimonio')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Testimonio entity.');
@@ -181,7 +181,7 @@ class BackendController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('CDTestimoniosBundle:Testimonio')->find($id);
+            $entity = $em->getRepository('T42TestimoniosBundle:Testimonio')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Testimonio entity.');

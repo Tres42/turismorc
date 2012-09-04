@@ -1,18 +1,18 @@
 <?php
 
-namespace CD\TestimoniosBundle\Entity;
+namespace T42\TestimoniosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * CD\TestimoniosBundle\Entity\Testimonio
+ * T42\TestimoniosBundle\Entity\Testimonio
  * 
  * Entidad que representa el testimonio de un viajante.
  *
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  *
- * @ORM\Entity(repositoryClass="CD\TestimoniosBundle\Entity\TestimonioRepository")
+ * @ORM\Entity(repositoryClass="T42\TestimoniosBundle\Entity\TestimonioRepository")
  * @ORM\Table(name="testimonio")
  */
 class Testimonio 

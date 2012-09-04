@@ -1,13 +1,13 @@
 <?php
 
-namespace CD\TestimoniosBundle\Controller;
+namespace T42\TestimoniosBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * CD\TestimoniosBundle\Controller\FrontendController
+ * T42\TestimoniosBundle\Controller\FrontendController
  * 
  * Controlador que maneja el frontend de testimonios.
  *
@@ -22,7 +22,7 @@ class FrontendController extends Controller
     */
     public function indexAction()
     {        
-        $repository = $this->getDoctrine()->getRepository('CDTestimoniosBundle:Testimonio');
+        $repository = $this->getDoctrine()->getRepository('T42TestimoniosBundle:Testimonio');
         
         // Buscamos un testimonio aleatoriamente
         $testimonio = $repository->findOneRandom();

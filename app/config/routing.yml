@@ -1,3 +1,8 @@
-CDTestimoniosBundle:
-    resource: "@CDTestimoniosBundle/Controller/"
+t42_backend:
+    resource: "@T42BackendBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+T42TestimoniosBundle:
+    resource: "@T42TestimoniosBundle/Controller/"
     type:     annotation    

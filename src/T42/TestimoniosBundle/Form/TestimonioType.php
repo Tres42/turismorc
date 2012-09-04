@@ -1,6 +1,6 @@
 <?php
 
-namespace CD\TestimoniosBundle\Form;
+namespace T42\TestimoniosBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,12 +20,12 @@ class TestimonioType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'CD\TestimoniosBundle\Entity\Testimonio'
+            'data_class' => 'T42\TestimoniosBundle\Entity\Testimonio'
         ));
     }
 
     public function getName()
     {
-        return 'cd_testimoniosbundle_testimoniotype';
+        return 't42_testimoniosbundle_testimoniotype';
     }
 }

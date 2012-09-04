@@ -1,6 +1,6 @@
 <?php
 
-namespace CD\TestimoniosBundle\DependencyInjection;
+namespace T42\BackendBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Loader;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class CDTestimoniosExtension extends Extension
+class T42BackendExtension extends Extension
 {
     /**
      * {@inheritDoc}

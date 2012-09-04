@@ -1,11 +1,11 @@
 <?php
 
-namespace CD\TestimoniosBundle\Entity;
+namespace T42\TestimoniosBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
 /**
- * CD\TestimoniosBundle\Entity\TestimonioRepository
+ * T42\TestimoniosBundle\Entity\TestimonioRepository
  * 
  * Respositorio de Testimonio
  *
@@ -19,12 +19,12 @@ class TestimonioRepository extends EntityRepository
      */
     public function findOneRandom() {
         $em = $this->getEntityManager();
-        $max = $em->createQuery('SELECT MAX(t.id) FROM CDTestimoniosBundle:Testimonio t')
+        $max = $em->createQuery('SELECT MAX(t.id) FROM T42TestimoniosBundle:Testimonio t')
                   ->getSingleScalarResult();
          
         $max = intval($max);
         
-        return $em->createQuery('SELECT t FROM CDTestimoniosBundle:Testimonio t
+        return $em->createQuery('SELECT t FROM T42TestimoniosBundle:Testimonio t
                     WHERE t.id >= :rand ORDER BY t.id ASC')
                     ->setParameter('rand', rand(0, $max))
                     ->setMaxResults(1)
