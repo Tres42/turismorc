@@ -1,8 +1,10 @@
 t42_backend:
     resource: "@T42BackendBundle/Controller/"
     type:     annotation
-    prefix:   /
 
-T42TestimoniosBundle:
+t42_testimonios:
     resource: "@T42TestimoniosBundle/Controller/"
-    type:     annotation    
+
+t42_destinos:
+    resource: "@DestinosBundle/Controller/"
+    type:     annotation
