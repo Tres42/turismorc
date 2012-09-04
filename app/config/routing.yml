@@ -1,3 +1,7 @@
+CDDestinosBundle:
+    resource: "@DestinosBundle/Controller/"
+    type:     annotation
+
 CDTestimoniosBundle:
     resource: "@CDTestimoniosBundle/Controller/"
     type:     annotation    
