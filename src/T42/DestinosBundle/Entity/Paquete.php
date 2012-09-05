@@ -45,24 +45,29 @@ class Paquete {
     private $esPromocion;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", length=255)
      */
     private $observaciones;
 
     /**
-     * @ORM\Column(type="object")
+     * @ORM\Column(type="array")
      */
     private $tarifas;
 
     /**
-     * @ORM\Column(type="string", length=255, name="servicio_incluido")
+     * @ORM\Column(type="text", length=255, name="servicios_incluidos")
      */
-    private $servicioIncluido;
+    private $serviciosIncluidos;
 
     /**
-     * @ORM\Column(type="string", length=255, name="servicio_no_incluido")
+     * @ORM\Column(type="text", name="servicios_no_incluidos")
      */
-    private $servicioNoIncluido;
+    private $serviciosNoIncluidos;
+
+    /**
+     * @ORM\Column(type="text", name="itinerario")
+     */
+    private $itinerario;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -80,6 +85,15 @@ class Paquete {
      *      
      * */
     private $ciudad;
+
+    /**
+     * Constructor
+     */
+    public function __construct() {
+        // Creamos el objeto tarifas el cual posee conceptos y sus respectivas tarifas
+        $this->tarifas = new Object();
+        $this->ciudad = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -217,45 +231,66 @@ class Paquete {
     }
 
     /**
-     * Set servicioIncluido
+     * Set serviciosIncluidos
      *
-     * @param string $servicioIncluido
+     * @param string $serviciosIncluidos
      * @return Paquete
      */
-    public function setServicioIncluido($servicioIncluido) {
-        $this->servicioIncluido = $servicioIncluido;
+    public function setServiciosIncluidos($serviciosIncluidos) {
+        $this->serviciosIncluidos = $serviciosIncluidos;
 
         return $this;
     }
 
     /**
-     * Get servicioIncluido
+     * Get serviciosIncluidos
      *
      * @return string 
      */
-    public function getServicioIncluido() {
-        return $this->servicioIncluido;
+    public function getServiciosIncluidos() {
+        return $this->serviciosIncluidos;
     }
 
     /**
-     * Set servicioNoIncluido
+     * Set serviciosNoIncluidos
      *
-     * @param string $servicioNoIncluido
+     * @param string $serviciosNoIncluidos
      * @return Paquete
      */
-    public function setServicioNoIncluido($servicioNoIncluido) {
-        $this->servicioNoIncluido = $servicioNoIncluido;
+    public function setServiciosNoIncluidos($serviciosNoIncluidos) {
+        $this->serviciosNoIncluidos = $serviciosNoIncluidos;
 
         return $this;
     }
 
     /**
-     * Get servicioNoIncluido
+     * Get serviciosNoIncluidos
      *
      * @return string 
      */
-    public function getServicioNoIncluido() {
-        return $this->servicioNoIncluido;
+    public function getServiciosNoIncluidos() {
+        return $this->serviciosNoIncluidos;
+    }
+
+    /**
+     * Set itinerario
+     *
+     * @param string $itinerario
+     * @return Paquete
+     */
+    public function setItinerario($itinerario) {
+        $this->itinerario = $itinerario;
+
+        return $this;
+    }
+
+    /**
+     * Get itinerario
+     *
+     * @return string 
+     */
+    public function getItinerario() {
+        return $this->itinerario;
     }
 
     /**
@@ -301,23 +336,14 @@ class Paquete {
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->ciudad = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
      * Add ciudad
      *
      * @param T42\DestinosBundle\Entity\Ciudad $ciudad
      * @return Paquete
      */
-    public function addCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad)
-    {
+    public function addCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad) {
         $this->ciudad[] = $ciudad;
-    
+
         return $this;
     }
 
@@ -326,8 +352,7 @@ class Paquete {
      *
      * @param T42\DestinosBundle\Entity\Ciudad $ciudad
      */
-    public function removeCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad)
-    {
+    public function removeCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad) {
         $this->ciudad->removeElement($ciudad);
     }
 
@@ -336,8 +361,54 @@ class Paquete {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getCiudad()
-    {
+    public function getCiudad() {
         return $this->ciudad;
     }
+
+    public function addTarifa(Tarifa $tarifa) {
+        $this->tarifas = array($tarifa->identificador => $tarifa);
+    }
+
+    public function removeTarifa(Tarifa $tarifa) {
+        if (false !== $key = array_search($tarifa->identificador, $this->tarifas, true)) {
+            unset($this->tarifas[$key]);
+            $this->tarifas = array_values($this->tarifas);
+        }
+    }
+
+}
+
+/**
+ * Clase que representa una tarifa, posee dos atributos el concepto y el monto de 
+ * la tarifa.
+ *
+ * @author Cristian Tosco <ctosco@tres42.com.ar>
+ * 
+ */
+class Tarifa {
+
+    /**
+     * Identificador interno unico de tarifas
+     */
+    public $identificador;
+
+    /*
+     * El concepto que maneja la empresa
+     * 
+     * Ej: SINGLE, DOUBLE o TRIPLE
+     */
+    public $concepto;
+
+    /*
+     *  El monto en dolares o pesos.
+     */
+    public $monto;
+
+    /**
+     * Constructor que inicializa el valor del identificador.
+     */
+    public function __construct() {
+        $this->identificador = 0;
+    }
+
 }

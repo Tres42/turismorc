@@ -29,13 +29,18 @@ class Ciudad
      * @ORM\Column(type="string", length=100)
      */
     private $nombre;
-
+    
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $provincia;
+    
     /** 
      * @ORM\ManyToOne(targetEntity="T42\DestinosBundle\Entity\Pais") 
      */
     private $pais;
 
-
+    
     /**
      * Get id
      *
@@ -70,6 +75,29 @@ class Ciudad
     }
 
     /**
+     * Set provincia
+     *
+     * @param string $provincia
+     * @return Ciudad
+     */
+    public function setProvincia($provincia)
+    {
+        $this->provincia = $provincia;
+    
+        return $this;
+    }
+
+    /**
+     * Get provincia
+     *
+     * @return string 
+     */
+    public function getProvincia()
+    {
+        return $this->provincia;
+    }
+
+    /**
      * Set pais
      *
      * @param T42\DestinosBundle\Entity\Pais $pais
@@ -90,5 +118,9 @@ class Ciudad
     public function getPais()
     {
         return $this->pais;
+    }
+    
+    public function __toString() {
+        return $this->nombre;
     }
 }
