@@ -11,14 +11,18 @@ use T42\DestinosBundle\Entity\Paquete;
 use T42\DestinosBundle\Form\PaqueteType;
 
 /**
- * Paquete controller.
+ * T42\DestinosBundle\Controller\PaqueteController
+ * 
+ * Controlador de paquete.
+ * 
+ * @author Cristian Tosco <ctosco@tres42.com.ar>
  *
  * @Route("admin/destinos")
  */
 class PaqueteController extends Controller
 {
     /**
-     * Lists all Paquete entities.
+     * Lista todas las entidades de paquetes.
      *
      * @Route("/", name="destinos")
      * @Template()
@@ -35,7 +39,7 @@ class PaqueteController extends Controller
     }
 
     /**
-     * Finds and displays a Paquete entity.
+     * Encuentra y muestra una entidad Paquete.
      *
      * @Route("/{id}/show", name="destinos_show")
      * @Template()
@@ -59,7 +63,7 @@ class PaqueteController extends Controller
     }
 
     /**
-     * Displays a form to create a new Paquete entity.
+     * Muestra el formulario para crear una nueva entidad de tipo Paquete.
      *
      * @Route("/new", name="destinos_new")
      * @Template()
@@ -76,7 +80,7 @@ class PaqueteController extends Controller
     }
 
     /**
-     * Creates a new Paquete entity.
+     * Crea un nueva entidad Paquete.
      *
      * @Route("/create", name="destinos_create")
      * @Method("POST")
@@ -103,7 +107,7 @@ class PaqueteController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Paquete entity.
+     * Muestra un formulario para editar un Paquete.
      *
      * @Route("/{id}/edit", name="destinos_edit")
      * @Template()
@@ -129,7 +133,7 @@ class PaqueteController extends Controller
     }
 
     /**
-     * Edits an existing Paquete entity.
+     * Edita una entidad de tipo Paquete.
      *
      * @Route("/{id}/update", name="destinos_update")
      * @Method("POST")
@@ -164,7 +168,7 @@ class PaqueteController extends Controller
     }
 
     /**
-     * Deletes a Paquete entity.
+     * Borra un Paquete.
      *
      * @Route("/{id}/delete", name="destinos_delete")
      * @Method("POST")
@@ -188,7 +192,10 @@ class PaqueteController extends Controller
 
         return $this->redirect($this->generateUrl('destinos'));
     }
-
+    
+    /**
+     * Crea un nuevo formulario de eliminacion de Paquete.
+     */
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder(array('id' => $id))

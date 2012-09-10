@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * T42\DestinosBundle\Entity\Ciudad
  * 
- * Representa una ciudad.
+ * Representa una ciudad en el paquete de viajes.
  * 
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  * 
@@ -42,7 +42,7 @@ class Ciudad
 
     
     /**
-     * Get id
+     * Retorna el id de la Ciudad.
      *
      * @return integer 
      */
@@ -52,7 +52,7 @@ class Ciudad
     }
 
     /**
-     * Set nombre
+     * Asigna el nombre de la ciudad.
      *
      * @param string $nombre
      * @return Ciudad
@@ -65,7 +65,7 @@ class Ciudad
     }
 
     /**
-     * Get nombre
+     * Retorna el nombre de la ciudad.
      *
      * @return string 
      */
@@ -75,7 +75,7 @@ class Ciudad
     }
 
     /**
-     * Set provincia
+     * Asigna el nombre de la provincia a la cual pertenece la ciudad.
      *
      * @param string $provincia
      * @return Ciudad
@@ -88,7 +88,7 @@ class Ciudad
     }
 
     /**
-     * Get provincia
+     * Retorna el nombre de la provincia a la cual pertenece la ciudad.
      *
      * @return string 
      */
@@ -98,7 +98,7 @@ class Ciudad
     }
 
     /**
-     * Set pais
+     * Asigna el pais al cual pertenece la ciudad.
      *
      * @param T42\DestinosBundle\Entity\Pais $pais
      * @return Ciudad
@@ -111,7 +111,7 @@ class Ciudad
     }
 
     /**
-     * Get pais
+     * Retorna el pais al cual pertenece la ciudad.
      *
      * @return T42\DestinosBundle\Entity\Pais 
      */
@@ -120,6 +120,9 @@ class Ciudad
         return $this->pais;
     }
     
+    /**
+     * Metodo magico que retorna el nombre para la coleccion de ciudades.
+     */
     public function __toString() {
         return $this->nombre;
     }

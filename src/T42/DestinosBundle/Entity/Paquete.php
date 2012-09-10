@@ -30,22 +30,22 @@ class Paquete {
     private $titulo;
 
     /**
-     * @ORM\Column(type="date", name="fecha_salida")
+     * @ORM\Column(type="date", name="fecha_salida", nullable=true)
      */
     private $fechaSalida;
 
     /**
-     * @ORM\Column(type="boolean", length=100, name="es_grupal")
+     * @ORM\Column(type="boolean", length=100, name="es_grupal", nullable=true)
      */
     private $esGrupal;
 
     /**
-     * @ORM\Column(type="boolean", length=100, name="es_promocion")
+     * @ORM\Column(type="boolean", length=100, name="es_promocion", nullable=true)
      */
     private $esPromocion;
 
     /**
-     * @ORM\Column(type="text", length=255)
+     * @ORM\Column(type="text", length=255, nullable=true)
      */
     private $observaciones;
 
@@ -55,17 +55,17 @@ class Paquete {
     private $tarifas;
 
     /**
-     * @ORM\Column(type="text", length=255, name="servicios_incluidos")
+     * @ORM\Column(type="text", length=255, name="servicios_incluidos", nullable=true)
      */
     private $serviciosIncluidos;
 
     /**
-     * @ORM\Column(type="text", name="servicios_no_incluidos")
+     * @ORM\Column(type="text", name="servicios_no_incluidos", nullable=true)
      */
     private $serviciosNoIncluidos;
 
     /**
-     * @ORM\Column(type="text", name="itinerario")
+     * @ORM\Column(type="text", name="itinerario", nullable=true)
      */
     private $itinerario;
 
@@ -84,19 +84,19 @@ class Paquete {
      * @ORM\JoinTable()
      *      
      * */
-    private $ciudad;
+    private $ciudades;
 
     /**
-     * Constructor
+     * Constructor del objeto paquete de viajes.
      */
     public function __construct() {
         // Creamos el objeto tarifas el cual posee conceptos y sus respectivas tarifas
-        $this->tarifas = new Object();
+        $this->tarifas = array();
         $this->ciudad = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Get id
+     * Retorna el id del paquete.
      *
      * @return integer 
      */
@@ -105,7 +105,7 @@ class Paquete {
     }
 
     /**
-     * Set titulo
+     * Asigna el titulo al paquete.
      *
      * @param string $titulo
      * @return Paquete
@@ -117,7 +117,7 @@ class Paquete {
     }
 
     /**
-     * Get titulo
+     * Retorna el titulo del paquete.
      *
      * @return string 
      */
@@ -126,7 +126,7 @@ class Paquete {
     }
 
     /**
-     * Set fechaSalida
+     * Asigna la fecha de salida del viaje. 
      *
      * @param \DateTime $fechaSalida
      * @return Paquete
@@ -138,7 +138,7 @@ class Paquete {
     }
 
     /**
-     * Get fechaSalida
+     * Retorna la fecha de salida del viaje.
      *
      * @return \DateTime 
      */
@@ -147,7 +147,8 @@ class Paquete {
     }
 
     /**
-     * Set esGrupal
+     * Asigna un valor de verdad si el paquete es o 
+     * no grupal.
      *
      * @param boolean $esGrupal
      * @return Paquete
@@ -159,7 +160,8 @@ class Paquete {
     }
 
     /**
-     * Get esGrupal
+     * Retorna un valor de verdad si el paquete es o 
+     * no grupal.
      *
      * @return boolean 
      */
@@ -168,7 +170,7 @@ class Paquete {
     }
 
     /**
-     * Set esPromocion
+     * Asigna un valor de verdad si el paquete es una promocion.
      *
      * @param boolean $esPromocion
      * @return Paquete
@@ -180,7 +182,7 @@ class Paquete {
     }
 
     /**
-     * Get esPromocion
+     * Retorna un valor de verdad si el paquete es una promocion.
      *
      * @return boolean 
      */
@@ -189,7 +191,7 @@ class Paquete {
     }
 
     /**
-     * Set observaciones
+     * Asigna las observaciones del paquete de viajes.
      *
      * @param string $observaciones
      * @return Paquete
@@ -201,7 +203,7 @@ class Paquete {
     }
 
     /**
-     * Get observaciones
+     * Retorna las observaciones del paquete de viajes.
      *
      * @return string 
      */
@@ -210,7 +212,7 @@ class Paquete {
     }
 
     /**
-     * Set tarifas
+     * Asigna las tarifas del paquete de viajes.
      *
      * @param \stdClass $tarifas
      * @return Paquete
@@ -222,7 +224,7 @@ class Paquete {
     }
 
     /**
-     * Get tarifas
+     * Retorna las tarifas del paquete de viajes.
      *
      * @return \stdClass 
      */
@@ -231,7 +233,7 @@ class Paquete {
     }
 
     /**
-     * Set serviciosIncluidos
+     * Retorna los servicios incluidos del paquete de viajes.
      *
      * @param string $serviciosIncluidos
      * @return Paquete
@@ -243,7 +245,8 @@ class Paquete {
     }
 
     /**
-     * Get serviciosIncluidos
+     * Retorna un string con los servicios que incluye el paquete de 
+     * viajes.
      *
      * @return string 
      */
@@ -252,7 +255,8 @@ class Paquete {
     }
 
     /**
-     * Set serviciosNoIncluidos
+     * Asigna un string con los servicios que no incluye el paquete de 
+     * viajes.
      *
      * @param string $serviciosNoIncluidos
      * @return Paquete
@@ -264,7 +268,8 @@ class Paquete {
     }
 
     /**
-     * Get serviciosNoIncluidos
+     * Retorna un string con los servicios que no incluye el paquete de 
+     * viajes.
      *
      * @return string 
      */
@@ -273,7 +278,7 @@ class Paquete {
     }
 
     /**
-     * Set itinerario
+     * Asigna el string con los itinerario del paquete.
      *
      * @param string $itinerario
      * @return Paquete
@@ -285,7 +290,7 @@ class Paquete {
     }
 
     /**
-     * Get itinerario
+     * Retorna el string con el itinerario del paquete.
      *
      * @return string 
      */
@@ -294,7 +299,7 @@ class Paquete {
     }
 
     /**
-     * Set resumen
+     * Asigna el resumen del paquete.
      *
      * @param string $resumen
      * @return Paquete
@@ -306,7 +311,7 @@ class Paquete {
     }
 
     /**
-     * Get resumen
+     * Retorna el resumen del paquete.
      *
      * @return string 
      */
@@ -315,7 +320,8 @@ class Paquete {
     }
 
     /**
-     * Set categoria
+     * Asigna un string con la categoria del paquete 
+     * Ej: Europa, Argentina, America Central y del Sur, etc.
      *
      * @param string $categoria
      * @return Paquete
@@ -327,7 +333,8 @@ class Paquete {
     }
 
     /**
-     * Get categoria
+     * Retorna un string con la categoria del paquete 
+     * Ej: Europa, Argentina, America Central y del Sur, etc.
      *
      * @return string 
      */
@@ -336,43 +343,66 @@ class Paquete {
     }
 
     /**
-     * Add ciudad
+     * Agrega la referencia a la ciudad en la cual se realiza el viaje.
      *
      * @param T42\DestinosBundle\Entity\Ciudad $ciudad
      * @return Paquete
      */
     public function addCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad) {
-        $this->ciudad[] = $ciudad;
+        $this->ciudades[] = $ciudad;
 
         return $this;
     }
 
     /**
-     * Remove ciudad
+     * Elimina la referencia a la ciudad en la cual se realiza el viaje.
      *
      * @param T42\DestinosBundle\Entity\Ciudad $ciudad
      */
     public function removeCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad) {
-        $this->ciudad->removeElement($ciudad);
+        $this->ciudades->removeElement($ciudad);
     }
 
     /**
-     * Get ciudad
+     * Retorna las ciudades en las cuales se realiza el viaje.
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getCiudad() {
-        return $this->ciudad;
+    public function getCiudades() {
+        return $this->ciudades;
     }
 
+    /**
+     * Agrega una nueva tarifa al arreglo de tarifas.
+     * 
+     * @param Tarifa $tarifa La Tarifa a agregar
+     */
     public function addTarifa(Tarifa $tarifa) {
-        $this->tarifas = array($tarifa->identificador => $tarifa);
+        $count = count($this->tarifas);
+        $tarifa->identificador = $count;
+
+        //Por ultimo agregamos la tarifa al arreglo 
+        $this->tarifas[] = $tarifa;
     }
 
+    /**
+     * Elimina una tarifa del arreglo de tarifas.
+     * 
+     * @param Tarifa $tarifa Tarifa a eliminar
+     */
     public function removeTarifa(Tarifa $tarifa) {
-        if (false !== $key = array_search($tarifa->identificador, $this->tarifas, true)) {
-            unset($this->tarifas[$key]);
-            $this->tarifas = array_values($this->tarifas);
+        // Obtenemos la clave de busqueda
+        $key = $tarifa->identificador;
+        $length = count($this->tarifas) - 1;
+
+        //Controlamos que el arreglo no sea vacio
+        if ($this->tarifas[$key] != NULL) {
+            for ($i = $key; $i < $length; $i++) {
+                $this->tarifas[$i] = $this->tarifas[$i + 1];
+            }
+            unset($this->tarifas[$length]);
+        } else {
+            //Nada la tarifa no se puede eliminar ya que el arregle esta vacio
         }
     }
 
@@ -408,7 +438,7 @@ class Tarifa {
      * Constructor que inicializa el valor del identificador.
      */
     public function __construct() {
-        $this->identificador = 0;
+        $this->identificador = -1;
     }
 
 }

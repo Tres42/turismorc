@@ -6,6 +6,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * T42\DestinosBundle\Controller\PaqueteType
+ * 
+ * Controlador de paquete.
+ * 
+ * @author Cristian Tosco <ctosco@tres42.com.ar>
+ *
+ */
 class PaqueteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -17,11 +25,12 @@ class PaqueteType extends AbstractType
             ->add('esPromocion')
             ->add('observaciones')
             ->add('tarifas')
-            ->add('servicioIncluido')
-            ->add('servicioNoIncluido')
+            ->add('serviciosIncluidos')
+            ->add('serviciosNoIncluidos')
+            ->add('itinerario')
             ->add('resumen')
             ->add('categoria')
-            ->add('ciudad')
+            ->add('ciudades')
         ;
     }
 

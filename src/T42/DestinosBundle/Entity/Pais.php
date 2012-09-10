@@ -4,10 +4,11 @@ namespace T42\DestinosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * T42\DestinosBundle\Entity\Pais
  * 
- * Representa un Pais.
+ * Representa un Pais en el paquete de viajes.
  * 
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  * 
@@ -30,7 +31,7 @@ class Pais
     
 
     /**
-     * Get id
+     * Retorna el id del pais.
      *
      * @return integer 
      */
@@ -40,7 +41,7 @@ class Pais
     }
 
     /**
-     * Set nombre
+     * Asigna el nombre al pais
      *
      * @param string $nombre
      * @return Pais
@@ -53,7 +54,7 @@ class Pais
     }
 
     /**
-     * Get nombre
+     * Retorna el nombre del pais.
      *
      * @return string 
      */
