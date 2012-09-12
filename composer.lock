@@ -1,5 +1,5 @@
 {
-    "hash": "502cb517b95d8cfe9c5d95e5e62235b0",
+    "hash": "cb4691822b6090b8e2366cb357081a37",
     "packages": [
         {
             "package": "doctrine/common",
@@ -30,6 +30,18 @@
             "version": "2.3.x-dev",
             "source-reference": "4d9f24b2eef3af3a3e76c773994c19bbb0706f88",
             "commit-date": "1346869007"
+        },
+        {
+            "package": "friendsofsymfony/user-bundle",
+            "version": "dev-master",
+            "alias-pretty-version": "2.0.x-dev",
+            "alias-version": "2.0.9999999.9999999-dev"
+        },
+        {
+            "package": "friendsofsymfony/user-bundle",
+            "version": "dev-master",
+            "source-reference": "878b7c8320159fb09e8e94d446c498b00142b206",
+            "commit-date": "1347102006"
         },
         {
             "package": "jms/aop-bundle",
@@ -81,13 +93,25 @@
         },
         {
             "package": "sensio/distribution-bundle",
-            "version": "2.1.x-dev",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "sensio/distribution-bundle",
+            "version": "dev-master",
             "source-reference": "2eee3cb4cd761c851f0d766649fb9ff6f4c97002",
             "commit-date": "1347340208"
         },
         {
             "package": "sensio/framework-extra-bundle",
-            "version": "2.1.x-dev",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "sensio/framework-extra-bundle",
+            "version": "dev-master",
             "source-reference": "v2.1.0",
             "commit-date": "1346234539"
         },
@@ -153,7 +177,13 @@
         },
         {
             "package": "symfony/symfony",
-            "version": "2.1.x-dev",
+            "version": "dev-master",
+            "alias-pretty-version": "2.1.x-dev",
+            "alias-version": "2.1.9999999.9999999-dev"
+        },
+        {
+            "package": "symfony/symfony",
+            "version": "dev-master",
             "source-reference": "f23fd03732e115fd15ec675c0ada4cba20a035d1",
             "commit-date": "1347354770"
         },
