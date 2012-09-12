@@ -1,4 +1,4 @@
-user:
+t42_user:
     resource: "@UserBundle/Controller/"
     type:     annotation
     prefix:   /
@@ -13,3 +13,22 @@ t42_testimonios:
 t42_destinos:
     resource: "@T42DestinosBundle/Controller/"
     type:     annotation
+    
+t42_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+
+t42_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+
+t42_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+
+t42_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+
+t42_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile    
