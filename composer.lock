@@ -40,8 +40,8 @@
         {
             "package": "friendsofsymfony/user-bundle",
             "version": "dev-master",
-            "source-reference": "878b7c8320159fb09e8e94d446c498b00142b206",
-            "commit-date": "1347102006"
+            "source-reference": "83536190cbd4a8b86846c3e8432f6ea907477b90",
+            "commit-date": "1347413919"
         },
         {
             "package": "jms/aop-bundle",
@@ -93,25 +93,13 @@
         },
         {
             "package": "sensio/distribution-bundle",
-            "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "sensio/distribution-bundle",
-            "version": "dev-master",
+            "version": "2.1.x-dev",
             "source-reference": "2eee3cb4cd761c851f0d766649fb9ff6f4c97002",
             "commit-date": "1347340208"
         },
         {
             "package": "sensio/framework-extra-bundle",
-            "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "sensio/framework-extra-bundle",
-            "version": "dev-master",
+            "version": "2.1.x-dev",
             "source-reference": "v2.1.0",
             "commit-date": "1346234539"
         },
@@ -177,13 +165,7 @@
         },
         {
             "package": "symfony/symfony",
-            "version": "dev-master",
-            "alias-pretty-version": "2.1.x-dev",
-            "alias-version": "2.1.9999999.9999999-dev"
-        },
-        {
-            "package": "symfony/symfony",
-            "version": "dev-master",
+            "version": "2.1.x-dev",
             "source-reference": "f23fd03732e115fd15ec675c0ada4cba20a035d1",
             "commit-date": "1347354770"
         },
