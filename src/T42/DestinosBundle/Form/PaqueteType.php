@@ -7,9 +7,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * T42\DestinosBundle\Controller\PaqueteType
+ * T42\DestinosBundle\Form\PaqueteType
  * 
- * Controlador de paquete.
+ * Form de paquete.
  * 
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  *

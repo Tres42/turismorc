@@ -1,3 +1,7 @@
+t42_contacto:
+    resource: "@ContactoBundle/Controller/"
+    type:     annotation
+
 t42_user:
     resource: "@UserBundle/Controller/"
     type:     annotation
