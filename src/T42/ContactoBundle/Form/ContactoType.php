@@ -21,11 +21,11 @@ class ContactoType extends AbstractType
         $builder
             ->add('nombre')
             ->add('apellido')
-            ->add('domicilio')
-            ->add('localidad')
-            ->add('provincia')
-            ->add('telefono')
-            ->add('destinos')
+            ->add('domicilio', 'text', array('required' => false))
+            ->add('localidad', 'text', array('required' => false))
+            ->add('provincia', 'text', array('required' => false))
+            ->add('telefono', 'text', array('required' => false))
+            ->add('destinos', 'text', array('required' => false))
             ->add('email', 'email')
             ->add('mensaje', 'textarea')
         ;

@@ -2,8 +2,6 @@
 
 namespace T42\ContactoBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * T42\ContactoBundle\Entity\Contacto
  * 
@@ -11,74 +9,55 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  * 
- * @ORM\Entity
- * @ORM\Table(name="contacto")
  */
 class Contacto 
 {
 
     /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=100)
+     * El nombre de la persona que envia el mensaje.
      */
     private $nombre;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * El apellido de la persona que envia el mensaje.
      */
     private $apellido;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * El domicilio de la persona que envia el mensaje.
      */
     private $domicilio;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * La localidad de la persona que envia el mensaje.
      */
     private $localidad;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * La provincia de la persona que envia el mensaje.
      */
     private $provincia;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * El numero de telefono de la persona que envia el mensaje.
      */
     private $telefono;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * Los destinos de los cuales desea obtener informacion al mail.
      */
     private $destinos;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * El mail de la persona que completa el formulario de contacto
      */
     private $email;
 
     /**
-     * @ORM\Column(type="text")
+     * El mensaje de la persona que completa el formulario de contacto
      */
     private $mensaje;
 
-
-    /**
-     * Retorna el id de contacto
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Asigna el nombre de contacto

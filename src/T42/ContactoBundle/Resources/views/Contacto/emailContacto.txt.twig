@@ -1,5 +1,11 @@
-Un mensaje de contacto fue hecho por {{ contacto.nombre }} en {{ "now" | date("Y-m-d H:i") }}.
+Un mensaje de contacto fue escrito por {{ contacto.apellido|capitalize }}, {{ contacto.nombre|capitalize }} el {{ "now" | date("Y-m-d H:i") }}.
 
-Escrito por : {{ contacto.email }}
+Mail del remitente : {{ contacto.email }}
+Domicilio del remitente: {{ contacto.domicilio }}
+Localidad del remitente: {{ contacto.localidad }}
+Provincia del remitente: {{ contacto.provincia }}
+Telefono del remitente: {{ contacto.telefono }}
+Destinos de interes: {{ contacto.destinos }}
+
 Mensaje:
 {{ contacto.mensaje }}

@@ -33,8 +33,8 @@ class ContactoController extends Controller
             $form->bindRequest($request);
 
             if ($form->isValid()) {
-                // Enviamos el correo electrónico
                 
+                // Enviamos el correo electrónico
                 $mensaje = \Swift_Message::newInstance()
                         ->setSubject('Contacto enviado desde Turismo Rio Cuarto')
                         ->setFrom('ctosco@tres42.com.ar')
