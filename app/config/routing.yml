@@ -17,7 +17,7 @@ t42_testimonios:
 t42_destinos:
     resource: "@T42DestinosBundle/Controller/"
     type:     annotation
-    
+
 t42_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
 

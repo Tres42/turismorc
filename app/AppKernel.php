@@ -19,11 +19,12 @@ class AppKernel extends Kernel
             new JMS\AopBundle\JMSAopBundle(),
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
             new T42\TestimoniosBundle\T42TestimoniosBundle(),
             new T42\BackendBundle\T42BackendBundle(),
             new T42\DestinosBundle\T42DestinosBundle(),
             new T42\UserBundle\UserBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
+            
             new T42\ContactoBundle\ContactoBundle(),
         );
 

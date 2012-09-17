@@ -21,6 +21,9 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    form:
+        resources:
+            - ':Form:fields.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -30,6 +33,8 @@ assetic:
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
+        compass:
+            apply_to: "\.scss$"
         #closure:
         #    jar: %kernel.root_dir%/Resources/java/compiler.jar
         #yui_css:

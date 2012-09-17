@@ -1,0 +1,66 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Administraci&oacute;n Turismo R&iacute;o Cuarto{% endblock %}
+
+{% block meta %}
+    <meta name="robots" content="noindex, nofollow" />
+{% endblock %}
+
+
+{% block stylesheets %}
+    {% stylesheets filter="cssrewrite"
+        "bundles/t42backend/css/bootstrap-2.1.1.min.css"
+        "bundles/t42backend/css/bootstrap-responsive-2.1.1.min.css"
+        "bundles/t42backend/sass/styles.scss"
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block body %}
+    {% block navbar %}
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a href="{{ path('t42_backend_index') }}" class="brand">Administraci&oacute;n Turismo R&iacute;o Cuarto</a>
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                    <div class="btn-group pull-right">
+                        <a href="{{ path('fos_user_profile_show') }}" class="btn"><i class="icon-user"></i> {{ app.user.username }}</a>
+                        <a href="#" class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="icon-envelope"></i> Mensajes</a></li>
+                            <li><a href="{{ path('fos_user_profile_show') }}"><i class="icon-pencil"></i> Editar Perfil</a></li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="{{ path('fos_user_security_logout') }}"><i class="icon-off"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <a href="{{ path('fos_user_security_login') }}" class="btn pull-right"><i class="icon-lock"></i> {{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                {% endif %}
+                <div class="nav-collapse">
+                    {% block nav %}{% include "T42BackendBundle:Backend:nav.html.twig" %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block container %}
+    <div class="container">
+        <div class="row">
+            <div class="span12">{% block content %}{% endblock %}</div>
+        </div>
+    </div>
+    {% endblock %}
+{% endblock body %}
+
+{% block javascripts %}
+    {% javascripts
+        "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+        "bundles/t42backend/js/lib/bootstrap/bootstrap-dropdown.js"
+    %}
+        &lt;script src="{{ asset_url }}"&gt;&lt;/script&gt;
+    {% endjavascripts %}
+{% endblock %}

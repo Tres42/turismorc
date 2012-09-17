@@ -1,0 +1,35 @@
+@import "compass/utilities/general/float";
+@import "compass/css3/opacity";
+
+body {
+    padding-top: 60px;
+}
+
+.login {
+    padding-top: 120px;
+}
+
+.centered {
+    float: none;
+    margin: 0 auto;
+}
+
+.sidebar {
+    padding: 8px 0;
+}
+
+.sidebar .icon-chevron-right {
+    @include float-right;
+    margin-top: 2px;
+    margin-right: -6px;
+    @include opacity(0.25);
+}
+
+.sidebar a:hover .icon-chevron-right {
+    @include opacity(0.5);
+}
+
+.sidebar .active a .icon-chevron-right,
+.sidebar .active a:hover .icon-chevron-right {
+    @include opacity(1);
+}
