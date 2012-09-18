@@ -1,26 +1,26 @@
+{% extends 'T42DestinosBundle::layout.html.twig' %}
+
+{% block content %}
+
 <h1>Paquete</h1>
 
-<table class="record_properties">
+<table class="table">
     <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
         <tr>
             <th>Titulo</th>
             <td>{{ entity.titulo }}</td>
         </tr>
         <tr>
             <th>Fecha Salida</th>
-            <td>{{ entity.fechaSalida|date('Y-m-d H:i:s') }}</td>
+            <td>{{ entity.fechaSalida|date('d/m/Y') }}</td>
         </tr>
         <tr>
             <th>Es Grupal</th>
-            <td>{{ entity.esGrupal }}</td>
+            <td>{% if entity.esGrupal %} Si {% else %} No {% endif %}</td>
         </tr>
         <tr>
             <th>Es Promocion</th>
-            <td>{{ entity.esPromocion }}</td>
+            <td>{% if entity.esPromocion %} Si {% else %} No {% endif %}</td>
         </tr>
         <tr>
             <th>Observaciones</th>
@@ -67,7 +67,9 @@
     <li>
         <form action="{{ path('destinos_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-            <button type="submit">Eliminar</button>
+                <button class="btn btn-danger" type="submit">Eliminar</button>
         </form>
     </li>
 </ul>
+
+{% endblock %}

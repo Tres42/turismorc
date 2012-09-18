@@ -1,13 +1,17 @@
+{% extends 'T42TestimoniosBundle::layout.html.twig' %}
+
+{% block content %}
+
 <h1>Listado de Testimonios</h1>
 
-<table class="records_list">
+<table class="table">
     <thead>
         <tr>
             <th>Id</th>
             <th>Nombre</th>
             <th>Organizacion</th>
             <th>Comentario</th>
-            <th>Actions</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -39,3 +43,5 @@
         </a>
     </li>
 </ul>
+
+{% endblock %}

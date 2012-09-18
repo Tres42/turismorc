@@ -29,7 +29,7 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [ ]
+    #bundles:        [ ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
@@ -68,3 +68,5 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: T42\UserBundle\Entity\User
+    group:
+        group_class: T42\UserBundle\Entity\Group

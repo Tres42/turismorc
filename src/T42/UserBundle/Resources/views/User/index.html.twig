@@ -1,0 +1,53 @@
+{% extends 'UserBundle::layout.html.twig' %}
+
+{% block content %}
+
+<h1>Usuarios</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Nombre de Usuario</th>
+            <th>Email</th>
+            <th>Habilitado</th>
+            <th>Ultimo Login</th>
+            <th>Bloqueado</th>
+            <th>Expirado</th>
+            <th>Roles</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('user_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+            <td>{{ entity.email }}</td>
+            <td>{% if entity.enabled %} Si {% else %} No {% endif %}</td>
+            <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('d-m-Y H:i:s') }}{% endif %}</td>
+            <td>{% if entity.locked %} Si {% else %} No {% endif %}</td>
+            <td>{% if entity.expired %} Si {% else %} No {% endif %}</td>
+            <td>{{ entity.roles }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('fos_user_profile_show', { 'id': entity.id }) }}">Mostrar</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}">Editar</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('fos_user_registration_register') }}">
+            Crear nuevo usuario
+        </a>
+    </li>
+</ul>
+
+{% endblock %}

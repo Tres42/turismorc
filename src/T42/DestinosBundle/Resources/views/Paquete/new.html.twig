@@ -1,16 +1,23 @@
-<h1>Creación de Paquetes</h1>
+{% extends 'T42DestinosBundle::layout.html.twig' %}
+
+{% block content %}
+
+<h1>Crear nuevo Paquete de viaje</h1>
 
 <form action="{{ path('destinos_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
-    <p>
-        <button type="submit">Crear</button>
-    </p>
+
+        <p>
+            <button class="btn btn-info" type="submit">Crear</button>
+        </p>
 </form>
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('destinos') }}">
-            Volver a paquetes
-        </a>
-    </li>
-</ul>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('destinos') }}">
+                Volver a paquetes
+            </a>
+        </li>
+    </ul>
+
+{% endblock %}

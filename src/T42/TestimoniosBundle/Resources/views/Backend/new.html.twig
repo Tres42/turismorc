@@ -1,9 +1,13 @@
+{% extends 'T42TestimoniosBundle::layout.html.twig' %}
+
+{% block content %}
+
 <h1>Crear nuevo Testimonio</h1>
 
 <form action="{{ path('testimonio_create') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <p>
-        <button type="submit">Crear</button>
+        <button class="btn btn-info" type="submit">Crear</button>
     </p>
 </form>
 
@@ -14,3 +18,5 @@
         </a>
     </li>
 </ul>
+
+{% endblock %}

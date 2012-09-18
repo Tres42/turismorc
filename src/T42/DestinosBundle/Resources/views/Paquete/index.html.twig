@@ -1,6 +1,10 @@
+{% extends 'T42DestinosBundle::layout.html.twig' %}
+
+{% block content %}
+
 <h1>Paquetes</h1>
 
-<table class="records_list">
+<table class="table">
     <thead>
         <tr>
             <th>Id</th>
@@ -8,13 +12,10 @@
             <th>Fecha de Salida</th>
             <th>Es Grupal</th>
             <th>Es Promocion</th>
-            <th>Observaciones</th>
             <th>Tarifas</th>
-            <th>Servicio Incluido</th>
-            <th>Servicio No Incluido</th>
             <th>Resumen</th>
             <th>Categoria</th>
-            <th>Actions</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -22,22 +23,19 @@
         <tr>
             <td><a href="{{ path('destinos_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.titulo }}</td>
-            <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('d-m-Y H:i:s') }}{% endif %}</td>
-            <td>{{ entity.esGrupal }}</td>
-            <td>{{ entity.esPromocion }}</td>
-            <td>{{ entity.observaciones }}</td>
+            <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('d/m/Y') }}{% endif %}</td>
+            <td>{% if entity.esGrupal %} Si {% else %} No {% endif %}</td>
+            <td>{% if entity.esPromocion %} Si {% else %} No {% endif %}</td>
             <td>{{ entity.tarifas }}</td>
-            <td>{{ entity.serviciosIncluidos }}</td>
-            <td>{{ entity.serviciosNoIncluidos }}</td>
             <td>{{ entity.resumen }}</td>
             <td>{{ entity.categoria }}</td>
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('destinos_show', { 'id': entity.id }) }}">show</a>
+                        <a href="{{ path('destinos_show', { 'id': entity.id }) }}">Mostrar</a>
                     </li>
                     <li>
-                        <a href="{{ path('destinos_edit', { 'id': entity.id }) }}">edit</a>
+                        <a href="{{ path('destinos_edit', { 'id': entity.id }) }}">Editar</a>
                     </li>
                 </ul>
             </td>
@@ -53,3 +51,5 @@
         </a>
     </li>
 </ul>
+
+{% endblock %}
