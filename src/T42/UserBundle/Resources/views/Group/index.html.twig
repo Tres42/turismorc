@@ -1,20 +1,20 @@
-<h1>Group list</h1>
+<h1>Grupos</h1>
 
 <table class="records_list">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Roles</th>
             <th>Id</th>
+            <th>Nombre</th>
+            <th>Roles</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
     {% for entity in entities %}
         <tr>
+            <td>{{ entity.id }}</td>
             <td><a href="{{ path('group_show', { 'id': entity.id }) }}">{{ entity.name }}</a></td>
             <td>{{ entity.roles }}</td>
-            <td>{{ entity.id }}</td>
             <td>
                 <ul>
                     <li>
@@ -32,8 +32,8 @@
 
 <ul>
     <li>
-        <a href="{{ path('group_new') }}">
-            Create a new entry
+        <a href="{{ path('fos_user_group_new') }}">
+            Crear nuevo grupo
         </a>
     </li>
 </ul>

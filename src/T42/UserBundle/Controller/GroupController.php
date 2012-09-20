@@ -11,9 +11,9 @@ use T42\UserBundle\Entity\Group;
 use T42\UserBundle\Form\GroupType;
 
 /**
- * Group controller.
+ * Controlador de Grupos.
  *
- * @Route("/admin/group")
+ * @Route("/admin/grupo")
  */
 class GroupController extends Controller
 {
