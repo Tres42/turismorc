@@ -6,12 +6,13 @@ use FOS\UserBundle\Entity\Group as BaseGroup;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * T42\UserBundle\Entity\User
+ * T42\UserBundle\Entity\Group
  * 
- * Clase que representa un grupo al cual pertenecen los usuarios y la cual 
- * agrupa los roles de permisos.
+ * Class representing a group to which users belong 
+ * to which groups and roles permissions.
  *
  * @author Cristian Tosco <ctosco@tres42.com.ar>
+ * 
  * @ORM\Entity
  * @ORM\Table(name="t42_group") 
  *  
