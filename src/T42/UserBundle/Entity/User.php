@@ -163,29 +163,6 @@ class User extends BaseUser
     }
 
     /**
-     * Add groups
-     *
-     * @param T42\UserBundle\Entity\Group $groups
-     * @return User
-     */
-    public function addGroup(\T42\UserBundle\Entity\Group $groups)
-    {
-        $this->groups[] = $groups;
-    
-        return $this;
-    }
-
-    /**
-     * Remove groups
-     *
-     * @param T42\UserBundle\Entity\Group $groups
-     */
-    public function removeGroup(\T42\UserBundle\Entity\Group $groups)
-    {
-        $this->groups->removeElement($groups);
-    }
-
-    /**
      * Get groups
      *
      * @return Doctrine\Common\Collections\Collection 
