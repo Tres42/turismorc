@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -17,4 +17,10 @@
         </service>
     </services>
     -->
+    <services>
+        <service id="t42_user.registration.form.type" class="T42\UserBundle\Form\Type\RegistrationFormType">
+            <tag name="form.type" alias="t42_user_registration" />
+            <argument>%fos_user.model.user.class%</argument>
+        </service>    
+    </services>
 </container>

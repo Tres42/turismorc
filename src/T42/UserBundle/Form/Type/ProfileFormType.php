@@ -2,10 +2,7 @@
 
 namespace T42\UserBundle\Form\Type;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\Validator\Constraint\UserPassword;
 use FOS\UserBundle\Form\Type\ProfileFormType as BaseProfileFormType;
 
 /**
@@ -16,9 +13,8 @@ use FOS\UserBundle\Form\Type\ProfileFormType as BaseProfileFormType;
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  *
  */
-class ProfileFormType extends BaseProfileFormType
+class ProfileFormType extends BaseProfileFormType 
 {
-
 
     /**
      * Builds the embedded form representing the user.
@@ -26,15 +22,20 @@ class ProfileFormType extends BaseProfileFormType
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
-    protected function buildUserForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('last_name', null, array('label' => 'Apellido', 'translation_domain' => 'FOSUserBundle'))
-            ->add('name', null, array('label' => 'Nombre', 'translation_domain' => 'FOSUserBundle'))
-            ->add('address', null, array('label' => 'Direccion', 'translation_domain' => 'FOSUserBundle'))
-            ->add('phone_number', null, array('label' => 'Numero de Telefono', 'translation_domain' => 'FOSUserBundle'))
-            ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
-            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
+    public function buildForm(FormBuilderInterface $builder, array $options) {
+        
+        parent::buildForm($builder, $options);
+        $builder->add('last_name', null, array('label' => 'Apellido'))
+                ->add('name', null, array('label' => 'Nombre'))
+                ->add('address', null, array('label' => 'Direccion'))
+                ->add('phone_number', null, array('label' => 'Numero de Telefono'))
         ;
+        
     }
+
+    public function getName()
+    {
+        return 't42_user_profile';
+    }
+    
 }
