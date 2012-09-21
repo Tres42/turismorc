@@ -73,3 +73,6 @@ fos_user:
     registration:
         form:
             type: t42_user_registration
+    profile:
+        form:
+            type: t42_user_profile            

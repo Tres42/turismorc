@@ -5,6 +5,14 @@ namespace T42\UserBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseRegistrationFormType;
 
+/**
+ * T42\UserBundle\Entity\User
+ * 
+ * Class overwritten to add fields to the user form.
+ *
+ * @author Cristian Tosco <ctosco@tres42.com.ar>
+ *
+ */
 class RegistrationFormType extends BaseRegistrationFormType
 {
     
