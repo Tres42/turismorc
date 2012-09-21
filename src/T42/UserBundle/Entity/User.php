@@ -29,12 +29,12 @@ class User extends BaseUser
     /**
      * @ORM\Column(type="string", length=100)
      */    
-    protected $last_name;
+    protected $lastname;
     
     /**
      * @ORM\Column(type="string", length=100)
      */    
-    protected $name;
+    protected $firstname;
     
     /**
      * @ORM\Column(type="string", length=100)
@@ -42,14 +42,27 @@ class User extends BaseUser
     protected $address;
     
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, name="phone_number")
      */
-    protected $phone_number;
+    protected $phoneNumber;
 
     /**
      * @ORM\ManyToMany(targetEntity="T42\UserBundle\Entity\Group")
      */
     protected $groups;
+
+
+
+    /**
+     * Construct
+     */
+    public function __construct()
+    {   
+        parent::__construct();
+        
+        //Initialize groups
+        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
 
     /**
@@ -63,57 +76,49 @@ class User extends BaseUser
     }
 
     /**
-     * Construct
-     */
-    public function __construct()
-    {
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
-     * Set last_name
+     * Set lastname
      *
-     * @param string $lastName
+     * @param string $lastname
      * @return User
      */
-    public function setLastName($lastName)
+    public function setLastname($lastname)
     {
-        $this->last_name = $lastName;
+        $this->lastname = $lastname;
     
         return $this;
     }
 
     /**
-     * Get last_name
+     * Get lastname
      *
      * @return string 
      */
-    public function getLastName()
+    public function getLastname()
     {
-        return $this->last_name;
+        return $this->lastname;
     }
 
     /**
-     * Set name
+     * Set firstname
      *
-     * @param string $name
+     * @param string $firstname
      * @return User
      */
-    public function setName($name)
+    public function setFirstname($firstname)
     {
-        $this->name = $name;
+        $this->firstname = $firstname;
     
         return $this;
     }
 
     /**
-     * Get name
+     * Get firstname
      *
      * @return string 
      */
-    public function getName()
+    public function getFirstname()
     {
-        return $this->name;
+        return $this->firstname;
     }
 
     /**
@@ -140,26 +145,26 @@ class User extends BaseUser
     }
 
     /**
-     * Set phone_number
+     * Set phoneNumber
      *
      * @param string $phoneNumber
      * @return User
      */
     public function setPhoneNumber($phoneNumber)
     {
-        $this->phone_number = $phoneNumber;
+        $this->phoneNumber = $phoneNumber;
     
         return $this;
     }
 
     /**
-     * Get phone_number
+     * Get phoneNumber
      *
      * @return string 
      */
     public function getPhoneNumber()
     {
-        return $this->phone_number;
+        return $this->phoneNumber;
     }
 
     /**

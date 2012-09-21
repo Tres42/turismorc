@@ -25,10 +25,10 @@ class ProfileFormType extends BaseProfileFormType
     public function buildForm(FormBuilderInterface $builder, array $options) {
         
         parent::buildForm($builder, $options);
-        $builder->add('last_name', null, array('label' => 'Apellido'))
-                ->add('name', null, array('label' => 'Nombre'))
+        $builder->add('lastname', null, array('label' => 'Apellido'))
+                ->add('firstname', null, array('label' => 'Nombre'))
                 ->add('address', null, array('label' => 'Direccion'))
-                ->add('phone_number', null, array('label' => 'Numero de Telefono'))
+                ->add('phoneNumber', null, array('label' => 'Numero de Telefono'))
         ;
         
     }

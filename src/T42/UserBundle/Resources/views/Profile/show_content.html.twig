@@ -1,6 +1,6 @@
 <div class="fos_user_user_show">
-    <p>Apellido: {{ user.getLastName() }}</p>
-    <p>Nombre: {{ user.getName() }}</p>
+    <p>Apellido: {{ user.getLastname() }}</p>
+    <p>Nombre: {{ user.getFirstname() }}</p>
     <p>Direccion: {{ user.getAddress() }}</p>
     <p>Numero de Telefono: {{ user.getPhoneNumber() }}</p>
     <p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}: {{ user.username }}</p>
