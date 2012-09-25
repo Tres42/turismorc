@@ -21,9 +21,9 @@ class RegistrationFormType extends BaseRegistrationFormType
         parent::buildForm($builder, $options);
         $builder->add('lastname', null, array('label' => 'Apellido'))
                 ->add('firstname', null, array('label' => 'Nombre'))
-                ->add('address', null, array('label' => 'Direccion'))
+                ->add('address', null, array('label' => 'Dirección'))
                 ->add('phone_number', null, array('label' => 'Numero de Telefono'))
-        ;
+                ->add('invitation', 'T42_invitation_type');
         
     }
 

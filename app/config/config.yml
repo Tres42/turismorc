@@ -75,4 +75,5 @@ fos_user:
             type: t42_user_registration
     profile:
         form:
-            type: t42_user_profile            
+            type: t42_user_profile
+    

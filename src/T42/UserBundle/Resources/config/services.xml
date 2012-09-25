@@ -26,6 +26,15 @@
         <service id="t42_user.profile.form.type" class="T42\UserBundle\Form\Type\ProfileFormType">
             <tag name="form.type" alias="t42_user_profile" />
             <argument>%fos_user.model.user.class%</argument>
-        </service>    
+        </service>  
+        
+        <service id="t42.invitation.form.type" class="T42\UserBundle\Form\Type\InvitationFormType">
+            <argument type="service" id="t42.invitation.form.data_transformer"/>
+            <tag name="form.type" alias="t42_invitation_type" />
+        </service>
+
+        <service id="t42.invitation.form.data_transformer" class="T42\UserBundle\Form\DataTransformer\InvitationToCodeTransformer">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>          
     </services>
 </container>

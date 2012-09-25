@@ -4,6 +4,7 @@ namespace T42\UserBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * T42\UserBundle\Entity\User
@@ -37,7 +38,7 @@ class User extends BaseUser
     protected $firstname;
     
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */    
     protected $address;
     
