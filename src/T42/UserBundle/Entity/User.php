@@ -50,6 +50,13 @@ class User extends BaseUser
      * @ORM\ManyToMany(targetEntity="T42\UserBundle\Entity\Group")
      */
     protected $groups;
+    
+    /**
+     * @ORM\OneToOne(targetEntity="T42\UserBundle\Entity\Invitation", inversedBy="user")
+     * @ORM\JoinColumn(referencedColumnName="code")
+     * @Assert\NotNull(message="Your invitation is wrong")
+     */
+    protected $invitation;    
 
 
 
@@ -176,4 +183,24 @@ class User extends BaseUser
     {
         return $this->groups;
     }
+    
+    /**
+     * Set invitation
+     * 
+     * @param Invitation $invitation Set the invitation for user.
+     */
+    public function setInvitation(Invitation $invitation)
+    {
+        $this->invitation = $invitation;
+    }
+    
+    /**
+     * Get invitation
+     * 
+     * @return Invitation Get the invitation for user.
+     */
+    public function getInvitation()
+    {
+        return $this->invitation;
+    }    
 }
