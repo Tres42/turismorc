@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
+use T42\UserBundle\Form\DataTransformer\InvitationToCodeTransformer;
 
 /**
  * Class for creating the invitation field
@@ -42,7 +43,7 @@ class InvitationFormType extends AbstractType
     }
 
     public function getName() {
-        return 'T42_invitation_type';
+        return 't42_invitation_type';
     }
 
 }

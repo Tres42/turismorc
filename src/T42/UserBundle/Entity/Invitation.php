@@ -15,6 +15,7 @@ use T42\UserBundle\Entity\User;
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  *
  * @ORM\Entity
+ * @ORM\Table(name="invitation")
  */
 class Invitation
 {

@@ -23,7 +23,7 @@ class RegistrationFormType extends BaseRegistrationFormType
                 ->add('firstname', null, array('label' => 'Nombre'))
                 ->add('address', null, array('label' => 'Dirección'))
                 ->add('phone_number', null, array('label' => 'Numero de Telefono'))
-                ->add('invitation', 'T42_invitation_type');
+                ->add('invitation', 't42_invitation_type');
         
     }
 

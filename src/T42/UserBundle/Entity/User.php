@@ -28,12 +28,12 @@ class User extends BaseUser
     protected $id;
     
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */    
     protected $lastname;
     
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=100, nullable=true)
      */    
     protected $firstname;
     
@@ -43,7 +43,7 @@ class User extends BaseUser
     protected $address;
     
     /**
-     * @ORM\Column(type="string", length=100, name="phone_number")
+     * @ORM\Column(type="string", length=100, name="phone_number", nullable=true)
      */
     protected $phoneNumber;
 
