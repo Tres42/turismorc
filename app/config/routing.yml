@@ -35,3 +35,7 @@ t42_user_change_password:
 t42_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /admin/group    
+    
+t42_user_invitation:
+    resource: "@T42UserBundle/Controller/"
+    type:     annotation

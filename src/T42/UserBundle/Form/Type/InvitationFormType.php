@@ -28,7 +28,7 @@ class InvitationFormType extends AbstractType
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->prependClientTransformer($this->invitationTransformer);
+        $builder->addViewTransformer($this->invitationTransformer);
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver) {

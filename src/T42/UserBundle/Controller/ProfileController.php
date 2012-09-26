@@ -21,7 +21,6 @@ class ProfileController extends BaseProfileController {
         $entities = $userManager->findUsers();
 
         return $this->container->get('templating')->renderResponse('T42UserBundle:Profile:list.html.' . $this->container->getParameter('fos_user.template.engine'), array('entities' => $entities));
-        //return $this->render('UserBundle:Profile:list.html.twig', array('entities' => $entities));
     }
 
     /**
