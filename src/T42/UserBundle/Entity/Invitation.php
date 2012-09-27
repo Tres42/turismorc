@@ -66,6 +66,16 @@ class Invitation
     }
     
     /**
+     * Set code
+     * 
+     * @param string $code 
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+    
+    /**
      * Get email
      * 
      * @return string Mail of user.
@@ -118,7 +128,7 @@ class Invitation
      * Sets the user they underwent the sending 
      * invitation.
      * 
-     * @param User $name Description
+     * @param User $user The user is assigned
      */
     public function setUser(User $user)
     {

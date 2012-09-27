@@ -21,6 +21,9 @@ class ContactoController extends Controller
 {
 
     /**
+     * Metodo que realiza el envio del mail si el formulario
+     * es valido.
+     * 
      * @Route("/", name="contacto")
      * @Template()
      */
@@ -39,7 +42,7 @@ class ContactoController extends Controller
                         ->setSubject('Contacto enviado desde Turismo Rio Cuarto')
                         ->setFrom('ctosco@tres42.com.ar')
                         ->setTo($this->container->getParameter('turismorc.emails.email_contacto'))
-                        ->setBody($this->renderView('ContactoBundle:Contacto:emailContacto.txt.twig', array('contacto' => $contacto)));
+                        ->setBody($this->renderView('T42ContactoBundle:Contacto:emailContacto.txt.twig', array('contacto' => $contacto)));
                 
                 $this->get('mailer')->send($mensaje);
                 
@@ -50,7 +53,7 @@ class ContactoController extends Controller
             }
         }
 
-        return $this->render('ContactoBundle:Contacto:contacto.html.twig', array(
+        return $this->render('T42ContactoBundle:Contacto:contacto.html.twig', array(
                     'form' => $form->createView()
                 ));
     }
