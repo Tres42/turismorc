@@ -66,16 +66,6 @@ class Invitation
     }
     
     /**
-     * Set code
-     * 
-     * @param string $code 
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-    }
-    
-    /**
      * Get email
      * 
      * @return string Mail of user.

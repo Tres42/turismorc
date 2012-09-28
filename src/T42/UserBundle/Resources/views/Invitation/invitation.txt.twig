@@ -2,5 +2,4 @@
 
 Para permitir registrarse como usuario del sistema usted debe acceder a este enlace 
 
-www.turismoriocuarto.com/register/{{ invitation.getCode() }}
-
+{{url('fos_user_registration_register') ~ invitation.getCode() }}

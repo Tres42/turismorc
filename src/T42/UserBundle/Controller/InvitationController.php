@@ -52,31 +52,40 @@ class InvitationController extends Controller
     public function sendAction(Request $request) {
         $invitation = new Invitation();
         $form = $this->createFormBuilder($invitation)
-                ->add('code', 'hidden')
                 ->add('email', 'email', array('label' => 'E-Mail'))
                 ->getForm();
         $form->bind($request);
 
         if ($form->isValid()) {
-            $data = $form->getData();
+            //Obtenemos los datos del email del form
+            $email = $form->get('email')->getData();
+
+            //Guardamos el objeto invitation
+            $invitation->setEmail($email);
+
+            //Hacemos persistente el objeto
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($invitation);
+            $em->flush();
+
 
             // Enviamos el correo electrónico
             $mensaje = \Swift_Message::newInstance()
-                    ->setSubject('Contacto enviado desde Turismo Rio Cuarto')
+                    ->setSubject('Invitacion de registración de usuario')
                     ->setFrom('ctosco@tres42.com.ar')
-                    ->setTo($this->container->getParameter('turismorc.emails.email_contacto'))
-                    ->setBody($this->renderView('T42ContactoBundle:Contacto:emailContacto.txt.twig', array('contacto' => $contacto)));
+                    ->setTo($email)
+                    ->setBody($this->renderView('T42UserBundle:Invitation:invitation.txt.twig', array('invitation' => $invitation)));
 
             $this->get('mailer')->send($mensaje);
 
-            $this->get('session')->setFlash('Turismo Rio Cuarto', 'El codigo ha sido enviado');
+            $this->get('session')->getFlashBag()->add('succes', 'El mensaje fue enviado!');
 
-            // Redirige - Si se actualiza la pagina
-            return $this->redirect($this->generateUrl('contacto'));
+//          // Redirige - Si se actualiza la pagina
+            return $this->redirect($this->generateUrl('invitation_new'));
         }
 
         return array(
-            'entity' => $entity,
+            'entity' => $invitation,
             'form' => $form->createView(),
         );
     }
