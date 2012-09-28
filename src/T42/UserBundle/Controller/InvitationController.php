@@ -57,19 +57,19 @@ class InvitationController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            //Obtenemos los datos del email del form
+            //We obtain the form of email data
             $email = $form->get('email')->getData();
 
-            //Guardamos el objeto invitation
+            //Save the object invitation
             $invitation->setEmail($email);
 
-            //Hacemos persistente el objeto
+            //The object persist
             $em = $this->getDoctrine()->getManager();
             $em->persist($invitation);
             $em->flush();
 
 
-            // Enviamos el correo electrónico
+            //Send e-mail
             $mensaje = \Swift_Message::newInstance()
                     ->setSubject('Invitacion de registración de usuario')
                     ->setFrom('ctosco@tres42.com.ar')
@@ -80,7 +80,7 @@ class InvitationController extends Controller
 
             $this->get('session')->getFlashBag()->add('succes', 'El mensaje fue enviado!');
 
-//          // Redirige - Si se actualiza la pagina
+            //Redirect the url
             return $this->redirect($this->generateUrl('invitation_new'));
         }
 

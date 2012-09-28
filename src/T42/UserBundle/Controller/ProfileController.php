@@ -9,6 +9,7 @@ use FOS\UserBundle\Model\UserInterface;
 /**
  * Profile controller.
  *
+ * @author Cristian Tosco <ctosco@tres42.com.ar>* 
  */
 class ProfileController extends BaseProfileController {
 
