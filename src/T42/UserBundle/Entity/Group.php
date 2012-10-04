@@ -36,4 +36,12 @@ class Group extends BaseGroup
     {
         return $this->id;
     }
+    
+    /**
+     * Magic method that returns the name of 
+     * the group to be displayed in the user
+     */
+    public function __toString() {
+        return $this->name;
+    }
 }

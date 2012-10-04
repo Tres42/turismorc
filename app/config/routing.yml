@@ -30,7 +30,7 @@ t42_user_resetting:
 
 t42_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix: /admin/profile    
+    prefix: /admin/profile  
     
 t42_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"

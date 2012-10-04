@@ -29,6 +29,7 @@ class ProfileFormType extends BaseProfileFormType
                 ->add('firstname', null, array('label' => 'Nombre'))
                 ->add('address', null, array('label' => 'Direccion'))
                 ->add('phoneNumber', null, array('label' => 'Numero de Telefono'))
+                ->add('groups', null, array('label'=>'Grupos'))
         ;
         
     }

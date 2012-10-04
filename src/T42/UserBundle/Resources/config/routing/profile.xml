@@ -11,8 +11,10 @@
         <requirement key="id">\d+</requirement>       
     </route>
 
-    <route id="fos_user_profile_edit" pattern="/edit">
+    <route id="fos_user_profile_edit" pattern="/edit/{id}">
         <default key="_controller">FOSUserBundle:Profile:edit</default>
+        <default key="id">0</default>
+        <requirement key="id">\d+</requirement>       
     </route>
 
     <route id="fos_user_profile_list" pattern="/list">

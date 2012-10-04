@@ -50,7 +50,6 @@ class InvitationToCodeTransformer implements DataTransformerInterface
                         ->getRepository('T42\UserBundle\Entity\Invitation')
                         ->findOneBy(array(
                             'code' => $value,
-                            'user' => null,
                         ));
     }
 

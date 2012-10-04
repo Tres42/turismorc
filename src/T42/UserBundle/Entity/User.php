@@ -70,6 +70,9 @@ class User extends BaseUser
         
         //Initialize groups
         $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        
+        //Initializes the user role
+        $this->addRole('ROLE_USER');
     }
 
 

@@ -70,6 +70,9 @@ fos_user:
     user_class: T42\UserBundle\Entity\User
     group:
         group_class: T42\UserBundle\Entity\Group
+        form:
+            type: t42_user_group
+            
     registration:
         form:
             type: t42_user_registration
