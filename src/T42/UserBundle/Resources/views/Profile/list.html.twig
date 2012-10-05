@@ -34,7 +34,7 @@
                         <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}">Editar</a>
                     </li>
                     <li>
-                        <a href="{# path('fos_user_profile_edit', { 'id': entity.id }) #}">Eliminar</a>
+                        <a href="{{ path('fos_user_profile_delete', { 'id': entity.id }) }}">Eliminar</a>
                     </li>
                 </ul>
             </td>

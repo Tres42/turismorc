@@ -20,4 +20,9 @@
     <route id="fos_user_profile_list" pattern="/list">
         <default key="_controller">FOSUserBundle:Profile:list</default>
     </route>
+
+    <route id="fos_user_profile_delete" pattern="/delete/{id}">
+        <default key="_controller">FOSUserBundle:Profile:delete</default>
+    </route>
+
 </routes>

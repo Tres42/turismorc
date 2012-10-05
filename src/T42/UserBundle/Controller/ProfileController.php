@@ -78,6 +78,30 @@ class ProfileController extends BaseProfileController
     }
 
     /**
+     * Delete the user
+     */
+    public function deleteAction($id = 0)
+    {
+        //Get the UserManager of FOSUserBundle
+        $userManager = $this->container->get('fos_user.user_manager');
+        
+        //Get the user from database
+        $user = $userManager->findUserBy(array('id' => $id));
+
+        if (!$user) {
+            //Error message
+            $this->container->get('session')->getFlashBag()->add('error', 'El usuario que quiere eliminar no existe');
+        } else {
+
+            //Delete the user
+            $userManager->deleteUser($user);
+            //Succes message
+            $this->container->get('session')->getFlashBag()->add('succes', 'El usuario se ha eliminado correctamente');
+        }
+        return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_list'));
+    }
+
+    /**
      * Generate the redirection url when editing is completed.
      *
      * @param \FOS\UserBundle\Model\UserInterface $user
@@ -86,7 +110,7 @@ class ProfileController extends BaseProfileController
      */
     protected function getRedirectionUrl(UserInterface $user)
     {
-        return $this->container->get('router')->generate('fos_user_profile_show', array('id'=> $user->getId()));
+        return $this->container->get('router')->generate('fos_user_profile_show', array('id' => $user->getId()));
     }
 
 }
