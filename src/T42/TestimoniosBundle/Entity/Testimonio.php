@@ -27,6 +27,7 @@ class Testimonio
     
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $nombre;
     
@@ -37,6 +38,7 @@ class Testimonio
     
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $comentario;
             

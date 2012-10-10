@@ -13,7 +13,7 @@ class TestimonioType extends AbstractType
         $builder
             ->add('nombre')
             ->add('organizacion')
-            ->add('comentario')
+            ->add('comentario', 'textarea')
         ;
     }
 

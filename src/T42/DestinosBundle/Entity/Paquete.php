@@ -4,6 +4,7 @@ namespace T42\DestinosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use CD\TestimoniosBundle\Entity\Ciudad;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * T42\DestinosBundle\Entity\Paquete
@@ -26,6 +27,7 @@ class Paquete {
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $titulo;
 
@@ -71,11 +73,13 @@ class Paquete {
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $resumen;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $categoria;
 

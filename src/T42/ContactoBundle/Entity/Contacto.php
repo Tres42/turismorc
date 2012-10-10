@@ -2,6 +2,8 @@
 
 namespace T42\ContactoBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * T42\ContactoBundle\Entity\Contacto
  * 
@@ -15,11 +17,13 @@ class Contacto
 
     /**
      * El nombre de la persona que envia el mensaje.
+     * @Assert\NotBlank()
      */
     private $nombre;
 
     /**
      * El apellido de la persona que envia el mensaje.
+     * @Assert\NotBlank()
      */
     private $apellido;
 
@@ -55,6 +59,7 @@ class Contacto
 
     /**
      * El mensaje de la persona que completa el formulario de contacto
+     * @Assert\NotBlank()
      */
     private $mensaje;
 
