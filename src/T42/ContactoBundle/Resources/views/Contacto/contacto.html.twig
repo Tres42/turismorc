@@ -1,13 +1,13 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <header>
-        <h1>Formulario de Contacto</h1>
-    </header>
+<header>
+    <h1>Formulario de Contacto</h1>
+</header>
 
-    <form action="{{ path('contacto') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('contacto') }}" method="post" {{ form_enctype(form) }} >
         {{ form_widget(form) }}
-            
+
         <input type="submit" value="Enviar" />
-    </form>
+</form>
 {% endblock %}

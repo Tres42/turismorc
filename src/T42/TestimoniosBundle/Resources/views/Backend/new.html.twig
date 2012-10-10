@@ -4,7 +4,7 @@
 
 <h1>Crear nuevo Testimonio</h1>
 
-<form action="{{ path('testimonio_create') }}" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('testimonio_create') }}" method="post" {{ form_enctype(form) }} >
     {{ form_widget(form) }}
     <p>
         <button class="btn btn-info" type="submit">Crear</button>

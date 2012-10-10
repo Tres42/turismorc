@@ -16,7 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\Table(name="paquete")
  */
-class Paquete {
+class Paquete
+{
 
     /**
      * @ORM\Id
@@ -86,14 +87,15 @@ class Paquete {
     /**
      * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\Ciudad")
      * @ORM\JoinTable()
-     *      
-     * */
+     */
     private $ciudades;
 
+    
     /**
      * Constructor del objeto paquete de viajes.
      */
-    public function __construct() {
+    public function __construct()
+    {
         // Creamos el objeto tarifas el cual posee conceptos y sus respectivas tarifas
         $this->tarifas = array();
         $this->ciudad = new \Doctrine\Common\Collections\ArrayCollection();
@@ -104,7 +106,8 @@ class Paquete {
      *
      * @return integer 
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -114,7 +117,8 @@ class Paquete {
      * @param string $titulo
      * @return Paquete
      */
-    public function setTitulo($titulo) {
+    public function setTitulo($titulo)
+    {
         $this->titulo = $titulo;
 
         return $this;
@@ -125,7 +129,8 @@ class Paquete {
      *
      * @return string 
      */
-    public function getTitulo() {
+    public function getTitulo()
+    {
         return $this->titulo;
     }
 
@@ -135,7 +140,8 @@ class Paquete {
      * @param \DateTime $fechaSalida
      * @return Paquete
      */
-    public function setFechaSalida($fechaSalida) {
+    public function setFechaSalida($fechaSalida)
+    {
         $this->fechaSalida = $fechaSalida;
 
         return $this;
@@ -146,7 +152,8 @@ class Paquete {
      *
      * @return \DateTime 
      */
-    public function getFechaSalida() {
+    public function getFechaSalida()
+    {
         return $this->fechaSalida;
     }
 
@@ -157,7 +164,8 @@ class Paquete {
      * @param boolean $esGrupal
      * @return Paquete
      */
-    public function setEsGrupal($esGrupal) {
+    public function setEsGrupal($esGrupal)
+    {
         $this->esGrupal = $esGrupal;
 
         return $this;
@@ -169,7 +177,8 @@ class Paquete {
      *
      * @return boolean 
      */
-    public function getEsGrupal() {
+    public function getEsGrupal()
+    {
         return $this->esGrupal;
     }
 
@@ -179,7 +188,8 @@ class Paquete {
      * @param boolean $esPromocion
      * @return Paquete
      */
-    public function setEsPromocion($esPromocion) {
+    public function setEsPromocion($esPromocion)
+    {
         $this->esPromocion = $esPromocion;
 
         return $this;
@@ -190,7 +200,8 @@ class Paquete {
      *
      * @return boolean 
      */
-    public function getEsPromocion() {
+    public function getEsPromocion()
+    {
         return $this->esPromocion;
     }
 
@@ -200,7 +211,8 @@ class Paquete {
      * @param string $observaciones
      * @return Paquete
      */
-    public function setObservaciones($observaciones) {
+    public function setObservaciones($observaciones)
+    {
         $this->observaciones = $observaciones;
 
         return $this;
@@ -211,7 +223,8 @@ class Paquete {
      *
      * @return string 
      */
-    public function getObservaciones() {
+    public function getObservaciones()
+    {
         return $this->observaciones;
     }
 
@@ -221,7 +234,8 @@ class Paquete {
      * @param \stdClass $tarifas
      * @return Paquete
      */
-    public function setTarifas($tarifas) {
+    public function setTarifas($tarifas)
+    {
         $this->tarifas = $tarifas;
 
         return $this;
@@ -232,7 +246,8 @@ class Paquete {
      *
      * @return \stdClass 
      */
-    public function getTarifas() {
+    public function getTarifas()
+    {
         return $this->tarifas;
     }
 
@@ -242,7 +257,8 @@ class Paquete {
      * @param string $serviciosIncluidos
      * @return Paquete
      */
-    public function setServiciosIncluidos($serviciosIncluidos) {
+    public function setServiciosIncluidos($serviciosIncluidos)
+    {
         $this->serviciosIncluidos = $serviciosIncluidos;
 
         return $this;
@@ -254,7 +270,8 @@ class Paquete {
      *
      * @return string 
      */
-    public function getServiciosIncluidos() {
+    public function getServiciosIncluidos()
+    {
         return $this->serviciosIncluidos;
     }
 
@@ -265,7 +282,8 @@ class Paquete {
      * @param string $serviciosNoIncluidos
      * @return Paquete
      */
-    public function setServiciosNoIncluidos($serviciosNoIncluidos) {
+    public function setServiciosNoIncluidos($serviciosNoIncluidos)
+    {
         $this->serviciosNoIncluidos = $serviciosNoIncluidos;
 
         return $this;
@@ -277,7 +295,8 @@ class Paquete {
      *
      * @return string 
      */
-    public function getServiciosNoIncluidos() {
+    public function getServiciosNoIncluidos()
+    {
         return $this->serviciosNoIncluidos;
     }
 
@@ -287,7 +306,8 @@ class Paquete {
      * @param string $itinerario
      * @return Paquete
      */
-    public function setItinerario($itinerario) {
+    public function setItinerario($itinerario)
+    {
         $this->itinerario = $itinerario;
 
         return $this;
@@ -298,7 +318,8 @@ class Paquete {
      *
      * @return string 
      */
-    public function getItinerario() {
+    public function getItinerario()
+    {
         return $this->itinerario;
     }
 
@@ -308,7 +329,8 @@ class Paquete {
      * @param string $resumen
      * @return Paquete
      */
-    public function setResumen($resumen) {
+    public function setResumen($resumen)
+    {
         $this->resumen = $resumen;
 
         return $this;
@@ -319,7 +341,8 @@ class Paquete {
      *
      * @return string 
      */
-    public function getResumen() {
+    public function getResumen()
+    {
         return $this->resumen;
     }
 
@@ -330,7 +353,8 @@ class Paquete {
      * @param string $categoria
      * @return Paquete
      */
-    public function setCategoria($categoria) {
+    public function setCategoria($categoria)
+    {
         $this->categoria = $categoria;
 
         return $this;
@@ -342,7 +366,8 @@ class Paquete {
      *
      * @return string 
      */
-    public function getCategoria() {
+    public function getCategoria()
+    {
         return $this->categoria;
     }
 
@@ -352,7 +377,8 @@ class Paquete {
      * @param T42\DestinosBundle\Entity\Ciudad $ciudad
      * @return Paquete
      */
-    public function addCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad) {
+    public function addCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad)
+    {
         $this->ciudades[] = $ciudad;
 
         return $this;
@@ -363,7 +389,8 @@ class Paquete {
      *
      * @param T42\DestinosBundle\Entity\Ciudad $ciudad
      */
-    public function removeCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad) {
+    public function removeCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad)
+    {
         $this->ciudades->removeElement($ciudad);
     }
 
@@ -372,7 +399,8 @@ class Paquete {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getCiudades() {
+    public function getCiudades()
+    {
         return $this->ciudades;
     }
 
@@ -381,7 +409,8 @@ class Paquete {
      * 
      * @param Tarifa $tarifa La Tarifa a agregar
      */
-    public function addTarifa(Tarifa $tarifa) {
+    public function addTarifa(Tarifa $tarifa)
+    {
         $count = count($this->tarifas);
         $tarifa->identificador = $count;
 
@@ -394,7 +423,8 @@ class Paquete {
      * 
      * @param Tarifa $tarifa Tarifa a eliminar
      */
-    public function removeTarifa(Tarifa $tarifa) {
+    public function removeTarifa(Tarifa $tarifa)
+    {
         // Obtenemos la clave de busqueda
         $key = $tarifa->identificador;
         $length = count($this->tarifas) - 1;
@@ -419,7 +449,8 @@ class Paquete {
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  * 
  */
-class Tarifa {
+class Tarifa
+{
 
     /**
      * Identificador interno unico de tarifas
@@ -441,7 +472,8 @@ class Tarifa {
     /**
      * Constructor que inicializa el valor del identificador.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->identificador = -1;
     }
 

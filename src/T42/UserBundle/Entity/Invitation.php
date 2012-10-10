@@ -4,7 +4,9 @@
 namespace T42\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use T42\UserBundle\Entity\User;
+
 
 /**
  * T42\UserBundle\Entity\Invitation
@@ -27,6 +29,8 @@ class Invitation
 
     /** 
      * @ORM\Column(type="string", length=256) 
+     * @Assert\NotBlank()
+     * @Assert\Email(checkMX = true)
      */
     protected $email;
 

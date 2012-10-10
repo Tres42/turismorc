@@ -54,12 +54,15 @@ class Contacto
 
     /**
      * El mail de la persona que completa el formulario de contacto
+     * @Assert\NotBlank()
+     * @Assert\Email(checkMX = true)     
      */
     private $email;
 
     /**
      * El mensaje de la persona que completa el formulario de contacto
      * @Assert\NotBlank()
+     * @Assert\MaxLength(500)
      */
     private $mensaje;
 
