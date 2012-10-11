@@ -3,6 +3,7 @@
 namespace T42\DestinosBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -21,6 +22,7 @@ use T42\DestinosBundle\Form\PaqueteType;
  */
 class PaqueteController extends Controller
 {
+
     /**
      * Lista todas las entidades de paquetes.
      *
@@ -57,7 +59,7 @@ class PaqueteController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -71,11 +73,11 @@ class PaqueteController extends Controller
     public function newAction()
     {
         $entity = new Paquete();
-        $form   = $this->createForm(new PaqueteType(), $entity);
+        $form = $this->createForm(new PaqueteType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -88,7 +90,7 @@ class PaqueteController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity  = new Paquete();
+        $entity = new Paquete();
         $form = $this->createForm(new PaqueteType(), $entity);
         $form->bind($request);
 
@@ -102,7 +104,7 @@ class PaqueteController extends Controller
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -126,8 +128,8 @@ class PaqueteController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -161,8 +163,8 @@ class PaqueteController extends Controller
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -192,16 +194,45 @@ class PaqueteController extends Controller
 
         return $this->redirect($this->generateUrl('destinos'));
     }
-    
+
+    /**
+     * Imprime los detalles del destino
+     *
+     * @Route("/{id}/print", name="destinos_print")
+     */
+    public function printAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('T42DestinosBundle:Paquete')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Paquete entity.');
+        }
+                
+        $html = $this->renderView('T42DestinosBundle:Paquete:print.html.twig', array(
+            'entity' => $entity
+                ));
+
+        return new Response(
+                        $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+                        200,
+                        array(
+                            'Content-Type' => 'application/pdf',
+                            'Content-Disposition' => 'attachment; filename="file.pdf"'
+                        )
+        );
+    }
+
     /**
      * Crea un nuevo formulario de eliminacion de Paquete.
      */
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
-                
+
 }

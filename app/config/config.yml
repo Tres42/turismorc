@@ -79,4 +79,9 @@ fos_user:
     profile:
         form:
             type: t42_user_profile
-    
+  
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     /usr/local/bin/wkhtmltopdf
+        options:    []

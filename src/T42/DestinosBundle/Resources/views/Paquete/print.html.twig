@@ -1,0 +1,46 @@
+<h1>Impresion de destinos</h1>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Titulo</th>
+            <td>{{ entity.titulo }}</td>
+        </tr>
+        <tr>
+            <th>Fecha de Salida</th>
+            <td>{{ entity.fechaSalida|date('d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <th>Es Grupal</th>
+            <td>{% if entity.esGrupal %} Si {% else %} No {% endif %}</td>
+        </tr>
+        <tr>
+            <th>Es Promocion</th>
+            <td>{% if entity.esPromocion %} Si {% else %} No {% endif %}</td>
+        </tr>
+        <tr>
+            <th>Observaciones</th>
+            <td>{{ entity.observaciones }}</td>
+        </tr>
+        <tr>
+            <th>Servicios Incluido</th>
+            <td>{{ entity.serviciosIncluidos }}</td>
+        </tr>
+        <tr>
+            <th>Servicios No Incluido</th>
+            <td>{{ entity.serviciosNoIncluidos }}</td>
+        </tr>
+        <tr>
+            <th>Itinerario</th>
+            <td>{{ entity.itinerario }}</td>
+        </tr>
+        <tr>
+            <th>Resumen</th>
+            <td>{{ entity.resumen }}</td>
+        </tr>
+        <tr>
+            <th>Categoria</th>
+            <td>{{ entity.categoria }}</td>
+        </tr>
+    </tbody>
+</table>
