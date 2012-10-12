@@ -1,6 +1,6 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Administraci&oacute;n Turismo R&iacute;o Cuarto{% endblock %}
+{% block title %}Administraci&oacute;n puntal.com.ar{% endblock %}
 
 {% block meta %}
     <meta name="robots" content="noindex, nofollow" />
@@ -22,7 +22,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
-                <a href="{{ path('t42_backend_index') }}" class="brand">Administraci&oacute;n Turismo R&iacute;o Cuarto</a>
+                <a href="{{ path('t42_backend_index') }}" class="brand">Administraci&oacute;n puntal.com.ar</a>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <div class="btn-group pull-right">
                         <a href="{{ path('fos_user_profile_show') }}" class="btn"><i class="icon-user"></i> {{ app.user.username }}</a>
@@ -49,9 +49,33 @@
 
     {% block container %}
     <div class="container">
-        <div class="row">
-            <div class="span12">{% block content %}{% endblock %}</div>
-        </div>
+        {% block flashes %}
+            {% set flashes = app.session.flashbag.all() %}
+            {% if flashes %}
+                {% spaceless %}
+                <div class="row">
+                    <div class="span12">
+                    {% for type, messages in flashes %}
+                        {% set prural = messages|length > 1 %}
+                        <div class="alert alert-{{ type }}{% if prural %} alert-block{% endif %} fade in">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {% if prural %}
+                            <ul>
+                        {% endif %}
+                        {% for message in messages %}
+                            {% if prural %}<li>{% endif %}{{ message|raw }}{% if prural %}</li>{% endif %}
+                        {% endfor %}
+                        {% if prural %}
+                            </ul>
+                        {% endif %}
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                {% endspaceless %}
+            {% endif %}
+        {% endblock flashes %}
+        {% block content %}{% endblock %}
     </div>
     {% endblock %}
 {% endblock body %}
@@ -59,8 +83,10 @@
 {% block javascripts %}
     {% javascripts
         "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
+        "bundles/t42backend/js/lib/bootstrap/bootstrap-transition.js"
         "bundles/t42backend/js/lib/bootstrap/bootstrap-dropdown.js"
+        "bundles/t42backend/js/lib/bootstrap/bootstrap-alert.js"
     %}
-        <script src="{{ asset_url }}"> </script>
+        <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

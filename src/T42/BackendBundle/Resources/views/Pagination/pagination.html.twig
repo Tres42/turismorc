@@ -1,0 +1,33 @@
+{% if pageCount > 1 %}
+<div class="pagination pagination-centered">
+    <ul>
+    {% if first is defined and current != first %}
+        <li><a href="{{ path(route, query|merge({(pageParameterName): first})) }}">&lsaquo; primera</a></li>
+    {% else %}
+        <li class="disabled"><span>&lsaquo; primera</span></li>
+    {% endif %}
+    {% if previous is defined %}
+        <li><a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">&laquo;</a></li>
+    {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for page in pagesInRange %}
+        {% if current == page %}
+            <li class="active"><span>{{ page }}</span></li>
+        {% else %}
+            <li><a href="{{ path(route, query|merge({(pageParameterName): page})) }}">{{ page }}</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if next is defined %}
+        <li><a href="{{ path(route, query|merge({(pageParameterName): next})) }}">&raquo;</a></li>
+    {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+    {% if last is defined and current != last %}
+        <li><a href="{{ path(route, query|merge({(pageParameterName): last})) }}">&uacute;ltima &rsaquo;</a></li>
+    {% else %}
+        <li class="disabled"><span>&uacute;ltima &rsaquo;</span></li>
+    {% endif %}
+    </ul>
+</div>
+{% endif %}
