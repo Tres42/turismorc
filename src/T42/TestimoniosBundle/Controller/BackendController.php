@@ -25,7 +25,7 @@ class BackendController extends Controller
     /**
      * Lists all Testimonio entities.
      *
-     * @Route("/", name="testimonio")
+     * @Route("/")
      * @Template()
      */
     public function indexAction()
@@ -42,7 +42,7 @@ class BackendController extends Controller
     /**
      * Finds and displays a Testimonio entity.
      *
-     * @Route("/{id}/show", name="testimonio_show")
+     * @Route("/{id}/show")
      * @Template()
      */
     public function showAction($id)
@@ -66,7 +66,7 @@ class BackendController extends Controller
     /**
      * Displays a form to create a new Testimonio entity.
      *
-     * @Route("/new", name="testimonio_new")
+     * @Route("/new")
      * @Template()
      */
     public function newAction()
@@ -83,7 +83,7 @@ class BackendController extends Controller
     /**
      * Creates a new Testimonio entity.
      *
-     * @Route("/create", name="testimonio_create")
+     * @Route("/create")
      * @Method("POST")
      * @Template("T42TestimoniosBundle:Backend:new.html.twig")
      */
@@ -97,8 +97,11 @@ class BackendController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('testimonio_show', array('id' => $entity->getId())));
+            
+            
+            $this->get('session')->getFlashBag()->add('success', 'El testimonio fue guardado correctamente');
+            
+            return $this->redirect($this->generateUrl('t42_testimonios_backend_index', array('id' => $entity->getId())));
         }
 
         return array(
@@ -110,7 +113,7 @@ class BackendController extends Controller
     /**
      * Displays a form to edit an existing Testimonio entity.
      *
-     * @Route("/{id}/edit", name="testimonio_edit")
+     * @Route("/{id}/edit")
      * @Template()
      */
     public function editAction($id)
@@ -136,7 +139,7 @@ class BackendController extends Controller
     /**
      * Edits an existing Testimonio entity.
      *
-     * @Route("/{id}/update", name="testimonio_update")
+     * @Route("/{id}/update")
      * @Method("POST")
      * @Template("T42TestimoniosBundle:Backend:edit.html.twig")
      */
@@ -157,8 +160,10 @@ class BackendController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()->add('success', 'Los cambios fueron guardados correctamente');
 
-            return $this->redirect($this->generateUrl('testimonio_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('t42_testimonios_backend_index', array('id' => $id)));
         }
 
         return array(
@@ -171,7 +176,7 @@ class BackendController extends Controller
     /**
      * Deletes a Testimonio entity.
      *
-     * @Route("/{id}/delete", name="testimonio_delete")
+     * @Route("/{id}/delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -189,9 +194,11 @@ class BackendController extends Controller
 
             $em->remove($entity);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()->add('success', 'El testimonio fue eliminado correctamente');
         }
 
-        return $this->redirect($this->generateUrl('testimonio'));
+        return $this->redirect($this->generateUrl('t42_testimonios_backend_index'));
     }
 
     private function createDeleteForm($id)

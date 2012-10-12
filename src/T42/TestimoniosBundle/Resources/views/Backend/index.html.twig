@@ -17,17 +17,17 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('testimonio_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td><a href="{{ path('t42_testimonios_backend_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.nombre }}</td>
             <td>{{ entity.organizacion }}</td>
             <td>{{ entity.comentario }}</td>
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('testimonio_show', { 'id': entity.id }) }}">Mostrar</a>
+                        <a href="{{ path('t42_testimonios_backend_show', { 'id': entity.id }) }}">Mostrar</a>
                     </li>
                     <li>
-                        <a href="{{ path('testimonio_edit', { 'id': entity.id }) }}">Editar</a>
+                        <a href="{{ path('t42_testimonios_backend_edit', { 'id': entity.id }) }}">Editar</a>
                     </li>
                 </ul>
             </td>
@@ -38,7 +38,7 @@
 
 <ul>
     <li>
-        <a href="{{ path('testimonio_new') }}">
+        <a href="{{ path('t42_testimonios_backend_new') }}">
             Crear nuevo Testimonio
         </a>
     </li>
