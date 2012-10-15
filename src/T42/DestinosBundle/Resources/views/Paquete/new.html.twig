@@ -4,7 +4,7 @@
 
 <h1>Crear nuevo Paquete de viaje</h1>
 
-<form action="{{ path('destinos_create') }}" method="post" {{ form_enctype(form) }} >
+<form action="{{ path('t42_destinos_paquete_create') }}" method="post" {{ form_enctype(form) }} >
     {{ form_widget(form) }}
 
         <p>
@@ -14,7 +14,7 @@
 
     <ul class="record_actions">
         <li>
-            <a href="{{ path('destinos') }}">
+            <a href="{{ path('t42_destinos_paquete_index') }}">
                 Volver a paquetes
             </a>
         </li>

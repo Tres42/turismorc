@@ -26,7 +26,7 @@ class PaqueteController extends Controller
     /**
      * Lista todas las entidades de paquetes.
      *
-     * @Route("/", name="destinos")
+     * @Route("/")
      * @Template()
      */
     public function indexAction()
@@ -43,7 +43,7 @@ class PaqueteController extends Controller
     /**
      * Encuentra y muestra una entidad Paquete.
      *
-     * @Route("/{id}/show", name="destinos_show")
+     * @Route("/{id}/show")
      * @Template()
      */
     public function showAction($id)
@@ -67,7 +67,7 @@ class PaqueteController extends Controller
     /**
      * Muestra el formulario para crear una nueva entidad de tipo Paquete.
      *
-     * @Route("/new", name="destinos_new")
+     * @Route("/new")
      * @Template()
      */
     public function newAction()
@@ -84,7 +84,7 @@ class PaqueteController extends Controller
     /**
      * Crea un nueva entidad Paquete.
      *
-     * @Route("/create", name="destinos_create")
+     * @Route("/create")
      * @Method("POST")
      * @Template("T42DestinosBundle:Paquete:new.html.twig")
      */
@@ -98,8 +98,10 @@ class PaqueteController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('destinos_show', array('id' => $entity->getId())));
+            
+            $this->get('session')->getFlashBag()->add('success', 'El destino fue guardado correctamente');
+            
+            return $this->redirect($this->generateUrl('t42_destinos_paquete_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -111,7 +113,7 @@ class PaqueteController extends Controller
     /**
      * Muestra un formulario para editar un Paquete.
      *
-     * @Route("/{id}/edit", name="destinos_edit")
+     * @Route("/{id}/edit")
      * @Template()
      */
     public function editAction($id)
@@ -137,7 +139,7 @@ class PaqueteController extends Controller
     /**
      * Edita una entidad de tipo Paquete.
      *
-     * @Route("/{id}/update", name="destinos_update")
+     * @Route("/{id}/update")
      * @Method("POST")
      * @Template("T42DestinosBundle:Paquete:edit.html.twig")
      */
@@ -158,8 +160,10 @@ class PaqueteController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-
-            return $this->redirect($this->generateUrl('destinos_edit', array('id' => $id)));
+            
+            $this->get('session')->getFlashBag()->add('success', 'Los cambios fueron guardados correctamente');
+            
+            return $this->redirect($this->generateUrl('t42_destinos_paquete_index', array('id' => $id)));
         }
 
         return array(
@@ -172,7 +176,7 @@ class PaqueteController extends Controller
     /**
      * Borra un Paquete.
      *
-     * @Route("/{id}/delete", name="destinos_delete")
+     * @Route("/{id}/delete")
      * @Method("POST")
      */
     public function deleteAction(Request $request, $id)
@@ -190,15 +194,17 @@ class PaqueteController extends Controller
 
             $em->remove($entity);
             $em->flush();
+            
+            $this->get('session')->getFlashBag()->add('success', 'El destino fue eliminado correctamente');
         }
 
-        return $this->redirect($this->generateUrl('destinos'));
+        return $this->redirect($this->generateUrl('t42_destinos_paquete_index'));
     }
 
     /**
      * Imprime los detalles del destino
      *
-     * @Route("/{id}/print", name="destinos_print")
+     * @Route("/{id}/print")
      */
     public function printAction($id)
     {
@@ -219,7 +225,7 @@ class PaqueteController extends Controller
                         200,
                         array(
                             'Content-Type' => 'application/pdf',
-                            'Content-Disposition' => 'attachment; filename="file.pdf"'
+                            'Content-Disposition' => 'attachment; filename="Destinos.pdf"'
                         )
         );
     }

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>Paquetes</h1>
+<h1>Listado de Paquetes</h1>
 
 <table class="table">
     <thead>
@@ -21,7 +21,7 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('destinos_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td><a href="{{ path('t42_destinos_paquete_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.titulo }}</td>
             <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('d/m/Y') }}{% endif %}</td>
             <td>{% if entity.esGrupal %} Si {% else %} No {% endif %}</td>
@@ -32,13 +32,13 @@
             <td>
                 <ul>
                     <li>
-                        <a href="{{ path('destinos_show', { 'id': entity.id }) }}">Mostrar</a>
+                        <a href="{{ path('t42_destinos_paquete_show', { 'id': entity.id }) }}">Mostrar</a>
                     </li>
                     <li>
-                        <a href="{{ path('destinos_edit', { 'id': entity.id }) }}">Editar</a>
+                        <a href="{{ path('t42_destinos_paquete_edit', { 'id': entity.id }) }}">Editar</a>
                     </li>
                     <li>
-                        <a href="{{ path('destinos_print', { 'id': entity.id }) }}">Imprimir</a>
+                        <a href="{{ path('t42_destinos_paquete_print', { 'id': entity.id }) }}">Imprimir</a>
                     </li>
                 </ul>
             </td>
@@ -49,7 +49,7 @@
 
 <ul>
     <li>
-        <a href="{{ path('destinos_new') }}">
+        <a href="{{ path('t42_destinos_paquete_new') }}">
             Crear nuevo paquete
         </a>
     </li>
