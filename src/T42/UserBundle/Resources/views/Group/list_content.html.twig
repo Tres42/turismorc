@@ -1,7 +1,28 @@
-<div class="fos_user_group_list">
-    <ul>
+<h1>Listado de Grupos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th></th>
+        </tr>        
+    </thead>
+    <tbody>
     {% for group in groups %}
-        <li><a href="{{ path('fos_user_group_show', {'groupname': group.getName()} ) }}">{{ group.getName() }}</a></li>
-    {% endfor %}
-    </ul>
-</div>
+        <tr>
+            <td> <a href="{{ path('fos_user_group_show', {'groupname': group.getName()} ) }}">{{ group.getName() }}</a> </td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('fos_user_group_edit', { 'groupname': group.getName() }) }}">Editar</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('fos_user_group_delete', { 'groupname': group.getName() }) }}">Eliminar</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+            
+    {% endfor %}        
+    </tbody>    
+</table>
