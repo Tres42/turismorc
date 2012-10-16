@@ -101,7 +101,7 @@ class PaqueteController extends Controller
             
             $this->get('session')->getFlashBag()->add('success', 'El destino fue guardado correctamente');
             
-            return $this->redirect($this->generateUrl('t42_destinos_paquete_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('t42_destinos_paquete_index', array('id' => $entity->getId())));
         }
 
         return array(
