@@ -67,7 +67,8 @@ class ProfileController extends BaseProfileController
 
         $process = $formHandler->process($user);
         if ($process) {
-            $this->setFlash('fos_user_success', 'profile.flash.updated');
+            $message = $this->trans('profile.flash.updated'); 
+            $this->setFlash('success', $message);
 
             return new RedirectResponse($this->getRedirectionUrl($user));
         }
@@ -90,13 +91,13 @@ class ProfileController extends BaseProfileController
 
         if (!$user) {
             //Error message
-            $this->container->get('session')->getFlashBag()->add('error', 'El usuario que quiere eliminar no existe');
+            $this->setFlash('error', 'El usuario que quiere eliminar no existe');
         } else {
 
             //Delete the user
             $userManager->deleteUser($user);
             //Succes message
-            $this->container->get('session')->getFlashBag()->add('succes', 'El usuario se ha eliminado correctamente');
+            $this->setFlash('success', 'El usuario se ha eliminado correctamente');
         }
         return new RedirectResponse($this->container->get('router')->generate('fos_user_profile_list'));
     }
@@ -112,5 +113,14 @@ class ProfileController extends BaseProfileController
     {
         return $this->container->get('router')->generate('fos_user_profile_show', array('id' => $user->getId()));
     }
+    
+    /**
+     *  
+     */
+    private function trans($key, $vars=array(), $dict = 'FOSUserBundle')
+    {
+        $this->container->get('translator')->trans($key, $vars, $dict);
+    }
+    
 
 }

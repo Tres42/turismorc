@@ -67,21 +67,20 @@ class InvitationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($invitation);
             $em->flush();
-
-
+            
             //Send e-mail
             $mensaje = \Swift_Message::newInstance()
-                    ->setSubject('Invitacion de registración de usuario')
+                    ->setSubject('Bienvenido a Turismo Rio Cuarto!')
                     ->setFrom('ctosco@tres42.com.ar')
                     ->setTo($email)
                     ->setBody($this->renderView('T42UserBundle:Invitation:invitation.txt.twig', array('invitation' => $invitation)));
 
             $this->get('mailer')->send($mensaje);
 
-            $this->get('session')->getFlashBag()->add('succes', 'El mensaje fue enviado!');
+            $this->get('session')->getFlashBag()->add('success', 'La invitacion fue enviada correctamente');
 
             //Redirect the url
-            return $this->redirect($this->generateUrl('invitation_new'));
+            return $this->redirect($this->generateUrl('fos_user_profile_list'));
         }
 
         return array(
