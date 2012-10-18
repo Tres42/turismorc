@@ -25,7 +25,7 @@ class InvitationController extends Controller
     /**
      * Displays the form to generate a new invitation
      *
-     * @Route("/new", name="invitation_new")
+     * @Route("/new")
      * @Template()
      */
     public function newAction(Request $request) {
@@ -45,7 +45,7 @@ class InvitationController extends Controller
     /**
      * Method the sending of the invitation
      * 
-     * @Route("/", name="invitation_send")
+     * @Route("/")
      * @Method("POST")
      * @Template("T42UserBundle:Invitation:new.html.twig")
      */

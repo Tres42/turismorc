@@ -4,7 +4,7 @@
 
 <h1>Enviar Invitación</h1>
 
-<form action="{{ path('invitation_send') }}" method="post" {{ form_enctype(form) }} >
+<form action="{{ path('t42_user_invitation_send') }}" method="post" {{ form_enctype(form) }} >
     {{ form_widget(form) }}
     <p>
         <button type="submit">Enviar</button>
