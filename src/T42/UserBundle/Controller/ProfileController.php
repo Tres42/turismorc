@@ -67,7 +67,7 @@ class ProfileController extends BaseProfileController
 
         $process = $formHandler->process($user);
         if ($process) {
-            $message = $this->trans('profile.flash.updated'); 
+            $message = $this->trans('profile.flash.updated');
             $this->setFlash('success', $message);
 
             return new RedirectResponse($this->getRedirectionUrl($user));
@@ -85,7 +85,7 @@ class ProfileController extends BaseProfileController
     {
         //Get the UserManager of FOSUserBundle
         $userManager = $this->container->get('fos_user.user_manager');
-        
+
         //Get the user from database
         $user = $userManager->findUserBy(array('id' => $id));
 
@@ -113,14 +113,18 @@ class ProfileController extends BaseProfileController
     {
         return $this->container->get('router')->generate('fos_user_profile_show', array('id' => $user->getId()));
     }
-    
+
     /**
-     *  
+     *  Method that translates a message from the message as a parameter 
+     *  an array of values ​​and the dictionary used.
+     * 
+     * @param String $key The message to be translated
+     * @param Array $vars An array with the values ​​of the variables
+     * @param String $dict The dictionary to use
      */
-    private function trans($key, $vars=array(), $dict = 'FOSUserBundle')
+    private function trans($key, $vars = array(), $dict = 'FOSUserBundle')
     {
         $this->container->get('translator')->trans($key, $vars, $dict);
     }
-    
 
 }
