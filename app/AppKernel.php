@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new T42\DestinosBundle\T42DestinosBundle(),
             new T42\UserBundle\T42UserBundle(),
             new T42\ContactoBundle\T42ContactoBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {            
