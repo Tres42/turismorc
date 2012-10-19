@@ -4,17 +4,15 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="t42_backend.example.class">T42\BackendBundle\Example</parameter>
+        <parameter key="t42_backend.twig.t42_backend_extension.class">T42\BackendBundle\Twig\T42BackendExtension</parameter>
+        <parameter key="t42_backend.twig.globals" />
     </parameters>
 
     <services>
-        <service id="t42_backend.example" class="%t42_backend.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="t42_backend.twig.t42_backend_extension" class="%t42_backend.twig.t42_backend_extension.class%">
+            <argument>%t42_backend.twig.globals%</argument>
+            <tag name="twig.extension" />
         </service>
     </services>
-    -->
 </container>

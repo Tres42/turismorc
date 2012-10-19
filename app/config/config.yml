@@ -85,3 +85,8 @@ knp_snappy:
         enabled:    true
         binary:     /usr/local/bin/wkhtmltopdf
         options:    []
+
+t42_backend:
+    twig:
+        globals:
+            brand: 'Administración Turismo Rio Cuarto'

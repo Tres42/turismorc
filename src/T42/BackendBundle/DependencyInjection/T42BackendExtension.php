@@ -24,5 +24,12 @@ class T42BackendExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        $container->setParameter('twig.form.resources', array_merge(
+            $container->getParameter('twig.form.resources'),
+            array('T42BackendBundle:Form:form.html.twig')
+        ));
+
+        $container->setParameter('t42_backend.twig.globals', $config['twig']['globals']);
     }
 }
