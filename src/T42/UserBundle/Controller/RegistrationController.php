@@ -47,7 +47,8 @@ class RegistrationController extends BaseRegistrationController
                 $route = 'fos_user_registration_check_email';
             } else {
                 $authUser = true;
-                $route = 'fos_user_registration_confirmed';
+                // Change the path to t42_backend_index
+                $route = 't42_backend_index';
             }
 
             $message = $this->container->get('translator')->trans('registration.flash.user_created', array(), 'FOSUserBundle');
