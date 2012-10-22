@@ -27,7 +27,7 @@ class T42BackendExtension extends Extension
 
         $container->setParameter('twig.form.resources', array_merge(
             $container->getParameter('twig.form.resources'),
-            array('T42BackendBundle:Form:form.html.twig')
+            array('T42BackendBundle:Form:fields.html.twig')
         ));
 
         $container->setParameter('t42_backend.twig.globals', $config['twig']['globals']);
