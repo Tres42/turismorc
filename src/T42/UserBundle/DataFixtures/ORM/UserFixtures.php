@@ -47,14 +47,30 @@ class UserFixtures implements FixtureInterface, ContainerAwareInterface
         $user->setEmail('cgonzales@gmail.com');
         $user->setEnabled(true);
         
+        $user2 = $userManager->createUser();
+        $user2->setLastName('Rodriguez');
+        $user2->setFirstName('Jose');
+        $user2->setAddress('Lamadrid 335');
+        $user2->setPhoneNumber('0351-455544');
+        $user2->addGroup($groupAdmin);
+        $user2->setUserName('usuario');
+        $user2->setEmail('jrodriguez@hotmail.com');
+        $user2->setEnabled(true);
+        
         // Get encoder factory
         $factory = $this->container->get('security.encoder_factory');
         $encoder = $factory->getEncoder($user);
         $password = $encoder->encodePassword('admin', $user->getSalt());
         $user->setPassword($password);
         
+        $encoder = $factory->getEncoder($user2);
+        $password2 = $encoder->encodePassword('user', $user2->getSalt());
+        $user2->setPassword($password2);
+        
         $manager->persist($groupSuperAdmin);        
+        $manager->persist($groupAdmin);
         $manager->persist($user);
+        $manager->persist($user2);
         
         $manager->flush();
         

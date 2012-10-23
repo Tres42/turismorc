@@ -99,7 +99,6 @@ class DestinosFixture implements FixtureInterface
  DIA 2: ESTAMBUL (MEDIA PENSION):
 	
 Llegada, recepción en el aeropuerto y traslado al Hotel designado. Tarde libre. Cena.
-
 	 
 DIA 3: ESTAMBUL
 	 
@@ -140,7 +139,6 @@ Desayuno. Llegada del barco al puerto de Pireo. Traslado al hotel. Día libre p
 DIA 12: ATENAS (MEDIA PENSION):
 	 
 Desayuno. Por la mañana, visita de la ciudad. El recorrido nos llevará a la Plaza de la Constitución, el Parlamento, la Biblioteca Nacional, la Universidad y la Academia. Al pasar por la calle Herodou Atticus podemos ver el ex Palacio Real, custodiado por los pintorescos Evzones. Siguiendo nuestro itinerario en dirección al ACROPOLIS, podrán ver el famoso Estadio Olímpico, el Templo de Zeus, el cual visitaremos, y el Arco de Adriano. En la Acrópolis se visitará las obras del tiempo de Pericles, los Propileos, el Templo de Atenea Nike, el Erection y el Partenón. Tarde libre para seguir conociendo e l impresionante pasado artístico de esta ciudad, pasear, recorrer el animado barrio de Plaka o hacer alguna compra artesanal. Alojamiento.
-
 
 DIA 13:  ATENAS (MEDIA PENSION):
 	 
