@@ -14,8 +14,10 @@ use Doctrine\ORM\EntityRepository;
 class TestimonioRepository extends EntityRepository
 {
     
-    /*
+    /**
      * Metodo que obtiene un testimonio aleatoriamente.
+     * 
+     * @return Testimonio Un objeto Testimonio aleatoriamente
      */
     public function findOneRandom() {
         $em = $this->getEntityManager();

@@ -1,6 +1,6 @@
 <?php
 
-namespace T42\DataFixtures\ORM;
+namespace T42\DestinosBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;

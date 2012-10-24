@@ -4,7 +4,6 @@ namespace T42\DestinosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * T42\DestinosBundle\Entity\Ciudad
  * 

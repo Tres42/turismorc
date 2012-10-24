@@ -15,7 +15,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class RegistrationController extends BaseRegistrationController
 {
-
+    /**
+     * Method that sets the invitation code to form Registration
+     * 
+     * @param Invitation $code The invitation code
+     */
     public function registerWithCodeAction($code)
     {
         $form = $this->container->get('fos_user.registration.form');
@@ -30,7 +34,12 @@ class RegistrationController extends BaseRegistrationController
                     'form' => $form->createView(),
                 ));
     }
-
+    
+    /**
+     * Method that performs the user registration in the 
+     * system and displays a message when performing flash 
+     * Registration
+     */
     public function registerAction()
     {
         $form = $this->container->get('fos_user.registration.form');

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace T42\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

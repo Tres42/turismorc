@@ -14,7 +14,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class GroupController extends BaseGroupController
 {
-
+    
+    /**
+     * List all groups
+     */
     public function listAction()
     {
         $groups = $this->container->get('fos_user.group_manager')->findGroups();

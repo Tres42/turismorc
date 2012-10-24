@@ -4,7 +4,6 @@ namespace T42\DestinosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * T42\DestinosBundle\Entity\Pais
  * 
@@ -29,7 +28,7 @@ class Pais
      */
     private $nombre;
     
-
+    
     /**
      * Retorna el id del pais.
      *

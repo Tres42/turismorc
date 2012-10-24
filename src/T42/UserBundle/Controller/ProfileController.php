@@ -124,7 +124,7 @@ class ProfileController extends BaseProfileController
      */
     private function trans($key, $vars = array(), $dict = 'FOSUserBundle')
     {
-        $this->container->get('translator')->trans($key, $vars, $dict);
+        return $this->container->get('translator')->trans($key, $vars, $dict);
     }
 
 }
