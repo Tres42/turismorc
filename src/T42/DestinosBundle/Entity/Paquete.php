@@ -3,7 +3,6 @@
 namespace T42\DestinosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use CD\TestimoniosBundle\Entity\Ciudad;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
