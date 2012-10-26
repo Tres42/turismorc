@@ -6,11 +6,11 @@
     <div class="row-fluid">
         <div class="span6 offset3">
             <form action="{{ path('t42_testimonios_backend_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal" >
-                <legend>Crear nuevo Testimonio</legend>
+                <legend>Nuevo Testimonio</legend>
                 {{ form_widget(form) }}
                 <div class="form-actions">
-                    <a href="{{ path('t42_testimonios_backend_index') }}" class="btn">Cancelar</a>
                     <button class="btn btn-primary" type="submit">Crear</button>
+                    <a href="{{ path('t42_testimonios_backend_index') }}" class="btn">Cancelar</a>
                 </div>
             </form>
         </div>
