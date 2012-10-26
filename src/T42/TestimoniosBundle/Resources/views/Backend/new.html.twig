@@ -1,22 +1,18 @@
 {% extends 'T42TestimoniosBundle::layout.html.twig' %}
 
+{% block title %}Nuevo | {{ parent() }}{% endblock %}
+
 {% block content %}
-
-<h1>Crear nuevo Testimonio</h1>
-
-<form action="{{ path('t42_testimonios_backend_create') }}" method="post" {{ form_enctype(form) }} >
-    {{ form_widget(form) }}
-    <p>
-        <button class="btn btn-info" type="submit">Crear</button>
-    </p>
-</form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('t42_testimonios_backend_index') }}">
-            Volver a Testimonios
-        </a>
-    </li>
-</ul>
-
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            <form action="{{ path('t42_testimonios_backend_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal" >
+                <legend>Crear nuevo Testimonio</legend>
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <a href="{{ path('t42_testimonios_backend_index') }}" class="btn">Cancelar</a>
+                    <button class="btn btn-primary" type="submit">Crear</button>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}
