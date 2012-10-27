@@ -1,5 +1,7 @@
 {% extends 'T42BackendBundle::layout.html.twig' %}
 
+{% block title %}Usuarios | {{ parent() }} {% endblock %}
+
 {% block content %}
     {{ block('fos_user_content') }}
 {% endblock %}

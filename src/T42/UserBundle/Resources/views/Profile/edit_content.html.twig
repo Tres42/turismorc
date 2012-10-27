@@ -1,6 +1,18 @@
-<form action="{{ path('fos_user_profile_edit', {'id': user.getId()}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+{% extends 'T42UserBundle::layout.html.twig' %}
+
+{% block title %}Editar | {{ parent() }}{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span6 offset3">
+        <form action="{{ path('fos_user_profile_edit', {'id': user.getId()}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+            <legend>Editar Usuario</legend>
+            {{ form_widget(form) }}
+            <div class="form-actions">
+                <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+            </div>    
+        </form>
     </div>
-</form>
+</div>
+
+{% endblock %}

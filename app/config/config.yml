@@ -86,4 +86,4 @@ knp_snappy:
 t42_backend:
     twig:
         globals:
-            brand: 'Administración Turismo Rio Cuarto'
+            brand: 'Administración Turismo Río Cuarto'
