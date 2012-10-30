@@ -21,7 +21,8 @@
         "friendsofsymfony/user-bundle": "*",
         "knplabs/knp-snappy-bundle": "dev-master",
         "knplabs/knp-paginator-bundle": "2.2",
-        "doctrine/doctrine-fixtures-bundle": "dev-master"
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "Trsteel/ckeditor-bundle": "*"
     },
     "scripts": {
         "post-install-cmd": [
