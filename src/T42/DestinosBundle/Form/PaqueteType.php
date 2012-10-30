@@ -27,7 +27,19 @@ class PaqueteType extends AbstractType
             ->add('tarifas')
             ->add('serviciosIncluidos', null, array('label'=>'Servicios Incluidos'))
             ->add('serviciosNoIncluidos', null, array('label'=>'Servicios No Incluidos'))
-            ->add('itinerario')
+            ->add('itinerario', 'ckeditor', array(
+                    'transformers'           => array('strip_js', 'strip_css', 'strip_comments'),
+                    'toolbar'                => array('clipboard','basicstyles', 'paragraph'),
+                    'toolbar_groups'         => array(
+                        'clipboard' => array('Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo'),
+                        'basicstyles' => array('Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat'),
+                        'paragraph' => array('NumberedList','BulletedList','-','Outdent','Indent','-','JustifyLeft', 'JustifyCenter','JustifyRight','JustifyBlock')
+                    ),
+                    'ui_color'               => '#fff',
+                    'startup_outline_blocks' => false,
+                    'width'                  => '100%',
+                    'height'                 => '320',
+                    ))
             ->add('resumen', 'textarea')
             ->add('categoria')
             ->add('ciudades')

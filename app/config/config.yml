@@ -87,3 +87,18 @@ t42_backend:
     twig:
         globals:
             brand: 'Administración Turismo Rio Cuarto'
+            
+trsteel_ckeditor:
+    class: Trsteel\CkeditorBundle\Form\Type\CkeditorType
+    transformers: ['strip_js', 'strip_css', 'strip_comments']
+    toolbar: ['clipboard', '/', 'basicstyles', 'paragraph']
+    toolbar_groups:
+        clipboard: ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo']
+        basicstyles: ['Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat']
+        paragraph: ['NumberedList','BulletedList','-','Outdent','Indent','-','JustifyLeft', 'JustifyCenter','JustifyRight','JustifyBlock']
+        tools: ['Maximize', 'ShowBlocks']
+    ui_color: '#000000'
+    startup_outline_blocks: true
+    width: 800 #Integer or %
+    height: 300 #Integer or %
+    language: 'es-AR'
