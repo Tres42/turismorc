@@ -15,8 +15,8 @@
                 <table class="table table-condensed table-striped">
                     <thead>
                         <tr>
-                            <td>Apellido y Nombre</td>
                             <td>Nombre de Usuario</td>
+                            <td>Apellido y Nombre</td>
                             <td>Email</td>
                             <td>Ultimo Login</td>
                             <th></th>
@@ -25,12 +25,24 @@
                     <tbody>
                         {% for entity in entities %}
                             <tr>
-                                <td>{{ entity.lastname ~ ', ' ~ entity.firstname}}</td>
-                                <td>{{ entity.username }}</td>
+                                <td><a href="{{ path('fos_user_profile_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+                                {% spaceless %}
+                                    <td>
+                                        {% if entity.lastname is not empty and entity.firstname is not empty %}
+                                            {{ entity.lastname ~ ', ' ~ entity.firstname}}
+                                        {% elseif  entity.lastname is empty and entity.firstname is not empty %}
+                                            {{ entity.firstname }}
+                                        {% elseif  entity.lastname is not empty and entity.firstname is empty %}
+                                            {{ entity.lastname }}
+                                        {% elseif  entity.lastname is empty and entity.firstname is empty %}
+                                            <i> {{ n/d }} </i> 
+                                        {% endif %}
+                                        
+                                    </td>
+                                {% endspaceless %}
                                 <td>{{ entity.email }}</td>
                                 <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('d-m-Y H:i:s') }}{% endif %}</td>
                                 <td>
-                                    <a href="{{ path('fos_user_profile_show', { 'id': entity.id }) }}"><i class="icon-list"></i></a>
                                     <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
                                     <a href="{{ path('fos_user_profile_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
                                 </td>

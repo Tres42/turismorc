@@ -5,11 +5,12 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span6 offset3">
-        <form action="{{ path('fos_user_profile_edit', {'id': user.getId()}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+        <form action="{{ path('fos_user_profile_edit', {'id': user.getId()}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit form-horizontal">
             <legend>Editar Usuario</legend>
             {{ form_widget(form) }}
             <div class="form-actions">
                 <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+                <a href="{{ path('fos_user_profile_list') }}" class="btn btn-small">Cancelar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </div>    
         </form>
     </div>
