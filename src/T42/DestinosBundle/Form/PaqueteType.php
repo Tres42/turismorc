@@ -27,7 +27,7 @@ class PaqueteType extends AbstractType
             ->add('tarifas')
             ->add('serviciosIncluidos', null, array('label'=>'Servicios Incluidos'))
             ->add('serviciosNoIncluidos', null, array('label'=>'Servicios No Incluidos'))
-            ->add('itinerario')
+            ->add('itinerario', 'ckeditor')
             ->add('resumen', 'textarea')
             ->add('categoria')
             ->add('ciudades')

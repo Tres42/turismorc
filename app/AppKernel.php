@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new T42\DestinosBundle\T42DestinosBundle(),
             new T42\UserBundle\T42UserBundle(),
             new T42\ContactoBundle\T42ContactoBundle(),
+            new Trsteel\CkeditorBundle\TrsteelCkeditorBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {            
