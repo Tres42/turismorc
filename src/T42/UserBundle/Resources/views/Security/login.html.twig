@@ -11,16 +11,20 @@
             </div>
         {% endif %}
         <form action="{{ path("fos_user_security_check") }}" method="post" class="well well-large">
+            <legend>Iniciar Sesi&oacute;n</legend>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
             <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+            <input type="text" id="username" name="_username" value="{{ last_username }}" autofocus="autofocus" />
 
             <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
             <input type="password" id="password" name="_password" />
-            <label for="remember_me" class="pull-right"><input type="checkbox" id="remember_me" name="_remember_me" value="on" /> {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
-
-            <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-primary" />
+            <div>
+                <label for="remember_me" class="pull-right checkbox inline">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                </label>
+                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" class="btn btn-primary" />
+            </div>
         </form>
     </div>
 </div>

@@ -1,54 +1,57 @@
 {% extends 'T42UserBundle::layout.html.twig' %}
 
 {% block content %}
-
-<h1>Usuarios</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre de Usuario</th>
-            <th>Email</th>
-            <th>Habilitado</th>
-            <th>Ultimo Login</th>
-            <th>Bloqueado</th>
-            <th>Expirado</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td>{{ entity.username }}</td>
-            <td>{{ entity.email }}</td>
-            <td>{% if entity.enabled %} Si {% else %} No {% endif %}</td>
-            <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('d-m-Y H:i:s') }}{% endif %}</td>
-            <td>{% if entity.locked %} Si {% else %} No {% endif %}</td>
-            <td>{% if entity.expired %} Si {% else %} No {% endif %}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('fos_user_profile_show', { 'id': entity.id }) }}">Mostrar</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}">Editar</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('fos_user_profile_delete', { 'id': entity.id }) }}">Eliminar</a>
-                    </li>
+<div class="row">
+    <div class="span12"> 
+        <h2>Usuarios</h2>
+        <div class="row">
+            <div class="span3">
+                <ul class="nav nav-tabs nav-stacked">
+                    <li><a href="{{ path('t42_user_invitation_new') }}"><i class="icon-user"></i> Enviar invitaci&oacute;n a usuario</a></li>
+                    <li><a href="{{ path('t42_backend_index') }}"><i class="icon-arrow-left"></i> Volver</a></li>
                 </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
-<ul>
-    <li>
-        <a href="{{ path('t42_user_invitation_new') }}">
-            Enviar invitaci&oacuten a Usuario
-        </a>
-    </li>
-</ul>
-
+            </div>
+            <div class="span7 offset1">
+                <table class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <td>Nombre de Usuario</td>
+                            <td>Apellido y Nombre</td>
+                            <td>Email</td>
+                            <td>Ultimo Login</td>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td><a href="{{ path('fos_user_profile_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+                                {% spaceless %}
+                                    <td>
+                                        {% if entity.lastname is not empty and entity.firstname is not empty %}
+                                            {{ entity.lastname ~ ', ' ~ entity.firstname}}
+                                        {% elseif  entity.lastname is empty and entity.firstname is not empty %}
+                                            {{ entity.firstname }}
+                                        {% elseif  entity.lastname is not empty and entity.firstname is empty %}
+                                            {{ entity.lastname }}
+                                        {% elseif  entity.lastname is empty and entity.firstname is empty %}
+                                            <i> {{ n/d }} </i> 
+                                        {% endif %}
+                                        
+                                    </td>
+                                {% endspaceless %}
+                                <td>{{ entity.email }}</td>
+                                <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('d-m-Y H:i:s') }}{% endif %}</td>
+                                <td>
+                                    <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
+                                    <a href="{{ path('fos_user_profile_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

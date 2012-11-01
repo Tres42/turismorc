@@ -10,10 +10,11 @@ class TestimonioType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $attr = array('class' => 'span10');
         $builder
-            ->add('nombre')
-            ->add('organizacion')
-            ->add('comentario', 'textarea')
+            ->add('nombre', null, array('attr' => $attr))
+            ->add('organizacion', null, array('attr' => $attr))
+            ->add('comentario', 'textarea', array('attr' => $attr))
         ;
     }
 

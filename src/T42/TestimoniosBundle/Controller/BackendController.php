@@ -127,12 +127,10 @@ class BackendController extends Controller
         }
 
         $editForm = $this->createForm(new TestimonioType(), $entity);
-        $deleteForm = $this->createDeleteForm($id);
 
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -177,26 +175,28 @@ class BackendController extends Controller
      * Deletes a Testimonio entity.
      *
      * @Route("/{id}/delete")
-     * @Method("POST")
+     * @Method("GET")
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('T42TestimoniosBundle:Testimonio')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Testimonio entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
-            
-            $this->get('session')->getFlashBag()->add('success', 'El testimonio fue eliminado correctamente');
+        $referer = $request->headers->get('referer');
+        
+        if ($referer !== $this->generateUrl('t42_testimonios_backend_index', array(), true)
+            && $referer !== $this->generateUrl('t42_testimonios_backend_edit', array('id' => $id), true)) {
+            throw $this->createNotFoundException('Unable to delete Testimonio from your referer.');
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $entity = $em->getRepository('T42TestimoniosBundle:Testimonio')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Testimonio entity.');
+        }
+
+        $em->remove($entity);
+        $em->flush();
+
+        $this->get('session')->getFlashBag()->add('success', 'El testimonio fue eliminado correctamente');
 
         return $this->redirect($this->generateUrl('t42_testimonios_backend_index'));
     }

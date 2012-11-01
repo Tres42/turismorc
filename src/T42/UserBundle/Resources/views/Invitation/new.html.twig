@@ -1,22 +1,16 @@
 {% extends 'T42UserBundle::layout.html.twig' %}
 
 {% block content %}
-
-<h1>Enviar Invitación</h1>
-
-<form action="{{ path('t42_user_invitation_send') }}" method="post" {{ form_enctype(form) }} >
-    {{ form_widget(form) }}
-    <p>
-        <button type="submit">Enviar</button>
-    </p>
-</form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('fos_user_profile_list') }}">
-            Volver al listado de Usuarios
-        </a>
-    </li>
-</ul>
-
+<div class="row-fluid">
+    <div class="span6 offset3">
+        <form action="{{ path('t42_user_invitation_send') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+            <legend> Enviar Invitaci&oacute;n </legend>
+            {{ form_widget(form) }}
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Enviar</button>                
+                <a class="btn " href="{{ path('fos_user_profile_list') }}" >Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

@@ -1,9 +1,77 @@
 @import "compass/utilities/general/float";
 @import "compass/css3/opacity";
 
+// Grays
+// -------------------------
+$black:                 #333;
+// $grayDarker:            #222 !default;
+// $grayDark:              #333 !default;
+// $gray:                  #555 !default;
+$grayLight:             #999;
+$grayLighter:           #eee;
+$white:                 #fff;
+
+
+// // Accent colors
+// // -------------------------
+// $blue:                  #049cdb !default;
+// $blueDark:              #0064cd !default;
+// $green:                 #46a546 !default;
+// $red:                   #9d261d !default;
+// $yellow:                #ffc40d !default;
+$orange:                #E87316;
+// $pink:                  #c3325f !default;
+// $purple:                #7a43b6 !default;
+
+
+// Sprite icons path
+// -------------------------
+$iconSpritePath:          "../images/glyphicons-halflings.png";
+$iconWhiteSpritePath:     "../images/glyphicons-halflings-white.png";
+
+
+// Navbar
+// -------------------------
+
+// $navbarBackgroundHighlight:       #ffffff !default;
+// $navbarBackground:                darken($navbarBackgroundHighlight, 5%) !default;
+// $navbarBorder:                    darken($navbarBackground, 12%) !default;
+
+// $navbarText:                      #777 !default;
+// $navbarLinkColor:                 #777 !default;
+// $navbarLinkColorHover:            $grayDark !default;
+// $navbarLinkColorActive:           $gray !default;
+// $navbarLinkBackgroundHover:       transparent !default;
+// $navbarLinkBackgroundActive:      darken($navbarBackground, 5.25%) !default;
+
+// $navbarBrandColor:                $navbarLinkColor !default;
+
+// Inverted navbar
+$navbarInverseBackgroundHighlight:       #6D8CA0;
+$navbarInverseBackground:                darken($navbarInverseBackgroundHighlight, 5%);
+$navbarInverseBorder:                    darken($navbarInverseBackground, 12%);
+
+$navbarInverseText:                      $grayLighter;
+$navbarInverseLinkColor:                 $grayLighter;
+$navbarInverseLinkColorHover:            lighten($navbarInverseLinkColor, 5%);
+// $navbarInverseLinkColorActive:           $navbarInverseLinkColorHover !default;
+// $navbarInverseLinkBackgroundHover:       transparent !default;
+// $navbarInverseLinkBackgroundActive:      $navbarInverseBackground !default;
+
+// $navbarInverseSearchBackground:          lighten($navbarInverseBackground, 25%) !default;
+// $navbarInverseSearchBackgroundFocus:     $white !default;
+// $navbarInverseSearchBorder:              $navbarInverseBackground !default;
+// $navbarInverseSearchPlaceholderColor:    #ccc !default;
+
+// $navbarInverseBrandColor:                $navbarInverseLinkColor !default;
+
+@import "bootstrap/bootstrap";
+
 body {
     padding-top: 60px;
 }
+
+@import "bootstrap/responsive";
 
 .login {
     padding-top: 120px;

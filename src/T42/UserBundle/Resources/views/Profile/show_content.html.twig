@@ -1,8 +1,26 @@
-<div class="fos_user_user_show">
-    <p>Apellido: {{ user.getLastname() }}</p>
-    <p>Nombre: {{ user.getFirstname() }}</p>
-    <p>Direccion: {{ user.getAddress() }}</p>
-    <p>Numero de Telefono: {{ user.getPhoneNumber() }}</p>
-    <p>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}: {{ user.email }}</p>
+{% extends 'T42UserBundle::layout.html.twig' %}
+
+{% block title %} Usuario | {{ parent() }} {% endblock %}
+
+{% block content %}
+<div class="row">    
+    <div class="span12">
+        <h2>Usuario: {{user.username}}</h2>
+        <div class="span5">
+            <div class="fos_user_user_show">
+                <p><b>Apellido:</b>  {{ user.getLastname() }}</p>
+                <p><b>Nombre:</b> {{ user.getFirstname() }}</p>
+                <p><b>Direccion:</b> {{ user.getAddress() }}</p>
+                <p><b>Numero de Telefono:</b> {{ user.getPhoneNumber() }}</p>
+                <p><b>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</b> {{ user.username }}</p>
+                <p><b>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</b> {{ user.email }}</p>
+                
+                <div class="form-actions">
+                    <a href="{{ path('fos_user_profile_list') }}" class="btn btn-small">Volver</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+                
+            </div>    
+        </div>
+    </div>        
 </div>
+{% endblock %}

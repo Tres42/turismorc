@@ -1,47 +1,47 @@
 {% extends 'T42TestimoniosBundle::layout.html.twig' %}
 
 {% block content %}
-
-<h1>Listado de Testimonios</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Organizacion</th>
-            <th>Comentario</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for entity in entities %}
-        <tr>
-            <td><a href="{{ path('t42_testimonios_backend_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-            <td>{{ entity.nombre }}</td>
-            <td>{{ entity.organizacion }}</td>
-            <td>{{ entity.comentario }}</td>
-            <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('t42_testimonios_backend_show', { 'id': entity.id }) }}">Mostrar</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('t42_testimonios_backend_edit', { 'id': entity.id }) }}">Editar</a>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
-<ul>
-    <li>
-        <a href="{{ path('t42_testimonios_backend_new') }}">
-            Crear nuevo Testimonio
-        </a>
-    </li>
-</ul>
-
+    <div class="row">
+        <div class="span12">
+            <h2>Testimonios</h2>
+            <div class="row">
+                <div class="span3">
+                    <ul class="nav nav-tabs nav-stacked">
+                        <li><a href="{{ path('t42_testimonios_backend_new') }}"><i class="icon-plus"></i> Agregar nuevo</a></li>
+                        <li><a href="{{ path('t42_backend_index') }}"><i class="icon-arrow-left"></i> Volver</a></li>
+                    </ul>
+                </div>
+                <div class="span5 offset2">
+                    <table class="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <td>Nombre</td>
+                                <td>Organizaci&oacute;n</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td>{{ entity.nombre }}</td>
+                                {% spaceless %}
+                                <td>
+                                    {% if entity.organizacion is not empty %}
+                                        {{ entity.organizacion }}
+                                    {% else %}
+                                        <i>n/d</i>
+                                    {% endif %}
+                                </td>
+                                {% endspaceless %}
+                                <td>
+                                    <a href="{{ path('t42_testimonios_backend_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
+                                    <a href="{{ path('t42_testimonios_backend_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
