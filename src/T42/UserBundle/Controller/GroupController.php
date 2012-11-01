@@ -4,6 +4,7 @@ namespace T42\UserBundle\Controller;
 
 use \FOS\UserBundle\Controller\GroupController as BaseGroupController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * T42\UserBundle\Controller\GroupController
@@ -17,6 +18,7 @@ class GroupController extends BaseGroupController
     
     /**
      * List all groups
+     * @Secure(roles="ROLE_USUARIOS_VIEW")
      */
     public function listAction()
     {
@@ -27,6 +29,7 @@ class GroupController extends BaseGroupController
 
     /**
      * Show the new form
+     * @Secure(roles="ROLE_USUARIOS_ADD")
      */
     public function newAction()
     {
@@ -50,6 +53,7 @@ class GroupController extends BaseGroupController
 
     /**
      * Edit one group, show the edit form
+     * @Secure(roles="ROLE_USUARIOS_EDIT")
      */
     public function editAction($groupname)
     {
@@ -74,6 +78,7 @@ class GroupController extends BaseGroupController
 
     /**
      * Delete one group
+     * @Secure(roles="ROLE_USUARIOS_DELETE")
      */
     public function deleteAction($groupname)
     {

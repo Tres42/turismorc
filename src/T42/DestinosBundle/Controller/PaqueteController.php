@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use T42\DestinosBundle\Entity\Paquete;
 use T42\DestinosBundle\Form\PaqueteType;
 
@@ -28,6 +29,7 @@ class PaqueteController extends Controller
      *
      * @Route("/")
      * @Template()
+     * @Secure(roles="ROLE_PAQUETES_VIEW")
      */
     public function indexAction()
     {
@@ -69,6 +71,7 @@ class PaqueteController extends Controller
      *
      * @Route("/new")
      * @Template()
+     * @Secure(roles="ROLE_PAQUETES_ADD")
      */
     public function newAction()
     {
@@ -115,6 +118,7 @@ class PaqueteController extends Controller
      *
      * @Route("/{id}/edit")
      * @Template()
+     * @Secure(roles="ROLE_PAQUETES_EDIT")
      */
     public function editAction($id)
     {
@@ -178,6 +182,7 @@ class PaqueteController extends Controller
      *
      * @Route("/{id}/delete")
      * @Method("POST")
+     * @Secure(roles="ROLE_PAQUETES_DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
