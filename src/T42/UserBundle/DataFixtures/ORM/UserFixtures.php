@@ -33,7 +33,7 @@ class UserFixtures implements FixtureInterface, ContainerAwareInterface
         
         $groupAdmin = $groupManager->createGroup('Usuarios Registrados');
         $groupAdmin->addRole('ROLE_ADMIN');
-        $groupAdmin->addRole('ROLE_PAQUETES_VIEW');
+        $groupAdmin->addRole('ROLE_USUARIOS');
         
         // Get the UserManager from fos_user.user_manager service
         $userManager = $this->container->get('fos_user.user_manager');

@@ -13,24 +13,27 @@
             <td> <a href="{{ path('fos_user_group_show', {'groupname': group.getName()} ) }}">{{ group.getName() }}</a> </td>
             <td>
                 <ul>
-                    <li>
-                        <a href="{{ path('fos_user_group_edit', { 'groupname': group.getName() }) }}">Editar</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('fos_user_group_delete', { 'groupname': group.getName() }) }}">Eliminar</a>
-                    </li>
+                    {% if is_granted('ROLE_USUARIOS_EDIT') and  not is_granted('ROLE_SUPER_ADMIN')%}                                            
+                        <li>
+                            <a href="{{ path('fos_user_group_edit', { 'groupname': group.getName() }) }}">Editar</a>
+                        </li>
+                    {% endif %}    
+                    {% if is_granted('ROLE_USUARIOS_DELETE') and  not is_granted('ROLE_SUPER_ADMIN')%}                                            
+                        <li>
+                            <a href="{{ path('fos_user_group_delete', { 'groupname': group.getName() }) }}">Eliminar</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </td>
-        </tr>
-            
+        </tr>            
     {% endfor %}        
     </tbody>    
 </table>
 
-<ul>
-    <li>
-        <a href="{{ path('fos_user_group_new') }}">
-            Crear nuevo grupo
-        </a>
-    </li>
-</ul>
+    {% if is_granted('ROLE_USUARIOS_ADD') and  not is_granted('ROLE_SUPER_ADMIN')%}                                            
+        <ul>
+            <li>
+                <a href="{{ path('fos_user_group_new') }}">Crear nuevo grupo</a>
+            </li>
+        </ul>
+    {% endif %}

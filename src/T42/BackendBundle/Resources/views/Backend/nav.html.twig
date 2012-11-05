@@ -5,7 +5,7 @@
     {% if is_granted('ROLE_TESTIMONIOS_VIEW') %}
         <li><a href="{{ path("t42_testimonios_backend_index") }}">Testimonios</a></li>
     {% endif %}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
+    {% if is_granted('ROLE_USUARIOS_VIEW') %}
         <li><a href="{{ path("fos_user_profile_list") }}">Usuarios</a></li>
     {% endif %}
 </ul>
