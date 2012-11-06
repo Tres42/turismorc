@@ -20,7 +20,9 @@
     <li>
         <form action="{{ path('t42_destinos_paquete_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-                <button class="btn btn-danger" type="submit">Eliminar</button>
+                {% if is_granted('ROLE_PAQUETES_DELETE') %}
+                    <button class="btn btn-danger" type="submit">Eliminar</button>                
+                {% endif %}
         </form>
     </li>
 </ul>

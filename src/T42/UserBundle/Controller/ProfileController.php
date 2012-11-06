@@ -6,6 +6,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Controller\ProfileController as BaseProfileController;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 
 /**
  * T42\UserBundle\Controller\ProfileController
@@ -19,6 +20,7 @@ class ProfileController extends BaseProfileController
 
     /**
      * Lists all User.
+     * @Secure(roles="ROLE_USUARIOS_VIEW")
      */
     public function listAction()
     {
@@ -49,6 +51,7 @@ class ProfileController extends BaseProfileController
 
     /**
      * Edit the user
+     * @Secure(roles="ROLE_USUARIOS_EDIT")
      */
     public function editAction($id = 0)
     {
@@ -80,6 +83,7 @@ class ProfileController extends BaseProfileController
 
     /**
      * Delete the user
+     * @Secure(roles="ROLE_USUARIOS_DELETE")
      */
     public function deleteAction($id = 0)
     {

@@ -3,12 +3,13 @@
 namespace T42\TestimoniosBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use T42\TestimoniosBundle\Form\TestimonioType;
 use T42\TestimoniosBundle\Entity\Testimonio;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * T42\TestimoniosBundle\Controller\BackendController
@@ -27,6 +28,7 @@ class BackendController extends Controller
      *
      * @Route("/")
      * @Template()
+     * @Secure(roles="ROLE_TESTIMONIOS_VIEW")
      */
     public function indexAction()
     {
@@ -68,6 +70,7 @@ class BackendController extends Controller
      *
      * @Route("/new")
      * @Template()
+     * @Secure(roles="ROLE_TESTIMONIOS_ADD")
      */
     public function newAction()
     {
@@ -115,6 +118,7 @@ class BackendController extends Controller
      *
      * @Route("/{id}/edit")
      * @Template()
+     * @Secure(roles="ROLE_TESTIMONIOS_EDIT")
      */
     public function editAction($id)
     {
@@ -176,6 +180,7 @@ class BackendController extends Controller
      *
      * @Route("/{id}/delete")
      * @Method("GET")
+     * @Secure(roles="ROLE_TESTIMONIOS_DELETE")
      */
     public function deleteAction(Request $request, $id)
     {

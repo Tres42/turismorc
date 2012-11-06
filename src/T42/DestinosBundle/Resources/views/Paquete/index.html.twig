@@ -7,7 +7,6 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Titulo</th>
             <th>Fecha de Salida</th>
             <th>Es Grupal</th>
@@ -21,7 +20,6 @@
     <tbody>
     {% for entity in entities %}
         <tr>
-            <td><a href="{{ path('t42_destinos_paquete_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
             <td>{{ entity.titulo }}</td>
             <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('d/m/Y') }}{% endif %}</td>
             <td>{% if entity.esGrupal %} Si {% else %} No {% endif %}</td>
@@ -31,12 +29,21 @@
             <td>{{ entity.categoria }}</td>
             <td>
                 <ul>
-                    <li>
-                        <a href="{{ path('t42_destinos_paquete_show', { 'id': entity.id }) }}">Mostrar</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('t42_destinos_paquete_edit', { 'id': entity.id }) }}">Editar</a>
-                    </li>
+                    {% if is_granted('ROLE_PAQUETES_VIEW') %}
+                        <li>
+                            <a href="{{ path('t42_destinos_paquete_show', { 'id': entity.id }) }}">Mostrar</a>
+                        </li>
+                    {% endif%}    
+                    {% if is_granted('ROLE_PAQUETES_EDIT') %}
+                        <li>
+                            <a href="{{ path('t42_destinos_paquete_edit', { 'id': entity.id }) }}">Editar</a>
+                        </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_PAQUETES_DELETE') %}
+                        <li>
+                            <a href="{{ path('t42_destinos_paquete_delete', { 'id': entity.id }) }}">Eliminar</a>
+                        </li>
+                    {% endif%}
                     <li>
                         <a href="{{ path('t42_destinos_paquete_print', { 'id': entity.id }) }}">Imprimir</a>
                     </li>
@@ -47,12 +54,11 @@
     </tbody>
 </table>
 
-<ul>
-    <li>
-        <a href="{{ path('t42_destinos_paquete_new') }}">
-            Crear nuevo paquete
-        </a>
-    </li>
-</ul>
-
+    {% if is_granted('ROLE_PAQUETES_ADD') %}
+        <ul>
+            <li>
+                <a href="{{ path('t42_destinos_paquete_new') }}"> Crear nuevo paquete</a>
+            </li>
+        </ul>
+    {% endif%}
 {% endblock %}

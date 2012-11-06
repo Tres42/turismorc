@@ -7,7 +7,9 @@
         <div class="row">
             <div class="span3">
                 <ul class="nav nav-tabs nav-stacked">
-                    <li><a href="{{ path('t42_user_invitation_new') }}"><i class="icon-user"></i> Enviar invitaci&oacute;n a usuario</a></li>
+                    {% if is_granted('ROLE_USUARIOS_ADD') %}
+                        <li><a href="{{ path('t42_user_invitation_new') }}"><i class="icon-user"></i> Enviar invitaci&oacute;n a usuario</a></li>
+                    {% endif %}    
                     <li><a href="{{ path('t42_backend_index') }}"><i class="icon-arrow-left"></i> Volver</a></li>
                 </ul>
             </div>
@@ -25,7 +27,13 @@
                     <tbody>
                         {% for entity in entities %}
                             <tr>
-                                <td><a href="{{ path('fos_user_profile_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+                                <td>
+                                    {% if is_granted('ROLE_USUARIOS_VIEW') %}
+                                        <a href="{{ path('fos_user_profile_show', { 'id': entity.id }) }}">{{ entity.username }}</a>
+                                    {% else%}
+                                        {{ entity.username }}
+                                    {% endif %}
+                                </td>
                                 {% spaceless %}
                                     <td>
                                         {% if entity.lastname is not empty and entity.firstname is not empty %}
@@ -43,8 +51,12 @@
                                 <td>{{ entity.email }}</td>
                                 <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('d-m-Y H:i:s') }}{% endif %}</td>
                                 <td>
-                                    <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
-                                    <a href="{{ path('fos_user_profile_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
+                                    {% if is_granted('ROLE_USUARIOS_EDIT') %}
+                                        <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
+                                    {% endif %}
+                                    {% if is_granted('ROLE_USUARIOS_DELETE') %}
+                                        <a href="{{ path('fos_user_profile_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
