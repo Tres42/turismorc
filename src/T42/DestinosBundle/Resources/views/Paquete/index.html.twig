@@ -29,32 +29,21 @@
             <td>{{ entity.categoria }}</td>
             <td>
                 <ul>
-                    {% if is_granted('ROLE_PAQUETES_SHOW') and  not is_granted('ROLE_SUPER_ADMIN')%}
+                    {% if is_granted('ROLE_PAQUETES_VIEW') %}
                         <li>
                             <a href="{{ path('t42_destinos_paquete_show', { 'id': entity.id }) }}">Mostrar</a>
                         </li>
                     {% endif%}    
-                    {% if is_granted('ROLE_PAQUETES_EDIT') and  not is_granted('ROLE_SUPER_ADMIN')%}
+                    {% if is_granted('ROLE_PAQUETES_EDIT') %}
                         <li>
                             <a href="{{ path('t42_destinos_paquete_edit', { 'id': entity.id }) }}">Editar</a>
                         </li>
                     {% endif %}
-                    {% if is_granted('ROLE_PAQUETES_DELETE') and  not is_granted('ROLE_SUPER_ADMIN')%}
+                    {% if is_granted('ROLE_PAQUETES_DELETE') %}
                         <li>
                             <a href="{{ path('t42_destinos_paquete_delete', { 'id': entity.id }) }}">Eliminar</a>
                         </li>
                     {% endif%}
-                    {% if is_granted('ROLE_PAQUETES') %}    
-                        <li>
-                            <a href="{{ path('t42_destinos_paquete_show', { 'id': entity.id }) }}">Mostrar</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('t42_destinos_paquete_edit', { 'id': entity.id }) }}">Editar</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('t42_destinos_paquete_delete', { 'id': entity.id }) }}">Eliminar</a>
-                        </li>
-                    {% endif %}
                     <li>
                         <a href="{{ path('t42_destinos_paquete_print', { 'id': entity.id }) }}">Imprimir</a>
                     </li>

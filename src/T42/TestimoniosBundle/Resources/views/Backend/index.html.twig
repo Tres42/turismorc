@@ -35,16 +35,12 @@
                                 </td>
                                 {% endspaceless %}
                                 <td>
-                                    {% if is_granted('ROLE_TESTIMONIOS_DELETE') and  not is_granted('ROLE_SUPER_ADMIN')%}
-                                        <a href="{{ path('t42_testimonios_backend_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
-                                    {% endif %}    
-                                    {% if is_granted('ROLE_TESTIMONIOS_EDIT') and  not is_granted('ROLE_SUPER_ADMIN') %}
+                                    {% if is_granted('ROLE_TESTIMONIOS_EDIT') %}
                                         <a href="{{ path('t42_testimonios_backend_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>                                        
                                     {% endif %}    
-                                    {% if is_granted('ROLE_TESTIMONIOS') %}    
-                                        <a href="{{ path('t42_testimonios_backend_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>                                        
+                                    {% if is_granted('ROLE_TESTIMONIOS_DELETE') %}
                                         <a href="{{ path('t42_testimonios_backend_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
-                                    {% endif %}
+                                    {% endif %}    
                                 </td>
                             </tr>
                         {% endfor %}

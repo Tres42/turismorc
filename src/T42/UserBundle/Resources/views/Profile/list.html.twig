@@ -27,7 +27,13 @@
                     <tbody>
                         {% for entity in entities %}
                             <tr>
-                                <td><a href="{{ path('fos_user_profile_show', { 'id': entity.id }) }}">{{ entity.username }}</a></td>
+                                <td>
+                                    {% if is_granted('ROLE_USUARIOS_VIEW') %}
+                                        <a href="{{ path('fos_user_profile_show', { 'id': entity.id }) }}">{{ entity.username }}</a>
+                                    {% else%}
+                                        {{ entity.username }}
+                                    {% endif %}
+                                </td>
                                 {% spaceless %}
                                     <td>
                                         {% if entity.lastname is not empty and entity.firstname is not empty %}
@@ -45,14 +51,10 @@
                                 <td>{{ entity.email }}</td>
                                 <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('d-m-Y H:i:s') }}{% endif %}</td>
                                 <td>
-                                    {% if is_granted('ROLE_USUARIOS_EDIT') and  not is_granted('ROLE_SUPER_ADMIN')%}
+                                    {% if is_granted('ROLE_USUARIOS_EDIT') %}
                                         <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
                                     {% endif %}
-                                    {% if is_granted('ROLE_USUARIOS_DELETE') and  not is_granted('ROLE_SUPER_ADMIN')%}
-                                        <a href="{{ path('fos_user_profile_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
-                                    {% endif %}
-                                    {% if is_granted('ROLE_USUARIOS') %}
-                                        <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
+                                    {% if is_granted('ROLE_USUARIOS_DELETE') %}
                                         <a href="{{ path('fos_user_profile_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
                                     {% endif %}
                                 </td>

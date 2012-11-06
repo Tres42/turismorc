@@ -1,7 +1,3 @@
-{% extends 'T42UserBundle::layout.html.twig' %}
-
-{% block title %}Editar | {{ parent() }}{% endblock %}
-
 {% block content %}
 <div class="row-fluid">
     <div class="span6 offset3">
@@ -10,10 +6,9 @@
             {{ form_widget(form) }}
             <div class="form-actions">
                 <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
-                <a href="{{ path('fos_user_profile_list') }}" class="btn btn-small">Cancelar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="{{ path('fos_user_profile_list') }}" class="btn btn-small">Cancelar</a>
             </div>    
         </form>
     </div>
 </div>
-
 {% endblock %}
