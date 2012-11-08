@@ -20,7 +20,7 @@ class PaqueteType extends AbstractType
     {
         $builder
             ->add('titulo')
-            ->add('fechaSalida', null, array('widget' => 'single_text', 'label'=>'Fecha de Salida','format' => 'dd-MM-yyyy'))
+            ->add('fechasDeSalida', null, array('label'=>'Fechas de Salida')) // 'options'=>array('widget'=>'single_text', 'format' => 'dd/MM/yyyy')
             ->add('esGrupal', null, array('label'=>'Viaje Grupal'))
             ->add('esPromocion', null, array('label'=>'Viaje Promocional'))
             ->add('observaciones')

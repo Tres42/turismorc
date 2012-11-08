@@ -8,7 +8,7 @@
     <thead>
         <tr>
             <th>Titulo</th>
-            <th>Fecha de Salida</th>
+            <th>Salidas</th>
             <th>Es Grupal</th>
             <th>Es Promocion</th>
             <th>Tarifas</th>
@@ -21,7 +21,11 @@
     {% for entity in entities %}
         <tr>
             <td>{{ entity.titulo }}</td>
-            <td>{% if entity.fechaSalida %}{{ entity.fechaSalida|date('d/m/Y') }}{% endif %}</td>
+            <td>
+                {% for fechaDeSalida in entity.fechasDeSalida %}
+                    {{fechaDeSalida.fecha|date("yy/mm/YYYY")}}
+                {% endfor %}
+            </td>
             <td>{% if entity.esGrupal %} Si {% else %} No {% endif %}</td>
             <td>{% if entity.esPromocion %} Si {% else %} No {% endif %}</td>
             <td>{{ entity.tarifas }}</td>

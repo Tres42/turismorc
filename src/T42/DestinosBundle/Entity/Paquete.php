@@ -4,6 +4,7 @@ namespace T42\DestinosBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use T42\DestinosBundle\Entity\FechaDeSalida;
 
 /**
  * T42\DestinosBundle\Entity\Paquete
@@ -30,11 +31,6 @@ class Paquete
      * @Assert\NotBlank()
      */
     private $titulo;
-
-    /**
-     * @ORM\Column(type="date", name="fecha_salida", nullable=true)
-     */
-    private $fechaSalida;
 
     /**
      * @ORM\Column(type="boolean", length=100, name="es_grupal", nullable=true)
@@ -84,6 +80,12 @@ class Paquete
     private $categoria;
 
     /**
+     * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\FechaDeSalida", inversedBy="paquetes")
+     * @ORM\JoinTable(name="paquete_fecha")
+     */
+    private $fechasDeSalida;
+
+    /**
      * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\Ciudad")
      * @ORM\JoinTable()
      */
@@ -98,6 +100,8 @@ class Paquete
         // Creamos el objeto tarifas el cual posee conceptos y sus respectivas tarifas
         $this->tarifas = array();
         $this->ciudad = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->fechasDeSalida = new \Doctrine\Common\Collections\ArrayCollection();
+        
     }
 
     /**
@@ -131,29 +135,6 @@ class Paquete
     public function getTitulo()
     {
         return $this->titulo;
-    }
-
-    /**
-     * Asigna la fecha de salida del viaje. 
-     *
-     * @param \DateTime $fechaSalida
-     * @return Paquete
-     */
-    public function setFechaSalida($fechaSalida)
-    {
-        $this->fechaSalida = $fechaSalida;
-
-        return $this;
-    }
-
-    /**
-     * Retorna la fecha de salida del viaje.
-     *
-     * @return \DateTime 
-     */
-    public function getFechaSalida()
-    {
-        return $this->fechaSalida;
     }
 
     /**
@@ -438,7 +419,40 @@ class Paquete
             //Nada la tarifa no se puede eliminar ya que el arregle esta vacio
         }
     }
+    
+    /**
+     * Add fechasDeSalida
+     *
+     * @param T42\DestinosBundle\Entity\FechaDeSalida $fechasDeSalida
+     * @return Paquete
+     */
+    public function addFechasDeSalida(\T42\DestinosBundle\Entity\FechaDeSalida $fechasDeSalida)
+    {
+        $this->fechasDeSalida[] = $fechasDeSalida;
+    
+        return $this;
+    }
 
+    /**
+     * Remove fechasDeSalida
+     *
+     * @param T42\DestinosBundle\Entity\FechaDeSalida $fechasDeSalida
+     */
+    public function removeFechasDeSalida(\T42\DestinosBundle\Entity\FechaDeSalida $fechasDeSalida)
+    {
+        $this->fechasDeSalida->removeElement($fechasDeSalida);
+    }
+
+    /**
+     * Get fechasDeSalida
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getFechasDeSalida()
+    {
+        return $this->fechasDeSalida;
+    }
+    
 }
 
 /**
@@ -476,4 +490,26 @@ class Tarifa
         $this->identificador = -1;
     }
 
+    /**
+     * Add ciudades
+     *
+     * @param T42\DestinosBundle\Entity\Ciudad $ciudades
+     * @return Paquete
+     */
+    public function addCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
+    {
+        $this->ciudades[] = $ciudades;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ciudades
+     *
+     * @param T42\DestinosBundle\Entity\Ciudad $ciudades
+     */
+    public function removeCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
+    {
+        $this->ciudades->removeElement($ciudades);
+    }
 }

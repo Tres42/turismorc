@@ -245,5 +245,18 @@ class PaqueteController extends Controller
                         ->getForm()
         ;
     }
+    
+    /**
+     * Metodo que retorna un valor verdadero si existe o 
+     * no la fecha.
+     */
+    private function existeFecha($fechaSalida)
+    {
+        $repository = $this->getDoctrine()->getRepository('T42DestinosBundle:FechaDeSalida');
+        
+        $fechaSalida = $repository->findOneByFecha($fechaSalida);
+        
+        return (null !== $fechaSalida);
+    }
 
 }
