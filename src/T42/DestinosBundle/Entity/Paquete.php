@@ -15,6 +15,7 @@ use T42\DestinosBundle\Entity\FechaDeSalida;
  * 
  * @ORM\Entity
  * @ORM\Table(name="paquete")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Paquete
 {
@@ -80,7 +81,7 @@ class Paquete
     private $categoria;
 
     /**
-     * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\FechaDeSalida", inversedBy="paquetes")
+     * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\FechaDeSalida", inversedBy="paquetes", cascade={"persist"})
      * @ORM\JoinTable(name="paquete_fecha")
      */
     private $fechasDeSalida;
@@ -98,10 +99,9 @@ class Paquete
     public function __construct()
     {
         // Creamos el objeto tarifas el cual posee conceptos y sus respectivas tarifas
-        $this->tarifas = array();
+        $this->tarifas = array();//new \Doctrine\Common\Collections\ArrayCollection();
         $this->ciudad = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fechasDeSalida = new \Doctrine\Common\Collections\ArrayCollection();
-        
     }
 
     /**
@@ -383,42 +383,6 @@ class Paquete
     {
         return $this->ciudades;
     }
-
-    /**
-     * Agrega una nueva tarifa al arreglo de tarifas.
-     * 
-     * @param Tarifa $tarifa La Tarifa a agregar
-     */
-    public function addTarifa(Tarifa $tarifa)
-    {
-        $count = count($this->tarifas);
-        $tarifa->identificador = $count;
-
-        //Por ultimo agregamos la tarifa al arreglo 
-        $this->tarifas[] = $tarifa;
-    }
-
-    /**
-     * Elimina una tarifa del arreglo de tarifas.
-     * 
-     * @param Tarifa $tarifa Tarifa a eliminar
-     */
-    public function removeTarifa(Tarifa $tarifa)
-    {
-        // Obtenemos la clave de busqueda
-        $key = $tarifa->identificador;
-        $length = count($this->tarifas) - 1;
-
-        //Controlamos que el arreglo no sea vacio
-        if ($this->tarifas[$key] != NULL) {
-            for ($i = $key; $i < $length; $i++) {
-                $this->tarifas[$i] = $this->tarifas[$i + 1];
-            }
-            unset($this->tarifas[$length]);
-        } else {
-            //Nada la tarifa no se puede eliminar ya que el arregle esta vacio
-        }
-    }
     
     /**
      * Add fechasDeSalida
@@ -452,64 +416,26 @@ class Paquete
     {
         return $this->fechasDeSalida;
     }
-    
-}
-
-/**
- * Clase que representa una tarifa, posee dos atributos el concepto y el monto de 
- * la tarifa.
- *
- * @author Cristian Tosco <ctosco@tres42.com.ar>
- * 
- */
-class Tarifa
-{
 
     /**
-     * Identificador interno unico de tarifas
+     * Get fechasDeSalida
+     *
+     * @return Doctrine\Common\Collections\Collection 
      */
-    public $identificador;
-
-    /*
-     * El concepto que maneja la empresa
-     * 
-     * Ej: SINGLE, DOUBLE o TRIPLE
-     */
-    public $concepto;
-
-    /*
-     *  El monto en dolares o pesos.
-     */
-    public $monto;
-
-    /**
-     * Constructor que inicializa el valor del identificador.
-     */
-    public function __construct()
+    public function setFechasDeSalida($fechasDeSalida)
     {
-        $this->identificador = -1;
+        $this->fechasDeSalida = $fechasDeSalida;
     }
 
     /**
-     * Add ciudades
-     *
-     * @param T42\DestinosBundle\Entity\Ciudad $ciudades
-     * @return Paquete
+     * @ORM\PrePersist
      */
-    public function addCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
+    public function removeNullFechasDeSalida()
     {
-        $this->ciudades[] = $ciudades;
-    
-        return $this;
-    }
-
-    /**
-     * Remove ciudades
-     *
-     * @param T42\DestinosBundle\Entity\Ciudad $ciudades
-     */
-    public function removeCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
-    {
-        $this->ciudades->removeElement($ciudades);
+        $this->fechasDeSalida = $this->fechasDeSalida->filter(
+            function ($value) {
+                return (bool) $value;
+            }
+        );
     }
 }

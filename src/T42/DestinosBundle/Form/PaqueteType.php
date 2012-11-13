@@ -5,6 +5,7 @@ namespace T42\DestinosBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use T42\DestinosBundle\Form\FechaDeSalidaType;
 
 /**
  * T42\DestinosBundle\Form\PaqueteType
@@ -20,7 +21,21 @@ class PaqueteType extends AbstractType
     {
         $builder
             ->add('titulo')
-            ->add('fechasDeSalida', null, array('label'=>'Fechas de Salida')) // 'options'=>array('widget'=>'single_text', 'format' => 'dd/MM/yyyy')
+            ->add('fechasDeSalida', 'collection', array(
+                    'label'=>'Fechas de Salida',
+                    'type' => 'fecha_de_salida',
+                    'options' => array(
+                        'label' => 'Fecha',
+                        'required' => false,
+                        'widget' => 'single_text',
+                        'format' => 'd/M/y',
+//                        'input' => 'string'
+                    ),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false
+                )
+            )
             ->add('esGrupal', null, array('label'=>'Viaje Grupal'))
             ->add('esPromocion', null, array('label'=>'Viaje Promocional'))
             ->add('observaciones')

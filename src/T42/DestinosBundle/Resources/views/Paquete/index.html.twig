@@ -23,7 +23,7 @@
             <td>{{ entity.titulo }}</td>
             <td>
                 {% for fechaDeSalida in entity.fechasDeSalida %}
-                    {{fechaDeSalida.fecha|date("yy/mm/YYYY")}}
+                    {{ fechaDeSalida.fecha|date("d/m/Y") }}
                 {% endfor %}
             </td>
             <td>{% if entity.esGrupal %} Si {% else %} No {% endif %}</td>

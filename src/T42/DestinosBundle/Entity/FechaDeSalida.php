@@ -62,8 +62,6 @@ class FechaDeSalida
     public function setFecha($fecha)
     {
         $this->fecha = $fecha;
-    
-        return $this;
     }
 
     /**
@@ -107,14 +105,5 @@ class FechaDeSalida
     public function getPaquetes()
     {
         return $this->paquetes;
-    }
-    
-    /**
-     * Metodo magico que retorna la fecha para mostrar en la 
-     * relacion.
-     */
-    public function __toString()
-    {
-        return $this->fecha;
     }
 }
