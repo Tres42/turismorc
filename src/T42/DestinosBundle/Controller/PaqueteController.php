@@ -167,6 +167,8 @@ class PaqueteController extends Controller
         $editForm = $this->createForm(new PaqueteType(), $entity);
         $editForm->bind($request);
 
+        $entity->removeNullFechasDeSalida();
+
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();

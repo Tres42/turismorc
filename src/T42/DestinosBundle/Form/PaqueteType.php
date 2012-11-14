@@ -28,8 +28,7 @@ class PaqueteType extends AbstractType
                         'label' => 'Fecha',
                         'required' => false,
                         'widget' => 'single_text',
-                        'format' => 'd/M/y',
-//                        'input' => 'string'
+                        'format' => 'd/M/y'
                     ),
                     'allow_add' => true,
                     'allow_delete' => true,
