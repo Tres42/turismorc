@@ -8,6 +8,7 @@ use T42\DestinosBundle\Entity\Paquete;
 use T42\DestinosBundle\Entity\Ciudad;
 use T42\DestinosBundle\Entity\Pais;
 use T42\DestinosBundle\Entity\Tarifa;
+use T42\DestinosBundle\Entity\FechaDeSalida;
 
 /**
  * T42\DataFixtures\ORM\DestinosFixture
@@ -58,21 +59,6 @@ class DestinosFixture implements FixtureInterface
         $ciudadEstambul->setPais($paisTurquia);
         $ciudadEstambul->setProvincia('Estambul');
         
-        $tarifa1 = new Tarifa();
-        $tarifa1->identificador = 1;
-        $tarifa1->concepto = 'SINGLE';
-        $tarifa1->monto = 7990;
-
-        $tarifa2 = new Tarifa();
-        $tarifa2->identificador = 2;
-        $tarifa2->concepto = 'DOUBLE';
-        $tarifa1->monto = 6635;
-        
-        $tarifa3 = new Tarifa();
-        $tarifa3->identificador = 3;
-        $tarifa3->concepto = 'TRIPLE';
-        $tarifa3->monto = 6285;
-        
         $paquete1 = new Paquete();
         $paquete1->addCiudad($ciudadAtenas);
         $paquete1->addCiudad($ciudadEstambul);
@@ -88,11 +74,12 @@ class DestinosFixture implements FixtureInterface
         $paquete1->setEsGrupal(true);
         
         $paquete1->setEsPromocion(true);
+
+        $fechaDeSalida = new FechaDeSalida();
+
+        $fechaDeSalida->setFecha(new \DateTime("2012-09-14"));
         
-        $fechaSalida = new \DateTime();
-        $fechaSalida->setDate(2012, 09, 14);
-        
-        $paquete1->setFechaSalida($fechaSalida);
+        $paquete1->addFechasDeSalida($fechaDeSalida);
         
         $paquete1->setItinerario(' DIA 1: RIO CUARTO - CORDOBA – ESTAMBUL.
 	 
@@ -221,6 +208,8 @@ Llegada a Córdoba, traslado a Río Cuarto y fin de nuestros servicios. ');
         $manager->persist($ciudadCordoba);
         $manager->persist($ciudadEstambul);
         $manager->persist($ciudadRioCuarto);
+
+        $manager->persist($fechaDeSalida);
                 
         $manager->persist($paquete1);
         

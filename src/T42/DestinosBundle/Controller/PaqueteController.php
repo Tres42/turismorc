@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use T42\DestinosBundle\Entity\Paquete;
+use T42\DestinosBundle\Entity\FechaDeSalida;
 use T42\DestinosBundle\Form\PaqueteType;
 
 /**
@@ -76,6 +77,9 @@ class PaqueteController extends Controller
     public function newAction()
     {
         $entity = new Paquete();
+        $fecha = new FechaDeSalida();
+        $entity->addFechasDeSalida($fecha);
+
         $form = $this->createForm(new PaqueteType(), $entity);
 
         return array(
@@ -104,7 +108,7 @@ class PaqueteController extends Controller
             
             $this->get('session')->getFlashBag()->add('success', 'El destino fue guardado correctamente');
             
-            return $this->redirect($this->generateUrl('t42_destinos_paquete_index', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('t42_destinos_paquete_index'));
         }
 
         return array(
@@ -128,6 +132,8 @@ class PaqueteController extends Controller
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Paquete entity.');
+        } elseif ($entity->getFechasDeSalida()->isEmpty()) {
+            $entity->addFechasDeSalida(new FechaDeSalida());
         }
 
         $editForm = $this->createForm(new PaqueteType(), $entity);
@@ -161,13 +167,15 @@ class PaqueteController extends Controller
         $editForm = $this->createForm(new PaqueteType(), $entity);
         $editForm->bind($request);
 
+        $entity->removeNullFechasDeSalida();
+
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
             
             $this->get('session')->getFlashBag()->add('success', 'Los cambios fueron guardados correctamente');
             
-            return $this->redirect($this->generateUrl('t42_destinos_paquete_index', array('id' => $id)));
+            return $this->redirect($this->generateUrl('t42_destinos_paquete_index'));
         }
 
         return array(
@@ -245,5 +253,4 @@ class PaqueteController extends Controller
                         ->getForm()
         ;
     }
-
 }

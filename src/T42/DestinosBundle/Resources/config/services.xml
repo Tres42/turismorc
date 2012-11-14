@@ -17,4 +17,14 @@
         </service>
     </services>
     -->
+    <parameters>
+        <parameter key="t42_destinos.type.fecha_de_salida.class">T42\DestinosBundle\Form\Type\FechaDeSalidaType</parameter>
+    </parameters>
+
+    <services>
+        <service id="t42_destinos.type.fecha_de_salida" class="%t42_destinos.type.fecha_de_salida.class%">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <tag name="form.type" alias="fecha_de_salida" />
+        </service>
+    </services>
 </container>
