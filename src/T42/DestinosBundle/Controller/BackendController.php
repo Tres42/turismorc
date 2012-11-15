@@ -20,9 +20,9 @@ use T42\DestinosBundle\Form\PaqueteType;
  * 
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  *
- * @Route("admin/destinos")
+ * @Route("/admin/destinos")
  */
-class PaqueteController extends Controller
+class BackendController extends Controller
 {
 
     /**
