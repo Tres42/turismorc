@@ -49,11 +49,6 @@ class Paquete
     private $observaciones;
 
     /**
-     * @ORM\Column(type="array")
-     */
-    private $tarifas;
-
-    /**
      * @ORM\Column(type="text", length=255, name="servicios_incluidos", nullable=true)
      */
     private $serviciosIncluidos;
@@ -92,6 +87,12 @@ class Paquete
      */
     private $ciudades;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\Tarifa", inversedBy="paquetes", cascade={"persist"})
+     * @ORM\JoinTable(name="paquete_tarifa")
+     */
+    private $tarifas;
+
     
     /**
      * Constructor del objeto paquete de viajes.
@@ -99,7 +100,7 @@ class Paquete
     public function __construct()
     {
         // Creamos el objeto tarifas el cual posee conceptos y sus respectivas tarifas
-        $this->tarifas = array();//new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tarifas = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ciudad = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fechasDeSalida = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -438,4 +439,63 @@ class Paquete
             }
         );
     }
+
+    /**
+     * Add ciudades
+     *
+     * @param \T42\DestinosBundle\Entity\Ciudad $ciudades
+     * @return Paquete
+     */
+    public function addCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
+    {
+        $this->ciudades[] = $ciudades;
+    
+        return $this;
+    }
+
+    /**
+     * Remove ciudades
+     *
+     * @param \T42\DestinosBundle\Entity\Ciudad $ciudades
+     */
+    public function removeCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
+    {
+        $this->ciudades->removeElement($ciudades);
+    }
+
+    /**
+     * Add tarifas
+     *
+     * @param \T42\DestinosBundle\Entity\Tarifa $tarifas
+     * @return Paquete
+     */
+    public function addTarifa(\T42\DestinosBundle\Entity\Tarifa $tarifas)
+    {
+        $this->tarifas[] = $tarifas;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tarifas
+     *
+     * @param \T42\DestinosBundle\Entity\Tarifa $tarifas
+     */
+    public function removeTarifa(\T42\DestinosBundle\Entity\Tarifa $tarifas)
+    {
+        $this->tarifas->removeElement($tarifas);
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function removeNullTarifas()
+    {
+        $this->tarifas = $this->tarifas->filter(
+            function ($value) {
+                return (bool) $value;
+            }
+        );
+    }
+    
 }
