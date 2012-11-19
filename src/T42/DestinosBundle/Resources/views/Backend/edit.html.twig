@@ -2,11 +2,18 @@
 
 {% block title %}Editar | {{ parent() }}{% endblock %}
 
-{% block content %}
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li><a href="{{ path('t42_destinos_backend_index') }}">Destinos</a></li>
+    <li class="divider">/</li>
+    <li class="active">{{ entity.titulo }}</li>
+{% endblock %}
 
+{% block content %}
 <h1>Editar Paquete de viajes</h1>
 
-<form action="{{ path('t42_destinos_paquete_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+<form action="{{ path('t42_destinos_backend_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <p>
         <button class="btn btn-info" type="submit">Editar</button>
@@ -15,12 +22,12 @@
 
 <ul class="record_actions">
     <li>
-        <a href="{{ path('t42_destinos_paquete_index') }}">
+        <a href="{{ path('t42_destinos_backend_index') }}">
             Volver a listado de paquetes
         </a>
     </li>
     <li>
-        <form action="{{ path('t42_destinos_paquete_delete', { 'id': entity.id }) }}" method="post">
+        <form action="{{ path('t42_destinos_backend_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
                 {% if is_granted('ROLE_PAQUETES_DELETE') %}
                     <button class="btn btn-danger" type="submit">Eliminar</button>                

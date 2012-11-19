@@ -2,8 +2,15 @@
 
 {% block title %}{{entity.titulo}} | {{ parent() }}{% endblock %}
 
-{% block content %}
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li><a href="{{ path('t42_destinos_backend_index') }}">Destinos</a></li>
+    <li class="divider">/</li>
+    <li class="active">{{ entity.titulo }}</li>
+{% endblock %}
 
+{% block content %}
 <div class="row">
     <div class="span11 offset1">
         <h2>{{ entity.titulo }}</h2>                
@@ -82,12 +89,12 @@
     </div>
 </div>
 <div class="form-actions">
-    <form class="form-horizontal" action="{{ path('t42_destinos_paquete_delete', { 'id': entity.id }) }}" method="post">
+    <form class="form-horizontal" action="{{ path('t42_destinos_backend_delete', { 'id': entity.id }) }}" method="post">
         {{ form_widget(delete_form) }}
         {% if is_granted('ROLE_PAQUETES_EDIT') %}
-            <a class="btn btn-primary" href="{{ path('t42_destinos_paquete_edit', { 'id': entity.id }) }}">Editar</a>
+            <a class="btn btn-primary" href="{{ path('t42_destinos_backend_edit', { 'id': entity.id }) }}">Editar</a>
         {% endif %}
-        <a class="btn btn-small" href="{{ path('t42_destinos_paquete_index') }}">Volver</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-small" href="{{ path('t42_destinos_backend_index') }}">Volver</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {% if is_granted('ROLE_PAQUETES_DELETE') %}
             <button class="btn btn-danger btn-small" type="submit"><i class="icon-remove icon-white"></i> Eliminar</button>
         {% endif %}            
