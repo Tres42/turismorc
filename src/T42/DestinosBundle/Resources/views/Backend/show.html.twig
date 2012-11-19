@@ -19,7 +19,9 @@
 <div class="row">
     <div class="span7 offset1">
         <h3>Fechas de Salida</h3>
-        <p class="lead"> {{ entity.fechaSalida|date("d/m/Y") }} </p>
+        {% for fecha in entity.fechasDeSalida %}
+            <p class="lead"> {{ fecha.fecha|date("d/m/Y") }} </p>
+        {% endfor %}
     </div>        
     <div class="span1">
         <h3>Grupal</h3>
