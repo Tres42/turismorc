@@ -1,7 +1,3 @@
-t42_contacto:
-    resource: "@T42ContactoBundle/Controller/"
-    type:     annotation
-
 t42_backend:
     resource: "@T42BackendBundle/Controller/"
     type:     annotation
@@ -11,6 +7,10 @@ t42_testimonios:
 
 t42_destinos:
     resource: "@T42DestinosBundle/Controller/"
+    type:     annotation
+
+t42_contacto:
+    resource: "@T42ContactoBundle/Controller/"
     type:     annotation
 
 t42_user_security:
@@ -31,11 +31,11 @@ t42_user_resetting:
 t42_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /admin/profile  
-    
+
 t42_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /admin/group    
-    
+
 t42_user_invitation:
     resource: "@T42UserBundle/Controller/"
     type:     annotation

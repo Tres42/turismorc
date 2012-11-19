@@ -1,6 +1,6 @@
 <ul class="nav">
     {% if is_granted('ROLE_PAQUETES_VIEW') %}
-        <li><a href="{{ path("t42_destinos_paquete_index") }}">Paquetes</a></li>
+        <li><a href="{{ path("t42_destinos_backend_index") }}">Paquetes</a></li>
     {% endif %}
     {% if is_granted('ROLE_TESTIMONIOS_VIEW') %}
         <li><a href="{{ path("t42_testimonios_backend_index") }}">Testimonios</a></li>
