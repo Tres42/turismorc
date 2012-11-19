@@ -2,6 +2,14 @@
 
 {% block title %}Nuevo | {{ parent() }}{% endblock %}
 
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li><a href="{{ path('t42_testimonios_backend_index') }}">Testimonios</a></li>
+    <li class="divider">/</li>
+    <li class="active">Nuevo</li>
+{% endblock %}
+
 {% block content %}
     <div class="row-fluid">
         <div class="span6 offset3">

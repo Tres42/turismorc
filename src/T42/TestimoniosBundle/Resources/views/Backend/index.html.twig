@@ -1,5 +1,11 @@
 {% extends 'T42TestimoniosBundle::layout.html.twig' %}
 
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li class="active">Testimonios</li>
+{% endblock %}
+
 {% block content %}
     <div class="row">
         <div class="span12">
@@ -10,7 +16,7 @@
                         {% if is_granted('ROLE_TESTIMONIOS_ADD') %}                            
                             <li><a href="{{ path('t42_testimonios_backend_new') }}"><i class="icon-plus"></i> Agregar nuevo</a></li>
                         {% endif %}
-                        <li><a href="{{ path('t42_backend_index') }}"><i class="icon-arrow-left"></i> Volver</a></li>
+                        <li><a href="{{ path('t42_backend_dashboard_index') }}"><i class="icon-arrow-left"></i> Volver</a></li>
                     </ul>
                 </div>
                 <div class="span5 offset2">

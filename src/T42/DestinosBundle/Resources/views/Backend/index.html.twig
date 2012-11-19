@@ -1,0 +1,66 @@
+{% extends 'T42DestinosBundle::layout.html.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li class="active">Paquetes</li>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="span12">
+        <h2>Paquetes</h2>
+        <div class="row">
+            <div class="span2">
+                <ul class="nav nav-tabs nav-stacked">
+                    {% if is_granted('ROLE_PAQUETES_ADD') %}
+                        <li><a href="{{ path('t42_destinos_backend_new') }}"><i class="icon-plus"></i> Agregar nuevo</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('t42_backend_dashboard_index') }}"><i class="icon-arrow-left"></i> Volver</a></li>
+                </ul>                
+            </div>
+            <div class="span10">
+                <table class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <td>Titulo</td>
+                            <td>Proxima Salida</td>
+                            <td>Grupal</td>
+                            <td>Promocion</td>
+                            <td>Categoria</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for entity in entities %}
+                        <tr>
+                            <td>
+                                {% if is_granted('ROLE_PAQUETES_VIEW') %}
+                                    <a href="{{ path('t42_destinos_backend_show', { 'id': entity.id }) }}">{{ entity.titulo }}</a>
+                                {% endif%}                                    
+                            </td>
+                            <td>
+                                {% for fecha in entity.fechasDeSalida %}
+                                    {{ fecha.fecha|date('d/m/Y') }}
+                                {% endfor %}
+                            </td>
+                            <td>{% if entity.esGrupal %} Si {% else %} No {% endif %}</td>
+                            <td>{% if entity.esPromocion %} Si {% else %} No {% endif %}</td>
+                            <td>{{ entity.categoria }}</td>
+                            <td>
+                                {% if is_granted('ROLE_PAQUETES_EDIT') %}
+                                    <a href="{{ path('t42_destinos_backend_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
+                                {% endif %}
+                                {% if is_granted('ROLE_PAQUETES_DELETE') %}
+                                    <a href="{{ path('t42_destinos_backend_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
+                                {% endif%}
+                                    <a href="{{ path('t42_destinos_backend_print', { 'id': entity.id }) }}"><i class="icon-print"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

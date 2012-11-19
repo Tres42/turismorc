@@ -10,10 +10,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 /**
  * @Route("/admin")
  */
-class BackendController extends Controller
+class DashboardController extends Controller
 {
     /**
-     * @Route("/", name="t42_backend_index")
+     * @Route("/")
      * @Template()
      */
     public function indexAction()
