@@ -1,5 +1,9 @@
 {% extends 'T42DestinosBundle::layout.html.twig' %}
 
+{% block breadcrumb %}
+    <li class="active"><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+{% endblock %}
+
 {% block content %}
 <div class="row">
     <div class="span12">
@@ -10,7 +14,7 @@
                     {% if is_granted('ROLE_PAQUETES_ADD') %}
                         <li><a href="{{ path('t42_destinos_paquete_new') }}"><i class="icon-plus"></i> Agregar nuevo</a></li>
                     {% endif %}
-                    <li><a href="{{ path('t42_backend_index') }}"><i class="icon-arrow-left"></i> Volver</a></li>
+                    <li><a href="{{ path('t42_backend_dashboard_index') }}"><i class="icon-arrow-left"></i> Volver</a></li>
                 </ul>                
             </div>
             <div class="span10">
