@@ -1,0 +1,24 @@
+{% extends 'T42DestinosBundle::layout.html.twig' %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li><a href="{{ path('t42_destinos_backend_index') }}">Destinos</a></li>
+    <li class="divider">/</li>
+    <li class="active">Nuevo</li>
+{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span8 offset2">
+        <form class="form-horizontal" action="{{ path('t42_destinos_backend_create') }}" method="post" {{ form_enctype(form) }} >
+            <legend>Nuevo Paquete de viaje</legend>
+            {{ form_widget(form) }}
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Crear</button>
+                <a class="btn" href="{{ path('t42_destinos_backend_index') }}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

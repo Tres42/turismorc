@@ -19,6 +19,7 @@ class PaqueteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $attr = array('class' => 'span10');
         $builder
             ->add('titulo')
             ->add('fechasDeSalida', 'collection', array(
@@ -37,14 +38,14 @@ class PaqueteType extends AbstractType
             )
             ->add('esGrupal', null, array('label'=>'Viaje Grupal'))
             ->add('esPromocion', null, array('label'=>'Viaje Promocional'))
-            ->add('observaciones')
+            ->add('observaciones', null, array('attr'=> $attr))
             ->add('tarifas')
-            ->add('serviciosIncluidos', null, array('label'=>'Servicios Incluidos'))
-            ->add('serviciosNoIncluidos', null, array('label'=>'Servicios No Incluidos'))
+            ->add('serviciosIncluidos', null, array('label'=>'Servicios Incluidos', 'attr'=> $attr))
+            ->add('serviciosNoIncluidos', null, array('label'=>'Servicios No Incluidos', 'attr'=> $attr))
             ->add('itinerario', 'ckeditor')
-            ->add('resumen', 'textarea')
-            ->add('categoria')
-            ->add('ciudades')
+            ->add('resumen', 'textarea', array('attr'=> $attr))
+            ->add('categoria', null, array('attr'=> $attr))
+            ->add('ciudades', null, array('attr'=> $attr))
         ;
     }
 

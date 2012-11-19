@@ -25,7 +25,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a href="{{ path('t42_backend_index') }}" class="brand">{{ t42_backend.brand }}</a>
+                <a href="{{ path('t42_backend_dashboard_index') }}" class="brand">{{ t42_backend.brand }}</a>
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <div class="btn-group pull-right">
                         <a href="{{ path('fos_user_profile_show') }}" class="btn"><i class="icon-user"></i> {{ app.user.username }}</a>
@@ -52,11 +52,20 @@
 
     {% block container %}
     <div class="container">
+        {% block breadcrumbs %}
+            <div class="row-fluid">
+                <div class="span12">
+                    <ul class="breadcrumb">
+                        {% block breadcrumb %}{% endblock %}
+                    </ul>
+                </div>
+            </div>
+        {% endblock %}
         {% block flashes %}
             {% set flashes = app.session.flashbag.all() %}
             {% if flashes %}
                 {% spaceless %}
-                <div class="row">
+                <div class="row-fluid">
                     <div class="span12">
                     {% for type, messages in flashes %}
                         {% set prural = messages|length > 1 %}

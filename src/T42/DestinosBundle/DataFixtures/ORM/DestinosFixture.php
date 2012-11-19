@@ -67,7 +67,7 @@ class DestinosFixture implements FixtureInterface
         //$paquete1->addTarifa($tarifa2);
         //$paquete1->addTarifa($tarifa3);
 
-        $paquete1->setTitulo('GRECIA TURQUÍA Y EGIPTO 2012 (Secretos de Medio Oriente');
+        $paquete1->setTitulo('GRECIA TURQUÍA Y EGIPTO 2012 (Secretos de Medio Oriente)');
         
         $paquete1->setCategoria('Europa');
         
