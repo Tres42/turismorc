@@ -267,25 +267,29 @@ class Paquete
                 }
         );
     }
-    
+
     /**
      * Removes the tarifas in parameter which are in the same and in the 
      * tarifas of the actual instance.
      *       
      * @param Array $originaltarifas 
      */
-    public function removeDeleteTarifas(&$originalTarifas)
+    public function toDeleteTarifas($originalTarifas)
     {
         foreach ($this->getTarifas() as $tarifa) {
+            if (!$tarifa->getPrecio()) {
+                $this->removeTarifa($tarifa);
+                continue;
+            }
             foreach ($originalTarifas as $key => $toDel) {
-                if($toDel->getId() === $tarifa->getId()){
+                if ($toDel->getId() === $tarifa->getId()) {
                     unset($originalTarifas[$key]);
                 }
             }
         }
+        return $originalTarifas;
     }
-    
-    
+
     /**
      * Retorna los servicios incluidos del paquete de viajes.
      *

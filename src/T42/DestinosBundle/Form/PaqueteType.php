@@ -46,7 +46,7 @@ class PaqueteType extends AbstractType
                     'options' => array(
                         'label' => 'Tarifa',
                     ),
-                    'required' => true,
+                    'required' => false,
                     'allow_add' => true,
                     'allow_delete' => true
                 )

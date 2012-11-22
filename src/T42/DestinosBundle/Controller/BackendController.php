@@ -191,12 +191,11 @@ class BackendController extends Controller
         if ($editForm->isValid()) {
             
             // Filter $originalTarifas to contain tarifas no longer present
-            $entity->removeDeleteTarifas($originalTarifas); 
+            $deleteTarifas = $entity->toDeleteTarifas($originalTarifas); 
             
             // Remove the relationship between the Tarifa and the Paquete
-            foreach ($originalTarifas as $tarifa) {
-                $tarifa->setPaquete(null);
-                $em->persist($tarifa);
+            foreach ($deleteTarifas as $tarifa) {
+                $em->remove($tarifa);
             }            
             
             // Persist the Paquete

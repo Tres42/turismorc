@@ -2,7 +2,6 @@
 
 namespace T42\DestinosBundle\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use T42\DestinosBundle\Entity\Paquete;
 
@@ -28,13 +27,11 @@ class Tarifa {
 
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
      */
     private $descripcion;
 
     /**
      * @ORM\Column(type="float")
-     * @Assert\NotBlank()
      */
     private $precio;
 
