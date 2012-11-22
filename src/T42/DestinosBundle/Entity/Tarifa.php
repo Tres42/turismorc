@@ -2,7 +2,9 @@
 
 namespace T42\DestinosBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use T42\DestinosBundle\Entity\Paquete;
 
 /**
  * T42\DestinosBundle\Entity\Tarifa
@@ -14,7 +16,6 @@ use Doctrine\ORM\Mapping as ORM;
  * 
  * @ORM\Entity
  * @ORM\Table(name="tarifa")
- * @ORM\HasLifecycleCallbacks()
  */
 class Tarifa {
 
@@ -27,25 +28,27 @@ class Tarifa {
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
      */
     private $descripcion;
 
     /**
      * @ORM\Column(type="float")
+     * @Assert\NotBlank()
      */
     private $precio;
 
     /**
-     * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\Paquete", mappedBy="tarifas")
+     * @ORM\ManyToOne(targetEntity="T42\DestinosBundle\Entity\Paquete", inversedBy="tarifas")
+     * @ORM\JoinColumn()
      */
-    private $paquetes;
+    private $paquete;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->paquetes = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -105,35 +108,25 @@ class Tarifa {
     }
 
     /**
-     * Add paquetes
+     * Set paquete
      *
-     * @param \T42\DestinosBundle\Entity\Paquete $paquetes
+     * @param \T42\DestinosBundle\Entity\Paquete $paquete
      * @return Tarifa
      */
-    public function addPaquete(\T42\DestinosBundle\Entity\Paquete $paquetes)
+    public function setPaquete(\T42\DestinosBundle\Entity\Paquete $paquete = null)
     {
-        $this->paquetes[] = $paquetes;
+        $this->paquete = $paquete;
     
         return $this;
     }
 
     /**
-     * Remove paquetes
+     * Get paquete
      *
-     * @param \T42\DestinosBundle\Entity\Paquete $paquetes
+     * @return \T42\DestinosBundle\Entity\Paquete 
      */
-    public function removePaquete(\T42\DestinosBundle\Entity\Paquete $paquetes)
+    public function getPaquete()
     {
-        $this->paquetes->removeElement($paquetes);
-    }
-
-    /**
-     * Get paquetes
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getPaquetes()
-    {
-        return $this->paquetes;
+        return $this->paquete;
     }
 }

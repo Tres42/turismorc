@@ -5,6 +5,7 @@ namespace T42\DestinosBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use T42\DestinosBundle\Entity\FechaDeSalida;
+use T42\DestinosBundle\Entity\Tarifa;
 
 /**
  * T42\DestinosBundle\Entity\Paquete
@@ -88,12 +89,10 @@ class Paquete
     private $ciudades;
 
     /**
-     * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\Tarifa", inversedBy="paquetes", cascade={"persist"})
-     * @ORM\JoinTable(name="paquete_tarifa")
+     * @ORM\OneToMany(targetEntity="T42\DestinosBundle\Entity\Tarifa", mappedBy="paquete", cascade={"all"})
      */
     private $tarifas;
 
-    
     /**
      * Constructor del objeto paquete de viajes.
      */
@@ -232,6 +231,61 @@ class Paquete
         return $this->tarifas;
     }
 
+    /**
+     * Add tarifa
+     *
+     * @param \T42\DestinosBundle\Entity\Tarifa $tarifa
+     * @return Paquete
+     */
+    public function addTarifa(\T42\DestinosBundle\Entity\Tarifa $tarifa)
+    {
+        $this->tarifas[] = $tarifa;
+
+        return $this;
+    }
+
+    /**
+     * Remove tarifa
+     *
+     * @param \T42\DestinosBundle\Entity\Tarifa $tarifa
+     */
+    public function removeTarifa(\T42\DestinosBundle\Entity\Tarifa $tarifa)
+    {
+        $this->tarifas->removeElement($tarifa);
+    }
+
+    /**
+     * Remove the null tarifas
+     * 
+     * @ORM\PrePersist
+     */
+    public function removeNullTarifas()
+    {
+        $this->tarifas = $this->tarifas->filter(
+                function ($value) {
+                    return (bool) $value;
+                }
+        );
+    }
+    
+    /**
+     * Removes the tarifas in parameter which are in the same and in the 
+     * tarifas of the actual instance.
+     *       
+     * @param Array $originaltarifas 
+     */
+    public function removeDeleteTarifas(&$originalTarifas)
+    {
+        foreach ($this->getTarifas() as $tarifa) {
+            foreach ($originalTarifas as $key => $toDel) {
+                if($toDel->getId() === $tarifa->getId()){
+                    unset($originalTarifas[$key]);
+                }
+            }
+        }
+    }
+    
+    
     /**
      * Retorna los servicios incluidos del paquete de viajes.
      *
@@ -384,7 +438,7 @@ class Paquete
     {
         return $this->ciudades;
     }
-    
+
     /**
      * Add fechasDeSalida
      *
@@ -394,7 +448,7 @@ class Paquete
     public function addFechasDeSalida(\T42\DestinosBundle\Entity\FechaDeSalida $fechasDeSalida)
     {
         $this->fechasDeSalida[] = $fechasDeSalida;
-    
+
         return $this;
     }
 
@@ -434,9 +488,9 @@ class Paquete
     public function removeNullFechasDeSalida()
     {
         $this->fechasDeSalida = $this->fechasDeSalida->filter(
-            function ($value) {
-                return (bool) $value;
-            }
+                function ($value) {
+                    return (bool) $value;
+                }
         );
     }
 
@@ -449,7 +503,7 @@ class Paquete
     public function addCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
     {
         $this->ciudades[] = $ciudades;
-    
+
         return $this;
     }
 
@@ -463,39 +517,4 @@ class Paquete
         $this->ciudades->removeElement($ciudades);
     }
 
-    /**
-     * Add tarifas
-     *
-     * @param \T42\DestinosBundle\Entity\Tarifa $tarifas
-     * @return Paquete
-     */
-    public function addTarifa(\T42\DestinosBundle\Entity\Tarifa $tarifas)
-    {
-        $this->tarifas[] = $tarifas;
-    
-        return $this;
-    }
-
-    /**
-     * Remove tarifas
-     *
-     * @param \T42\DestinosBundle\Entity\Tarifa $tarifas
-     */
-    public function removeTarifa(\T42\DestinosBundle\Entity\Tarifa $tarifas)
-    {
-        $this->tarifas->removeElement($tarifas);
-    }
-    
-    /**
-     * @ORM\PrePersist
-     */
-    public function removeNullTarifas()
-    {
-        $this->tarifas = $this->tarifas->filter(
-            function ($value) {
-                return (bool) $value;
-            }
-        );
-    }
-    
 }

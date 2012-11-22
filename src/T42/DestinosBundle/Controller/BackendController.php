@@ -12,6 +12,7 @@ use JMS\SecurityExtraBundle\Annotation\Secure;
 use T42\DestinosBundle\Entity\Paquete;
 use T42\DestinosBundle\Entity\FechaDeSalida;
 use T42\DestinosBundle\Form\PaqueteType;
+use T42\DestinosBundle\Entity\Tarifa;
 
 /**
  * T42\DestinosBundle\Controller\PaqueteController
@@ -78,8 +79,10 @@ class BackendController extends Controller
     {
         $entity = new Paquete();
         $fecha = new FechaDeSalida();
+        $tarifa = new Tarifa();
         $entity->addFechasDeSalida($fecha);
-
+        $entity->getTarifas()->add($tarifa);
+        
         $form = $this->createForm(new PaqueteType(), $entity);
 
         return array(
@@ -104,11 +107,17 @@ class BackendController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+            
+            foreach ($entity->getTarifas() as $tarifa) {
+                $em->persist($tarifa);
+                $tarifa->setPaquete($entity);
+            }
+            
             $em->flush();
             
             $this->get('session')->getFlashBag()->add('success', 'El destino fue guardado correctamente');
             
-            return $this->redirect($this->generateUrl('t42_destinos_paquete_index'));
+            return $this->redirect($this->generateUrl('t42_destinos_backend_index'));
         }
 
         return array(
@@ -135,7 +144,11 @@ class BackendController extends Controller
         } elseif ($entity->getFechasDeSalida()->isEmpty()) {
             $entity->addFechasDeSalida(new FechaDeSalida());
         }
-
+        
+        if($entity->getTarifas()->isEmpty()){
+            $entity->addTarifa(new Tarifa());
+        }
+        
         $editForm = $this->createForm(new PaqueteType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -162,20 +175,43 @@ class BackendController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Paquete entity.');
         }
+        
+        $originalTarifas = array();
 
-        $deleteForm = $this->createDeleteForm($id);
+        // Create an array of the current Tarifa objects in the database
+        foreach ($entity->getTarifas() as $tarifa) $originalTarifas[] = $tarifa;    
+        
+        $deleteForm = $this->createDeleteForm($id);        
         $editForm = $this->createForm(new PaqueteType(), $entity);
         $editForm->bind($request);
-
+        
         $entity->removeNullFechasDeSalida();
-
+        $entity->removeNullTarifas();
+                
         if ($editForm->isValid()) {
+            
+            // Filter $originalTarifas to contain tarifas no longer present
+            $entity->removeDeleteTarifas($originalTarifas); 
+            
+            // Remove the relationship between the Tarifa and the Paquete
+            foreach ($originalTarifas as $tarifa) {
+                $tarifa->setPaquete(null);
+                $em->persist($tarifa);
+            }            
+            
+            // Persist the Paquete
             $em->persist($entity);
+            
+            foreach ($entity->getTarifas() as $tarifa) {
+                $em->persist($tarifa);
+                $tarifa->setPaquete($entity);
+            }
+            
             $em->flush();
             
             $this->get('session')->getFlashBag()->add('success', 'Los cambios fueron guardados correctamente');
             
-            return $this->redirect($this->generateUrl('t42_destinos_paquete_index'));
+            return $this->redirect($this->generateUrl('t42_destinos_backend_index'));
         }
 
         return array(
@@ -211,7 +247,7 @@ class BackendController extends Controller
             $this->get('session')->getFlashBag()->add('success', 'El destino fue eliminado correctamente');
         }
 
-        return $this->redirect($this->generateUrl('t42_destinos_paquete_index'));
+        return $this->redirect($this->generateUrl('t42_destinos_backend_index'));
     }
 
     /**

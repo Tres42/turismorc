@@ -48,7 +48,7 @@
     <div class="span5">
         <h3>Tarifas</h3>
         {% for tarifa in entity.tarifas%}
-            {{tarifa}}
+            {{tarifa.descripcion~'-'~tarifa.precio}}
         {% endfor %}
     </div>
 </div>

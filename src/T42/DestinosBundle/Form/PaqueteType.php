@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use T42\DestinosBundle\Form\FechaDeSalidaType;
+use T42\DestinosBundle\Form\Type\TarifaType;
 
 /**
  * T42\DestinosBundle\Form\PaqueteType
@@ -39,7 +40,17 @@ class PaqueteType extends AbstractType
             ->add('esGrupal', null, array('label'=>'Viaje Grupal'))
             ->add('esPromocion', null, array('label'=>'Viaje Promocional'))
             ->add('observaciones', null, array('attr'=> $attr))
-            ->add('tarifas')
+            ->add('tarifas', 'collection', array(
+                    'label'=>'Tarifas',
+                    'type' => new TarifaType(),
+                    'options' => array(
+                        'label' => 'Tarifa',
+                    ),
+                    'required' => true,
+                    'allow_add' => true,
+                    'allow_delete' => true
+                )
+             )
             ->add('serviciosIncluidos', null, array('label'=>'Servicios Incluidos', 'attr'=> $attr))
             ->add('serviciosNoIncluidos', null, array('label'=>'Servicios No Incluidos', 'attr'=> $attr))
             ->add('itinerario', 'ckeditor')
