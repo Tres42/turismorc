@@ -20,6 +20,7 @@ class ProfileController extends BaseProfileController
 
     /**
      * Lists all User.
+     * 
      * @Secure(roles="ROLE_USUARIOS_VIEW")
      */
     public function listAction()

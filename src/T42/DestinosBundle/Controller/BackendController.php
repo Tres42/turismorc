@@ -15,7 +15,7 @@ use T42\DestinosBundle\Form\PaqueteType;
 use T42\DestinosBundle\Entity\Tarifa;
 
 /**
- * T42\DestinosBundle\Controller\PaqueteController
+ * T42\DestinosBundle\Controller\BackendController
  * 
  * Controlador de paquete.
  * 
@@ -35,12 +35,22 @@ class BackendController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()
+            ->getRepository('T42DestinosBundle:Paquete');
+        
+        $query = $repository->createQueryBuilder('p')
+            ->getQuery();
+        
+        $paginator = $this->get('knp_paginator');
 
-        $entities = $em->getRepository('T42DestinosBundle:Paquete')->findAll();
-
+        $pagination = $paginator->paginate(
+            $query,
+            $this->get('request')->query->get('page', 1),
+            10
+        );
+        
         return array(
-            'entities' => $entities,
+            'pagination' => $pagination,
         );
     }
 
