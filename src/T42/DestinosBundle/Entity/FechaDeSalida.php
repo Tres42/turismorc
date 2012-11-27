@@ -34,6 +34,7 @@ class FechaDeSalida
      * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\Paquete", mappedBy="fechasDeSalida")
      */
     private $paquetes;
+
     
     /**
      * Constructor

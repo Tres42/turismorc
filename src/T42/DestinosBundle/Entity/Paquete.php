@@ -5,6 +5,7 @@ namespace T42\DestinosBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use T42\DestinosBundle\Entity\FechaDeSalida;
+use T42\DestinosBundle\Entity\Tarifa;
 
 /**
  * T42\DestinosBundle\Entity\Paquete
@@ -49,11 +50,6 @@ class Paquete
     private $observaciones;
 
     /**
-     * @ORM\Column(type="array")
-     */
-    private $tarifas;
-
-    /**
      * @ORM\Column(type="text", length=255, name="servicios_incluidos", nullable=true)
      */
     private $serviciosIncluidos;
@@ -92,14 +88,18 @@ class Paquete
      */
     private $ciudades;
 
-    
+    /**
+     * @ORM\OneToMany(targetEntity="T42\DestinosBundle\Entity\Tarifa", mappedBy="paquete", cascade={"all"})
+     */
+    private $tarifas;
+
     /**
      * Constructor del objeto paquete de viajes.
      */
     public function __construct()
     {
         // Creamos el objeto tarifas el cual posee conceptos y sus respectivas tarifas
-        $this->tarifas = array();//new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tarifas = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ciudad = new \Doctrine\Common\Collections\ArrayCollection();
         $this->fechasDeSalida = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -229,6 +229,65 @@ class Paquete
     public function getTarifas()
     {
         return $this->tarifas;
+    }
+
+    /**
+     * Add tarifa
+     *
+     * @param \T42\DestinosBundle\Entity\Tarifa $tarifa
+     * @return Paquete
+     */
+    public function addTarifa(\T42\DestinosBundle\Entity\Tarifa $tarifa)
+    {
+        $this->tarifas[] = $tarifa;
+
+        return $this;
+    }
+
+    /**
+     * Remove tarifa
+     *
+     * @param \T42\DestinosBundle\Entity\Tarifa $tarifa
+     */
+    public function removeTarifa(\T42\DestinosBundle\Entity\Tarifa $tarifa)
+    {
+        $this->tarifas->removeElement($tarifa);
+    }
+
+    /**
+     * Remove the null tarifas
+     * 
+     * @ORM\PrePersist
+     */
+    public function removeNullTarifas()
+    {
+        $this->tarifas = $this->tarifas->filter(
+                function ($value) {
+                    return (bool) $value;
+                }
+        );
+    }
+
+    /**
+     * Removes the tarifas in parameter which are in the same and in the 
+     * tarifas of the actual instance.
+     *       
+     * @param Array $originaltarifas 
+     */
+    public function toDeleteTarifas($originalTarifas)
+    {
+        foreach ($this->getTarifas() as $tarifa) {
+            if (!$tarifa->getPrecio()) {
+                $this->removeTarifa($tarifa);
+                continue;
+            }
+            foreach ($originalTarifas as $key => $toDel) {
+                if ($toDel->getId() === $tarifa->getId()) {
+                    unset($originalTarifas[$key]);
+                }
+            }
+        }
+        return $originalTarifas;
     }
 
     /**
@@ -383,7 +442,7 @@ class Paquete
     {
         return $this->ciudades;
     }
-    
+
     /**
      * Add fechasDeSalida
      *
@@ -393,7 +452,7 @@ class Paquete
     public function addFechasDeSalida(\T42\DestinosBundle\Entity\FechaDeSalida $fechasDeSalida)
     {
         $this->fechasDeSalida[] = $fechasDeSalida;
-    
+
         return $this;
     }
 
@@ -433,9 +492,33 @@ class Paquete
     public function removeNullFechasDeSalida()
     {
         $this->fechasDeSalida = $this->fechasDeSalida->filter(
-            function ($value) {
-                return (bool) $value;
-            }
+                function ($value) {
+                    return (bool) $value;
+                }
         );
     }
+
+    /**
+     * Add ciudades
+     *
+     * @param \T42\DestinosBundle\Entity\Ciudad $ciudades
+     * @return Paquete
+     */
+    public function addCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
+    {
+        $this->ciudades[] = $ciudades;
+
+        return $this;
+    }
+
+    /**
+     * Remove ciudades
+     *
+     * @param \T42\DestinosBundle\Entity\Ciudad $ciudades
+     */
+    public function removeCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
+    {
+        $this->ciudades->removeElement($ciudades);
+    }
+
 }

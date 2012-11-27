@@ -59,12 +59,20 @@ class DestinosFixture implements FixtureInterface
         $ciudadEstambul->setPais($paisTurquia);
         $ciudadEstambul->setProvincia('Estambul');
         
+        $tarifa1 = new Tarifa();
+        $tarifa1->setDescripcion('DOBLE');
+        $tarifa1->setPrecio(125.05);
+
+        $tarifa2 = new Tarifa();
+        $tarifa2->setDescripcion('SINGLE');
+        $tarifa2->setPrecio(200.50);
+
         $paquete1 = new Paquete();
         $paquete1->addCiudad($ciudadAtenas);
         $paquete1->addCiudad($ciudadEstambul);
         
-        //$paquete1->addTarifa($tarifa1);
-        //$paquete1->addTarifa($tarifa2);
+        $paquete1->addTarifa($tarifa1);
+        $paquete1->addTarifa($tarifa2);
         //$paquete1->addTarifa($tarifa3);
 
         $paquete1->setTitulo('GRECIA TURQUÍA Y EGIPTO 2012 (Secretos de Medio Oriente)');
@@ -210,7 +218,10 @@ Llegada a Córdoba, traslado a Río Cuarto y fin de nuestros servicios. ');
         $manager->persist($ciudadRioCuarto);
 
         $manager->persist($fechaDeSalida);
-                
+        
+        $manager->persist($tarifa1);
+        $manager->persist($tarifa2);
+        
         $manager->persist($paquete1);
         
         $manager->flush();
