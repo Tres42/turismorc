@@ -28,8 +28,17 @@ class ProfileController extends BaseProfileController
         $userManager = $this->container->get('fos_user.user_manager');
 
         $entities = $userManager->findUsers();
+        
+        $paginator = $this->container->get('knp_paginator');
 
-        return $this->container->get('templating')->renderResponse('T42UserBundle:Profile:list.html.' . $this->container->getParameter('fos_user.template.engine'), array('entities' => $entities));
+        $pagination = $paginator->paginate(
+            $entities,
+            $this->container->get('request')->query->get('page', 1),
+            10
+        );
+        
+
+        return $this->container->get('templating')->renderResponse('T42UserBundle:Profile:list.html.' . $this->container->getParameter('fos_user.template.engine'), array('pagination' => $pagination));
     }
 
     /**

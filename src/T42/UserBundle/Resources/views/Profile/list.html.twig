@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for entity in entities %}
+                        {% for entity in pagination %}
                             <tr>
                                 <td>
                                     {% if is_granted('ROLE_USUARIOS_VIEW') %}
@@ -62,6 +62,9 @@
                         {% endfor %}
                     </tbody>
                 </table>
+                <div class="row-fluid">
+                    <div class="span12">{{ pagination.render()|raw }}</div>
+                </div>                    
             </div>
         </div>
     </div>
