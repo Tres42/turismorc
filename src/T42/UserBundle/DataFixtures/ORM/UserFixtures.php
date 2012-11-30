@@ -73,6 +73,21 @@ class UserFixtures implements FixtureInterface, ContainerAwareInterface
         $manager->persist($user);
         $manager->persist($user2);
         
+        for ($i = 0; $i < 50; $i++) {
+            $user3 = $userManager->createUser();
+            $user3->setLastName('Apellido '.$i);
+            $user3->setFirstName('Nombre '.$i);
+            $user3->setAddress('Direccion '.$i);
+            $user3->setPhoneNumber('0351-'.$i);
+            $user3->addGroup($groupAdmin);
+            $user3->setUserName('usuario'.$i);
+            $user3->setEmail($i.'@hotmail.com');
+            $user3->setEnabled(true);
+            $user3->setPassword($password2);
+            
+            $manager->persist($user3);
+        }        
+        
         $manager->flush();
         
     }
