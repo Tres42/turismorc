@@ -57,15 +57,8 @@ class BackendController extends Controller
                     'label' => 'Promocion',
                     'required' => false,
                 ))
-                ->add('fechaDesde', 'date', array(
-                    'label' => 'Fecha Desde',
-                    'widget' => 'single_text',
-                    'required' => false,
-                    'format' => 'd/M/y',
-                    'attr' => array('class' => 'span10'),
-                ))
-                ->add('fechaHasta', 'date', array(
-                    'label' => 'Fecha Hasta',
+                ->add('fecha', 'date', array(
+                    'label' => 'Fecha de Salida',
                     'widget' => 'single_text',
                     'required' => false,
                     'format' => 'd/M/y',
@@ -79,13 +72,9 @@ class BackendController extends Controller
             // Obtenemos los datos cargados en el form de busqueda
             $data = $formFilter->getData();
 
-            if ($data['fechaDesde'] && $data['fechaHasta']) {
-                //TODO Controlar fechas
-                /*
-                 * $qb->andWhere(
-                  $qb->expr()->between('a.publishedAt', $qb->expr()->literal($filters['publishedAtFrom']->format('Y-m-d')), $qb->expr()->literal($filters['publishedAtTo']->format('Y-m-d')))
-                  );
-                 */
+            if ($data['fecha']) {
+                $qb->innerJoin('p.fechasDeSalida', 'f', 'WITH', 'f.fecha = :fechaSalida')
+                   ->setParameter('fechaSalida', $data['fecha']->format('Y-m-d'));
             }
 
             if ($data['tipoViaje'] && $data['tipoViaje'] === 'esGrupal') {
