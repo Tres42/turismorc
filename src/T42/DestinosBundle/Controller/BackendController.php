@@ -70,24 +70,27 @@ class BackendController extends Controller
         if ($request->isMethod('POST')) {
             $formFilter->bind($request);
 
-            // Obtenemos los datos cargados en el form de busqueda
-            $data = $formFilter->getData();
+            if ($formFilter->isValid()) {
+                // Obtenemos los datos cargados en el form de busqueda
+                $data = $formFilter->getData();
 
-            if ($data['fecha']) {
-                $qb->innerJoin('p.fechasDeSalida', 'f', 'WITH', 'f.fecha = :fechaSalida')
-                   ->setParameter('fechaSalida', $data['fecha']->format('Y-m-d'));
-            }
+                if ($data['fecha']) {
+                    $qb->innerJoin('p.fechasDeSalida', 'f', 'WITH', 'f.fecha = :fechaSalida')
+                            ->setParameter('fechaSalida', $data['fecha']->format('Y-m-d'));
+                }
 
-            if ($data['tipoViaje'] && $data['tipoViaje'] === 'esGrupal') {
-                $qb->andWhere($qb->expr()->eq('p.esGrupal', 'true'));
-            } else {
-                $qb->andWhere($qb->expr()->eq('p.esGrupal', 'false'));
-            }
+                if ($data['tipoViaje'] && $data['tipoViaje'] === 'esGrupal') {
+                    $qb->andWhere($qb->expr()->eq('p.esGrupal', 'true'));
+                } else {
+                    $qb->andWhere($qb->expr()->eq('p.esGrupal', 'false'));
+                }
 
-            if ($data['promocion']) {
-                $qb->andWhere($qb->expr()->eq('p.esPromocion', 'true'));
-            } else {
-                $qb->andWhere($qb->expr()->eq('p.esPromocion', 'false'));
+                if ($data['promocion']) {
+                    $qb->andWhere($qb->expr()->eq('p.esPromocion', 'true'));
+                } else {
+                    $qb->andWhere($qb->expr()->eq('p.esPromocion', 'false'));
+                }
+
             }
         }
 
@@ -96,8 +99,6 @@ class BackendController extends Controller
             $this->get('request')->query->get('page', 1),
             10
         );
-
-        $entities = $qb->getQuery()->getResult();
 
         return array(
             'pagination' => $pagination,
