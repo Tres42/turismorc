@@ -33,14 +33,68 @@ class BackendController extends Controller
      * @Template()
      * @Secure(roles="ROLE_PAQUETES_VIEW")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('T42DestinosBundle:Paquete')->findAll();
+        $qb = $em->createQueryBuilder();
+
+        $qb->select('p')
+                ->from('T42DestinosBundle:Paquete', 'p');
+
+        $formFilter = $this->createFormBuilder()
+                ->add('tipoViaje', 'choice', array(
+                    'choices' => array(
+                        'esGrupal' => 'Grupal',
+                        'individual' => 'Indivual',
+                    ),
+                    'label' => 'Tipo de viaje',
+                    'multiple' => false,
+                    'expanded' => true,
+                    'required' => false,
+                ))
+                ->add('promocion', 'checkbox', array(
+                    'label' => 'Promocion',
+                    'required' => false,
+                ))
+                ->add('fecha', 'date', array(
+                    'label' => 'Fecha de Salida',
+                    'widget' => 'single_text',
+                    'required' => false,
+                    'format' => 'd/M/y',
+                    'attr' => array('class' => 'span10'),
+                ))
+                ->getForm();
+
+        if ($request->isMethod('POST')) {
+            $formFilter->bind($request);
+
+            // Obtenemos los datos cargados en el form de busqueda
+            $data = $formFilter->getData();
+
+            if ($data['fecha']) {
+                $qb->innerJoin('p.fechasDeSalida', 'f', 'WITH', 'f.fecha = :fechaSalida')
+                   ->setParameter('fechaSalida', $data['fecha']->format('Y-m-d'));
+            }
+
+            if ($data['tipoViaje'] && $data['tipoViaje'] === 'esGrupal') {
+                $qb->andWhere($qb->expr()->eq('p.esGrupal', 'true'));
+            } else {
+                $qb->andWhere($qb->expr()->eq('p.esGrupal', 'false'));
+            }
+
+            if ($data['promocion']) {
+                $qb->andWhere($qb->expr()->eq('p.esPromocion', 'true'));
+            } else {
+                $qb->andWhere($qb->expr()->eq('p.esPromocion', 'false'));
+            }
+        }
+
+        $entities = $qb->getQuery()->getResult();
 
         return array(
             'entities' => $entities,
+            'form' => $formFilter->createView(),
         );
     }
 
@@ -82,7 +136,7 @@ class BackendController extends Controller
         $tarifa = new Tarifa();
         $entity->addFechasDeSalida($fecha);
         $entity->getTarifas()->add($tarifa);
-        
+
         $form = $this->createForm(new PaqueteType(), $entity);
 
         return array(
@@ -107,16 +161,16 @@ class BackendController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
-            
+
             foreach ($entity->getTarifas() as $tarifa) {
                 $em->persist($tarifa);
                 $tarifa->setPaquete($entity);
             }
-            
+
             $em->flush();
-            
+
             $this->get('session')->getFlashBag()->add('success', 'El destino fue guardado correctamente');
-            
+
             return $this->redirect($this->generateUrl('t42_destinos_backend_index'));
         }
 
@@ -144,11 +198,11 @@ class BackendController extends Controller
         } elseif ($entity->getFechasDeSalida()->isEmpty()) {
             $entity->addFechasDeSalida(new FechaDeSalida());
         }
-        
-        if($entity->getTarifas()->isEmpty()){
+
+        if ($entity->getTarifas()->isEmpty()) {
             $entity->addTarifa(new Tarifa());
         }
-        
+
         $editForm = $this->createForm(new PaqueteType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -175,41 +229,42 @@ class BackendController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Paquete entity.');
         }
-        
+
         $originalTarifas = array();
 
         // Create an array of the current Tarifa objects in the database
-        foreach ($entity->getTarifas() as $tarifa) $originalTarifas[] = $tarifa;    
-        
-        $deleteForm = $this->createDeleteForm($id);        
+        foreach ($entity->getTarifas() as $tarifa)
+            $originalTarifas[] = $tarifa;
+
+        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createForm(new PaqueteType(), $entity);
         $editForm->bind($request);
-        
+
         $entity->removeNullFechasDeSalida();
         $entity->removeNullTarifas();
-                
+
         if ($editForm->isValid()) {
-            
+
             // Filter $originalTarifas to contain tarifas no longer present
-            $deleteTarifas = $entity->toDeleteTarifas($originalTarifas); 
-            
+            $deleteTarifas = $entity->toDeleteTarifas($originalTarifas);
+
             // Remove the relationship between the Tarifa and the Paquete
             foreach ($deleteTarifas as $tarifa) {
                 $em->remove($tarifa);
-            }            
-            
+            }
+
             // Persist the Paquete
             $em->persist($entity);
-            
+
             foreach ($entity->getTarifas() as $tarifa) {
                 $em->persist($tarifa);
                 $tarifa->setPaquete($entity);
             }
-            
+
             $em->flush();
-            
+
             $this->get('session')->getFlashBag()->add('success', 'Los cambios fueron guardados correctamente');
-            
+
             return $this->redirect($this->generateUrl('t42_destinos_backend_index'));
         }
 
@@ -242,7 +297,7 @@ class BackendController extends Controller
 
             $em->remove($entity);
             $em->flush();
-            
+
             $this->get('session')->getFlashBag()->add('success', 'El destino fue eliminado correctamente');
         }
 
@@ -263,7 +318,7 @@ class BackendController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Paquete entity.');
         }
-                
+
         $html = $this->renderView('T42DestinosBundle:Paquete:print.html.twig', array(
             'entity' => $entity
                 ));
@@ -288,4 +343,5 @@ class BackendController extends Controller
                         ->getForm()
         ;
     }
+
 }

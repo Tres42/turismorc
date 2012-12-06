@@ -1,5 +1,7 @@
 {% extends 'T42DestinosBundle::layout.html.twig' %}
 
+{% block title %}Nuevo | {{ parent() }}{% endblock %}
+
 {% block breadcrumb %}
     <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
     <li class="divider">/</li>
