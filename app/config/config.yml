@@ -98,3 +98,8 @@ trsteel_ckeditor:
     width: 100%
     height: 300
     language: %locale%
+    
+knp_paginator:
+    page_range: 8
+    template:
+        pagination: T42BackendBundle:Pagination:pagination.html.twig    

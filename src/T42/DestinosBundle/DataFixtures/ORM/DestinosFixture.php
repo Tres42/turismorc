@@ -75,7 +75,7 @@ class DestinosFixture implements FixtureInterface
         $paquete1->addTarifa($tarifa2);
         //$paquete1->addTarifa($tarifa3);
 
-        $paquete1->setTitulo('GRECIA TURQUÍA Y EGIPTO 2012 (Secretos de Medio Oriente)');
+        $paquete1->setTitulo('GRECIA TURQUIA Y EGIPTO 2012 (Secretos de Medio Oriente)');
         
         $paquete1->setCategoria('Europa');
         
@@ -223,6 +223,17 @@ Llegada a Córdoba, traslado a Río Cuarto y fin de nuestros servicios. ');
         $manager->persist($tarifa2);
         
         $manager->persist($paquete1);
+        
+        for ($i = 0; $i < 50; $i++) {
+            $paquete = new Paquete();
+            $paquete->setTitulo('Paquete Nº '.$i);
+            $paquete->setCategoria('Categoria '.$i);
+            $paquete->setEsGrupal(true);
+            $paquete->setEsPromocion(true);
+            $paquete->setResumen('Resumen...');
+            
+            $manager->persist($paquete);
+        }
         
         $manager->flush();
     }

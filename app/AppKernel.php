@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new T42\TestimoniosBundle\T42TestimoniosBundle(),
             new T42\BackendBundle\T42BackendBundle(),
             new T42\DestinosBundle\T42DestinosBundle(),

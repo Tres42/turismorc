@@ -40,6 +40,15 @@ class TestimoniosFixture implements FixtureInterface
         $manager->persist($testimonio3);
         $manager->persist($testimonio4);
         
+        for ($i = 0; $i < 50; $i++) {
+            $testimonio = new Testimonio();
+            $testimonio->setComentario('Muy bueno el viaje '.$i);
+            $testimonio->setNombre('Carlos '.$i);
+            $testimonio->setOrganizacion('Organizacion'. $i);
+            
+            $manager->persist($testimonio);
+        }
+                
         $manager->flush();
     }
 }

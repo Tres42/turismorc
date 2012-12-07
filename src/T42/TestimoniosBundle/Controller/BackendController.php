@@ -32,12 +32,22 @@ class BackendController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $repository = $this->getDoctrine()
+            ->getRepository('T42TestimoniosBundle:Testimonio');
+        
+        $query = $repository->createQueryBuilder('t')
+            ->getQuery();
+        
+        $paginator = $this->get('knp_paginator');
 
-        $entities = $em->getRepository('T42TestimoniosBundle:Testimonio')->findAll();
-
+        $pagination = $paginator->paginate(
+            $query,
+            $this->get('request')->query->get('page', 1),
+            10
+        );
+        
         return array(
-            'entities' => $entities,
+            'pagination' => $pagination,
         );
     }
 

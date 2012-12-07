@@ -35,34 +35,37 @@
                         </tr>
                     </thead>
                     <tbody>
-                    {% for entity in entities %}
+                    {% for paquete in pagination %}
                         <tr>
                             <td>
                                 {% if is_granted('ROLE_PAQUETES_VIEW') %}
-                                    <a href="{{ path('t42_destinos_backend_show', { 'id': entity.id }) }}">{{ entity.titulo }}</a>
+                                    <a href="{{ path('t42_destinos_backend_show', { 'id': paquete.id }) }}">{{ paquete.titulo }}</a>
                                 {% endif%}                                    
                             </td>
                             <td>
-                                {% for fecha in entity.fechasDeSalida %}
+                                {% for fecha in paquete.fechasDeSalida %}
                                     {{ fecha.fecha|date('d/m/Y') }}
                                 {% endfor %}
                             </td>
-                            <td>{% if entity.esGrupal %} Si {% else %} No {% endif %}</td>
-                            <td>{% if entity.esPromocion %} Si {% else %} No {% endif %}</td>
-                            <td>{{ entity.categoria }}</td>
+                            <td>{% if paquete.esGrupal %} Si {% else %} No {% endif %}</td>
+                            <td>{% if paquete.esPromocion %} Si {% else %} No {% endif %}</td>
+                            <td>{{ paquete.categoria }}</td>
                             <td>
                                 {% if is_granted('ROLE_PAQUETES_EDIT') %}
-                                    <a href="{{ path('t42_destinos_backend_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
+                                    <a href="{{ path('t42_destinos_backend_edit', { 'id': paquete.id }) }}"><i class="icon-pencil"></i></a>
                                 {% endif %}
                                 {% if is_granted('ROLE_PAQUETES_DELETE') %}
-                                    <a href="{{ path('t42_destinos_backend_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
+                                    <a href="{{ path('t42_destinos_backend_delete', { 'id': paquete.id }) }}"><i class="icon-remove"></i></a>
                                 {% endif%}
-                                    <a href="{{ path('t42_destinos_backend_print', { 'id': entity.id }) }}"><i class="icon-print"></i></a>
+                                    <a href="{{ path('t42_destinos_backend_print', { 'id': paquete.id }) }}"><i class="icon-print"></i></a>
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
-                </table>                
+                </table>
+                <div class="row-fluid">
+                    <div class="span12">{{ pagination.render()|raw }}</div>
+                </div>                    
             </div>
         </div>
     </div>
