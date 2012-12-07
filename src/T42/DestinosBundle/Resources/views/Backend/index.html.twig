@@ -20,7 +20,7 @@
                 </ul>                
                 <form class="well well-small" action="{{ path('t42_destinos_backend_index') }}" method="post" {{ form_enctype(form) }} >
                     {{ form_widget(form) }}
-                    <button class="btn btn-primary" type="submit">Filtrar</button>
+                    <button class="btn btn-primary" type="submit">Filtrar</button>                    
                 </form>                    
             </div>
             <div class="span10">
@@ -31,7 +31,7 @@
                             <td>Proxima Salida</td>
                             <td>Grupal</td>
                             <td>Promocion</td>
-                            <td>Categoria</td>
+                            <td>Segmento</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,14 +49,11 @@
                             </td>
                             <td>{% if paquete.esGrupal %} Si {% else %} No {% endif %}</td>
                             <td>{% if paquete.esPromocion %} Si {% else %} No {% endif %}</td>
-                            <td>{{ paquete.categoria }}</td>
+                            <td>{{ paquete.segmento }}</td>
                             <td>
                                 {% if is_granted('ROLE_PAQUETES_EDIT') %}
                                     <a href="{{ path('t42_destinos_backend_edit', { 'id': paquete.id }) }}"><i class="icon-pencil"></i></a>
                                 {% endif %}
-                                {% if is_granted('ROLE_PAQUETES_DELETE') %}
-                                    <a href="{{ path('t42_destinos_backend_delete', { 'id': paquete.id }) }}"><i class="icon-remove"></i></a>
-                                {% endif%}
                                     <a href="{{ path('t42_destinos_backend_print', { 'id': paquete.id }) }}"><i class="icon-print"></i></a>
                             </td>
                         </tr>
