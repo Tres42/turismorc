@@ -327,7 +327,7 @@ class BackendController extends Controller
             throw $this->createNotFoundException('Unable to find Paquete entity.');
         }
 
-        $html = $this->renderView('T42DestinosBundle:Paquete:print.html.twig', array(
+        $html = $this->renderView('T42DestinosBundle:Backend:print.html.twig', array(
             'entity' => $entity
                 ));
 

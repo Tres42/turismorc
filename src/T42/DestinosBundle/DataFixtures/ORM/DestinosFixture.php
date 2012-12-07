@@ -9,6 +9,7 @@ use T42\DestinosBundle\Entity\Ciudad;
 use T42\DestinosBundle\Entity\Pais;
 use T42\DestinosBundle\Entity\Tarifa;
 use T42\DestinosBundle\Entity\FechaDeSalida;
+use T42\DestinosBundle\Entity\Segmento;
 
 /**
  * T42\DataFixtures\ORM\DestinosFixture
@@ -66,6 +67,12 @@ class DestinosFixture implements FixtureInterface
         $tarifa2 = new Tarifa();
         $tarifa2->setDescripcion('SINGLE');
         $tarifa2->setPrecio(200.50);
+        
+        $segmento = new Segmento();
+        $segmento->setDescripcion('ARGENTINA');
+
+        $segmento2 = new Segmento();
+        $segmento2->setDescripcion('REGIONAL');
 
         $paquete1 = new Paquete();
         $paquete1->addCiudad($ciudadAtenas);
@@ -77,7 +84,7 @@ class DestinosFixture implements FixtureInterface
 
         $paquete1->setTitulo('GRECIA TURQUIA Y EGIPTO 2012 (Secretos de Medio Oriente)');
         
-        $paquete1->setCategoria('Europa');
+        $paquete1->setSegmento($segmento);
         
         $paquete1->setEsGrupal(true);
         
@@ -218,6 +225,8 @@ Llegada a Córdoba, traslado a Río Cuarto y fin de nuestros servicios. ');
         $manager->persist($ciudadRioCuarto);
 
         $manager->persist($fechaDeSalida);
+        
+        $manager->persist($segmento);
         
         $manager->persist($tarifa1);
         $manager->persist($tarifa2);
