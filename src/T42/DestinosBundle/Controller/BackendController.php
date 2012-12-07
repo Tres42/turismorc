@@ -37,7 +37,7 @@ class BackendController extends Controller
     {
         $paginator = $this->get('knp_paginator');
 
-        $em = $this->getDoctrine()->getManager();        
+        $em = $this->getDoctrine()->getManager();
         $qb = $em->createQueryBuilder();
 
         $qb->select('p')
@@ -46,8 +46,8 @@ class BackendController extends Controller
         $formFilter = $this->createFormBuilder()
                 ->add('tipoViaje', 'choice', array(
                     'choices' => array(
-                        'esGrupal' => 'Grupal',
-                        'individual' => 'Indivual',
+                        'gr' => 'Grupal',
+                        'in' => 'Indivual',
                     ),
                     'label' => 'Tipo de viaje',
                     'multiple' => false,
@@ -70,34 +70,32 @@ class BackendController extends Controller
         if ($request->isMethod('POST')) {
             $formFilter->bind($request);
 
-            // Obtenemos los datos cargados en el form de busqueda
-            $data = $formFilter->getData();
+            if ($formFilter->isValid()) {
+                // Obtenemos los datos cargados en el form de busqueda
+                $data = $formFilter->getData();
 
-            if ($data['fecha']) {
-                $qb->innerJoin('p.fechasDeSalida', 'f', 'WITH', 'f.fecha = :fechaSalida')
-                   ->setParameter('fechaSalida', $data['fecha']->format('Y-m-d'));
-            }
+                if ($data['fecha']) {
+                    $qb->innerJoin('p.fechasDeSalida', 'f', 'WITH', 'f.fecha = :fechaSalida')
+                            ->setParameter('fechaSalida', $data['fecha']->format('Y-m-d'));
+                }
 
-            if ($data['tipoViaje'] && $data['tipoViaje'] === 'esGrupal') {
-                $qb->andWhere($qb->expr()->eq('p.esGrupal', 'true'));
-            } else {
-                $qb->andWhere($qb->expr()->eq('p.esGrupal', 'false'));
-            }
+                if ($data['tipoViaje']) {
+                    if ($data['tipoViaje'] === 'gr') {
+                        $qb->andWhere($qb->expr()->eq('p.esGrupal', 'true'));
+                    } else if($data['tipoViaje'] === 'in'){
+                        $qb->andWhere($qb->expr()->eq('p.esGrupal', 'false'));
+                    }
+                }
 
-            if ($data['promocion']) {
-                $qb->andWhere($qb->expr()->eq('p.esPromocion', 'true'));
-            } else {
-                $qb->andWhere($qb->expr()->eq('p.esPromocion', 'false'));
+                if ($data['promocion']) {
+                    $qb->andWhere($qb->expr()->eq('p.esPromocion', 'true'));
+                }
             }
         }
 
         $pagination = $paginator->paginate(
-            $qb->getQuery(),
-            $this->get('request')->query->get('page', 1),
-            10
+                $qb->getQuery(), $this->get('request')->query->get('page', 1), 10
         );
-
-        $entities = $qb->getQuery()->getResult();
 
         return array(
             'pagination' => $pagination,
@@ -326,7 +324,7 @@ class BackendController extends Controller
             throw $this->createNotFoundException('Unable to find Paquete entity.');
         }
 
-        $html = $this->renderView('T42DestinosBundle:Paquete:print.html.twig', array(
+        $html = $this->renderView('T42DestinosBundle:Backend:print.html.twig', array(
             'entity' => $entity
                 ));
 

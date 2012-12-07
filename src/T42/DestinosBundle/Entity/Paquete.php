@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use T42\DestinosBundle\Entity\FechaDeSalida;
 use T42\DestinosBundle\Entity\Tarifa;
+use T42\DestinosBundle\Entity\Segmento;
 
 /**
  * T42\DestinosBundle\Entity\Paquete
@@ -71,10 +72,10 @@ class Paquete
     private $resumen;
 
     /**
-     * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank()
-     */
-    private $categoria;
+     * @ORM\ManyToOne(targetEntity="T42\DestinosBundle\Entity\Segmento")
+     * @ORM\JoinColumn()
+     **/    
+    private $segmento;
 
     /**
      * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\FechaDeSalida", inversedBy="paquetes", cascade={"persist"})
@@ -363,6 +364,29 @@ class Paquete
     }
 
     /**
+     * Set segmento
+     *
+     * @param \T42\DestinosBundle\Entity\Segmento $segmento
+     * @return Paquete
+     */
+    public function setSegmento(\T42\DestinosBundle\Entity\Segmento $segmento = null)
+    {
+        $this->segmento = $segmento;
+    
+        return $this;
+    }
+
+    /**
+     * Get segmento
+     *
+     * @return \T42\DestinosBundle\Entity\Segmento 
+     */
+    public function getSegmento()
+    {
+        return $this->segmento;
+    }
+    
+    /**
      * Asigna el resumen del paquete.
      *
      * @param string $resumen
@@ -383,31 +407,6 @@ class Paquete
     public function getResumen()
     {
         return $this->resumen;
-    }
-
-    /**
-     * Asigna un string con la categoria del paquete 
-     * Ej: Europa, Argentina, America Central y del Sur, etc.
-     *
-     * @param string $categoria
-     * @return Paquete
-     */
-    public function setCategoria($categoria)
-    {
-        $this->categoria = $categoria;
-
-        return $this;
-    }
-
-    /**
-     * Retorna un string con la categoria del paquete 
-     * Ej: Europa, Argentina, America Central y del Sur, etc.
-     *
-     * @return string 
-     */
-    public function getCategoria()
-    {
-        return $this->categoria;
     }
 
     /**
