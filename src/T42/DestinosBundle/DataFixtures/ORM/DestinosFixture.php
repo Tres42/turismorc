@@ -236,7 +236,7 @@ Llegada a Córdoba, traslado a Río Cuarto y fin de nuestros servicios. ');
         for ($i = 0; $i < 50; $i++) {
             $paquete = new Paquete();
             $paquete->setTitulo('Paquete Nº '.$i);
-            $paquete->setCategoria('Categoria '.$i);
+            $paquete->setSegmento($segmento);
             $paquete->setEsGrupal(true);
             $paquete->setEsPromocion(true);
             $paquete->setResumen('Resumen...');
