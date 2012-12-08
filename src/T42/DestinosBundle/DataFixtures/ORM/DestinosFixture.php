@@ -5,11 +5,10 @@ namespace T42\DestinosBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use T42\DestinosBundle\Entity\Paquete;
-use T42\DestinosBundle\Entity\Ciudad;
-use T42\DestinosBundle\Entity\Pais;
 use T42\DestinosBundle\Entity\Tarifa;
 use T42\DestinosBundle\Entity\FechaDeSalida;
 use T42\DestinosBundle\Entity\Segmento;
+use T42\DestinosBundle\Entity\Lugar;
 
 /**
  * T42\DataFixtures\ORM\DestinosFixture
@@ -22,43 +21,46 @@ class DestinosFixture implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $paisGrecia = new Pais();
+        $paisGrecia = new Lugar();
         $paisGrecia->setNombre('Grecia');
         
-        $paisArgentina = new Pais();
+        $paisArgentina = new Lugar();
         $paisArgentina->setNombre('Argentina');
         
-        $paisBrasil = new Pais();
+        $paisBrasil = new Lugar();
         $paisBrasil->setNombre('Brasil');
 
-        $paisItalia = new Pais();
+        $paisItalia = new Lugar();
         $paisItalia->setNombre('Italia');
         
-        $paisEspaña = new Pais();
+        $paisEspaña = new Lugar();
         $paisEspaña->setNombre('España');
 
-        $paisTurquia = new Pais();
+        $paisTurquia = new Lugar();
         $paisTurquia->setNombre('Turquia');
         
-        $ciudadAtenas = new Ciudad();
+        $provinciaCordoba = new Lugar();
+        $provinciaCordoba->setNombre('Cordoba');
+        
+        $provinciaEstambul = new Lugar();
+        $provinciaEstambul->setNombre('Estambul');
+        $provinciaEstambul->setPertenece($paisTurquia);
+        
+        $ciudadAtenas = new Lugar;
         $ciudadAtenas->setNombre('Atenas');
-        $ciudadAtenas->setProvincia('Atenas');
-        $ciudadAtenas->setPais($paisGrecia);
+        $ciudadAtenas->setPertenece($paisGrecia);
         
-        $ciudadRioCuarto = new Ciudad();
+        $ciudadRioCuarto = new Lugar();
         $ciudadRioCuarto->setNombre('Rio Cuarto');
-        $ciudadRioCuarto->setPais($paisArgentina);
-        $ciudadRioCuarto->setProvincia('Cordoba');
+        $ciudadRioCuarto->setPertenece($provinciaCordoba);
         
-        $ciudadCordoba = new Ciudad();
+        $ciudadCordoba = new Lugar();
         $ciudadCordoba->setNombre('Cordoba');
-        $ciudadCordoba->setPais($paisArgentina);
-        $ciudadCordoba->setProvincia('Cordoba');
+        $ciudadCordoba->setPertenece($provinciaCordoba);
         
-        $ciudadEstambul = new Ciudad();
+        $ciudadEstambul = new Lugar;
         $ciudadEstambul->setNombre('Estambul');
-        $ciudadEstambul->setPais($paisTurquia);
-        $ciudadEstambul->setProvincia('Estambul');
+        $ciudadEstambul->setPertenece($provinciaEstambul);
         
         $tarifa1 = new Tarifa();
         $tarifa1->setDescripcion('DOBLE');
@@ -75,8 +77,8 @@ class DestinosFixture implements FixtureInterface
         $segmento2->setDescripcion('REGIONAL');
 
         $paquete1 = new Paquete();
-        $paquete1->addCiudad($ciudadAtenas);
-        $paquete1->addCiudad($ciudadEstambul);
+        $paquete1->addLugar($ciudadAtenas);
+        $paquete1->addLugar($ciudadEstambul);
         
         $paquete1->addTarifa($tarifa1);
         $paquete1->addTarifa($tarifa2);
@@ -240,7 +242,7 @@ Llegada a Córdoba, traslado a Río Cuarto y fin de nuestros servicios. ');
             $paquete->setEsGrupal(true);
             $paquete->setEsPromocion(true);
             $paquete->setResumen('Resumen...');
-            
+                    
             $manager->persist($paquete);
         }
         
