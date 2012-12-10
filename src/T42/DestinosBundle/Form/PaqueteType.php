@@ -56,7 +56,7 @@ class PaqueteType extends AbstractType
             ->add('itinerario', 'ckeditor')
             ->add('resumen', 'textarea', array('attr'=> $attr))
             ->add('segmento', null, array('attr'=> $attr))
-            ->add('ciudades', null, array('attr'=> $attr))
+            ->add('lugares', null, array('attr'=> $attr))
         ;
     }
 
