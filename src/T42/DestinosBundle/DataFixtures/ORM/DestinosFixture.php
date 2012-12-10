@@ -52,7 +52,6 @@ class DestinosFixture implements FixtureInterface
         
         $ciudadRioCuarto = new Lugar();
         $ciudadRioCuarto->setNombre('Rio Cuarto');
-        $ciudadRioCuarto->setPertenece($provinciaCordoba);
         
         $ciudadCordoba = new Lugar();
         $ciudadCordoba->setNombre('Cordoba');
@@ -214,18 +213,18 @@ Llegada a Córdoba, traslado a Río Cuarto y fin de nuestros servicios. ');
                                             -Visado de Egipto (U$D35).
                                             -Tasas de Aeropuerto (U$D 29). ');
         
-        $manager->persist($paisArgentina);
-        $manager->persist($paisBrasil);
-        $manager->persist($paisEspaña);
-        $manager->persist($paisGrecia);
-        $manager->persist($paisItalia);
-        $manager->persist($paisTurquia);
+//        $manager->persist($paisArgentina);
+//        $manager->persist($paisBrasil);
+//        $manager->persist($paisEspaña);
+//        $manager->persist($paisGrecia);
+//        $manager->persist($paisItalia);
+//        $manager->persist($paisTurquia);
         
         $manager->persist($ciudadAtenas);
         $manager->persist($ciudadCordoba);
         $manager->persist($ciudadEstambul);
-        $manager->persist($ciudadRioCuarto);
-
+        //$manager->persist($ciudadRioCuarto);
+        
         $manager->persist($fechaDeSalida);
         
         $manager->persist($segmento);

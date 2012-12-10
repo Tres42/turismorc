@@ -32,6 +32,7 @@ class Lugar
 
     /**
      * @ORM\OneToOne(targetEntity="T42\DestinosBundle\Entity\Lugar", cascade={"persist"})
+     * @ORM\JoinColumn(name="pertenece_id", referencedColumnName="id" , unique=false)
      */
     private $pertenece;
 
@@ -90,5 +91,9 @@ class Lugar
     public function getPertenece()
     {
         return $this->pertenece;
+    }
+    
+    public function __toString() {
+        return $this->nombre;
     }
 }
