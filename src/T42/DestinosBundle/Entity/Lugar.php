@@ -31,8 +31,7 @@ class Lugar
     private $nombre;
 
     /**
-     * @ORM\OneToOne(targetEntity="T42\DestinosBundle\Entity\Lugar", cascade={"persist"})
-     * @ORM\JoinColumn(name="pertenece_id", referencedColumnName="id" , unique=false)
+     * @ORM\ManyToOne(targetEntity="T42\DestinosBundle\Entity\Lugar")
      */
     private $pertenece;
 
