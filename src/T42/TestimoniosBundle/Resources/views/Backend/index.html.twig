@@ -44,9 +44,6 @@
                                     {% if is_granted('ROLE_TESTIMONIOS_EDIT') %}
                                         <a href="{{ path('t42_testimonios_backend_edit', { 'id': testimonio.id }) }}"><i class="icon-pencil"></i></a>                                        
                                     {% endif %}    
-                                    {% if is_granted('ROLE_TESTIMONIOS_DELETE') %}
-                                        <a href="{{ path('t42_testimonios_backend_delete', { 'id': testimonio.id }) }}"><i class="icon-remove"></i></a>
-                                    {% endif %}    
                                 </td>
                             </tr>
                         {% endfor %}
