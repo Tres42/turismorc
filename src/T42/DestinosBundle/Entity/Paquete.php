@@ -84,10 +84,10 @@ class Paquete
     private $fechasDeSalida;
 
     /**
-     * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\Ciudad")
+     * @ORM\ManyToMany(targetEntity="T42\DestinosBundle\Entity\Lugar")
      * @ORM\JoinTable()
      */
-    private $ciudades;
+    private $lugares;
 
     /**
      * @ORM\OneToMany(targetEntity="T42\DestinosBundle\Entity\Tarifa", mappedBy="paquete", cascade={"all"})
@@ -410,39 +410,6 @@ class Paquete
     }
 
     /**
-     * Agrega la referencia a la ciudad en la cual se realiza el viaje.
-     *
-     * @param T42\DestinosBundle\Entity\Ciudad $ciudad
-     * @return Paquete
-     */
-    public function addCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad)
-    {
-        $this->ciudades[] = $ciudad;
-
-        return $this;
-    }
-
-    /**
-     * Elimina la referencia a la ciudad en la cual se realiza el viaje.
-     *
-     * @param T42\DestinosBundle\Entity\Ciudad $ciudad
-     */
-    public function removeCiudad(\T42\DestinosBundle\Entity\Ciudad $ciudad)
-    {
-        $this->ciudades->removeElement($ciudad);
-    }
-
-    /**
-     * Retorna las ciudades en las cuales se realiza el viaje.
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getCiudades()
-    {
-        return $this->ciudades;
-    }
-
-    /**
      * Add fechasDeSalida
      *
      * @param T42\DestinosBundle\Entity\FechaDeSalida $fechasDeSalida
@@ -498,26 +465,35 @@ class Paquete
     }
 
     /**
-     * Add ciudades
+     * Add lugar
      *
-     * @param \T42\DestinosBundle\Entity\Ciudad $ciudades
+     * @param \T42\DestinosBundle\Entity\Lugar $lugares
      * @return Paquete
      */
-    public function addCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
+    public function addLugar(\T42\DestinosBundle\Entity\Lugar $lugar)
     {
-        $this->ciudades[] = $ciudades;
-
+        $this->lugares[] = $lugar;
+    
         return $this;
     }
 
     /**
-     * Remove ciudades
+     * Remove lugar
      *
-     * @param \T42\DestinosBundle\Entity\Ciudad $ciudades
+     * @param \T42\DestinosBundle\Entity\Lugar $lugares
      */
-    public function removeCiudade(\T42\DestinosBundle\Entity\Ciudad $ciudades)
+    public function removeLugar(\T42\DestinosBundle\Entity\Lugar $lugar)
     {
-        $this->ciudades->removeElement($ciudades);
+        $this->lugares->removeElement($lugar);
     }
 
+    /**
+     * Get lugares
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLugares()
+    {
+        return $this->lugares;
+    }
 }
