@@ -22,7 +22,7 @@ class PaqueteType extends AbstractType
     {
         $attr = array('class' => 'span10');
         $builder
-            ->add('titulo')
+            ->add('titulo', null, array('attr'=> $attr))
             ->add('fechasDeSalida', 'collection', array(
                     'label'=>'Fechas de Salida',
                     'type' => 'fecha_de_salida',

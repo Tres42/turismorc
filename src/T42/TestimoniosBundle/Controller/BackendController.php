@@ -22,7 +22,7 @@ use T42\TestimoniosBundle\Entity\Testimonio;
  */
 class BackendController extends Controller
 {
-    
+
     /**
      * Lists all Testimonio entities.
      *
@@ -33,19 +33,17 @@ class BackendController extends Controller
     public function indexAction()
     {
         $repository = $this->getDoctrine()
-            ->getRepository('T42TestimoniosBundle:Testimonio');
-        
+                ->getRepository('T42TestimoniosBundle:Testimonio');
+
         $query = $repository->createQueryBuilder('t')
-            ->getQuery();
-        
+                ->getQuery();
+
         $paginator = $this->get('knp_paginator');
 
         $pagination = $paginator->paginate(
-            $query,
-            $this->get('request')->query->get('page', 1),
-            10
+                $query, $this->get('request')->query->get('page', 1), 10
         );
-        
+
         return array(
             'pagination' => $pagination,
         );
@@ -70,7 +68,7 @@ class BackendController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'entity' => $entity,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -85,11 +83,11 @@ class BackendController extends Controller
     public function newAction()
     {
         $entity = new Testimonio();
-        $form   = $this->createForm(new TestimonioType(), $entity);
+        $form = $this->createForm(new TestimonioType(), $entity);
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -102,7 +100,7 @@ class BackendController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity  = new Testimonio();
+        $entity = new Testimonio();
         $form = $this->createForm(new TestimonioType(), $entity);
         $form->bind($request);
 
@@ -110,16 +108,16 @@ class BackendController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
-            
-            
+
+
             $this->get('session')->getFlashBag()->add('success', 'El testimonio fue guardado correctamente');
-            
+
             return $this->redirect($this->generateUrl('t42_testimonios_backend_index', array('id' => $entity->getId())));
         }
 
         return array(
             'entity' => $entity,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
@@ -141,10 +139,13 @@ class BackendController extends Controller
         }
 
         $editForm = $this->createForm(new TestimonioType(), $entity);
+        $deleteForm = $this->createDeleteForm($id);
+
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         );
     }
 
@@ -172,15 +173,15 @@ class BackendController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
-            
+
             $this->get('session')->getFlashBag()->add('success', 'Los cambios fueron guardados correctamente');
 
             return $this->redirect($this->generateUrl('t42_testimonios_backend_index', array('id' => $id)));
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -189,29 +190,27 @@ class BackendController extends Controller
      * Deletes a Testimonio entity.
      *
      * @Route("/{id}/delete")
-     * @Method("GET")
+     * @Method("POST")
      * @Secure(roles="ROLE_TESTIMONIOS_DELETE")
      */
     public function deleteAction(Request $request, $id)
     {
-        $referer = $request->headers->get('referer');
-        
-        if ($referer !== $this->generateUrl('t42_testimonios_backend_index', array(), true)
-            && $referer !== $this->generateUrl('t42_testimonios_backend_edit', array('id' => $id), true)) {
-            throw $this->createNotFoundException('Unable to delete Testimonio from your referer.');
+        $form = $this->createDeleteForm($id);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $entity = $em->getRepository('T42TestimoniosBundle:Testimonio')->find($id);
+
+            if (!$entity) {
+                throw $this->createNotFoundException('Unable to find Testimonio entity.');
+            }
+
+            $em->remove($entity);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'El testimonio fue eliminado correctamente');
         }
-
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('T42TestimoniosBundle:Testimonio')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Testimonio entity.');
-        }
-
-        $em->remove($entity);
-        $em->flush();
-
-        $this->get('session')->getFlashBag()->add('success', 'El testimonio fue eliminado correctamente');
 
         return $this->redirect($this->generateUrl('t42_testimonios_backend_index'));
     }
@@ -219,9 +218,9 @@ class BackendController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
-    
+
 }
