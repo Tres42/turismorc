@@ -11,29 +11,22 @@
 {% endblock %}
 
 {% block content %}
-<h1>Editar Paquete de viajes</h1>
-
-<form action="{{ path('t42_destinos_backend_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
-    {{ form_widget(edit_form) }}
-    <p>
-        <button class="btn btn-info" type="submit">Editar</button>
-    </p>
-</form>
-
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('t42_destinos_backend_index') }}">
-            Volver a listado de paquetes
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('t42_destinos_backend_delete', { 'id': entity.id }) }}" method="post">
+<div class="row-fluid">
+    <div class="span8 offset2">
+        <form class="form-horizontal" action="{{ path('t42_destinos_backend_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+            <legend>Editar Paquete de viaje</legend>            
+            {{ form_widget(edit_form) }}
+            <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Guardar</button>                
+                <a href="{{ path('t42_destinos_backend_index') }}" class="btn btn-small">Cancelar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </form>            
+        <form style="margin-top: -70px; margin-right: 50px;" class="pull-right" action="{{ path('t42_destinos_backend_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
-                {% if is_granted('ROLE_PAQUETES_DELETE') %}
-                    <button class="btn btn-danger" type="submit">Eliminar</button>                
-                {% endif %}
-        </form>
-    </li>
-</ul>
-
+            {% if is_granted('ROLE_PAQUETES_DELETE') %}
+                <button class="btn btn-small btn-danger" type="submit"><i class="icon-remove icon-white"></i>Eliminar</button>                
+            {% endif %}
+        </form>            
+    </div>
+</div>
 {% endblock %}
