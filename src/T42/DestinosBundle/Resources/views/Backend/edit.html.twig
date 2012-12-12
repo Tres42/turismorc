@@ -15,7 +15,7 @@
     <div class="span8 offset2">
         <form class="form-horizontal" action="{{ path('t42_destinos_backend_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
             <legend>Editar Paquete de viaje</legend>            
-            {{ form_widget(edit_form) }}
+            {% include 'T42DestinosBundle:Backend:paqueteForm.html.twig' with { 'form': edit_form } %}
             <div class="form-actions">
                 <button class="btn btn-primary" type="submit">Guardar</button>                
                 <a href="{{ path('t42_destinos_backend_index') }}" class="btn btn-small">Cancelar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
