@@ -43,10 +43,7 @@
                                     <div class="control-group{% if row.vars.errors|length > 0 %} error{% endif %}">
                                         {{ form_label(row, null, { 'label_attr': {'class': 'control-label'} }) }}
                                         <div class="controls">
-                                            <div class="input-append">
-                                                {{ form_widget(row) }}
-                                                <span class="add-on"><i class="icon-calendar"></i></span>
-                                            </div>
+                                            {{ form_widget(row) }}
                                             {{ form_errors(row) }}
                                         </div>
                                     </div>
