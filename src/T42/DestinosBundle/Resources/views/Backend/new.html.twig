@@ -24,3 +24,20 @@
     </div>
 </div>
 {% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/t42backend/js/lib/select2/select2.css') }}" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/t42backend/js/lib/select2/select2.min.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        (function ($) {
+            $(document).ready(function () {
+                $(".select2").select2();
+            });
+        })(jQuery);
+    </script>
+{% endblock %}
