@@ -14,7 +14,7 @@
 
 {% block form_row %}
 {% spaceless %}
-    <div class="control-group {% if errors|length > 0 %} error {% endif %}">
+    <div class="control-group{% if errors|length > 0 %} error{% endif %}">
         {{ form_label(form, null, { 'label_attr': {'class': 'control-label'} }) }}
         <div class="controls">
             {{ form_widget(form) }}
@@ -42,29 +42,14 @@
 {% spaceless %}
     <div {{ block('widget_container_attributes') }}>
     {% for child in form %}
-        {{ form_widget(child) }}
+        {{ form_label(child) }}
     {% endfor %}
     </div>
 {% endspaceless %}
 {% endblock choice_widget_expanded %}
 
-{% block checkbox_widget %}
-{% spaceless %}
-    {% if not compound %}
-        {% set label_attr = label_attr|merge({'for': id}) %}
-    {% endif %}
-    {% if required %}
-        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-    {% endif %}
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' checkbox inline')|trim}) %}
-    {% if label is empty %}
-        {% set label = name|humanize %}
-    {% endif %}
-    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}><input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />  {{ label|trans({}, translation_domain) }}</label>
-{% endspaceless %}
-{% endblock checkbox_widget %}
 
-{% block radio_widget %}
+{% block form_label %}
 {% spaceless %}
     {% if not compound %}
         {% set label_attr = label_attr|merge({'for': id}) %}
@@ -72,10 +57,21 @@
     {% if required %}
         {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
     {% endif %}
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' radio inline')|trim}) %}
     {% if label is empty %}
         {% set label = name|humanize %}
     {% endif %}
-    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}><input type="radio" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} />  {{ label|trans({}, translation_domain) }}</label>
+    {% if form.parent.vars.expanded is defined and form.parent.vars.expanded %}
+        {% if form.parent.vars.multiple is defined and form.parent.vars.multiple %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' checkbox')|trim}) %}
+        {% else %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' radio')|trim}) %}
+        {% endif %}
+    {% endif %}
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        {% if form.parent.vars.choices is defined %}
+            {{ form_widget(form) }}
+        {% endif %}
+        {{ label|trans({}, translation_domain) }}
+    </label>
 {% endspaceless %}
-{% endblock radio_widget %}
+{% endblock form_label %}
