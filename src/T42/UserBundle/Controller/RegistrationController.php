@@ -8,16 +8,16 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * T42\UserBundle\Controller\RegistrationController
- * 
+ *
  * Controller managing the registration
  *
- * @author Cristian Tosco <ctosco@tres42.com.ar>* 
+ * @author Cristian Tosco <ctosco@tres42.com.ar>*
  */
 class RegistrationController extends BaseRegistrationController
 {
     /**
      * Method that sets the invitation code to form Registration
-     * 
+     *
      * @param Invitation $code The invitation code
      */
     public function registerWithCodeAction($code)
@@ -34,10 +34,10 @@ class RegistrationController extends BaseRegistrationController
                     'form' => $form->createView(),
                 ));
     }
-    
+
     /**
-     * Method that performs the user registration in the 
-     * system and displays a message when performing flash 
+     * Method that performs the user registration in the
+     * system and displays a message when performing flash
      * Registration
      */
     public function registerAction()
@@ -56,8 +56,8 @@ class RegistrationController extends BaseRegistrationController
                 $route = 'fos_user_registration_check_email';
             } else {
                 $authUser = true;
-                // Change the path to t42_backend_index
-                $route = 't42_backend_index';
+                // Change the path to t42_backend_dashboard_index
+                $route = 't42_backend_dashboard_index';
             }
 
             $message = $this->container->get('translator')->trans('registration.flash.user_created', array(), 'FOSUserBundle');

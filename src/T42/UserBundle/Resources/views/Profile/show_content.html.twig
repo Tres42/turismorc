@@ -1,5 +1,5 @@
 {% block content %}
-<div class="row">    
+<div class="row">
     <div class="span12">
         <h2>Usuario: {{user.username}}</h2>
         <div class="span5">
@@ -10,13 +10,18 @@
                 <p><b>Numero de Telefono:</b> {{ user.getPhoneNumber() }}</p>
                 <p><b>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</b> {{ user.username }}</p>
                 <p><b>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</b> {{ user.email }}</p>
-                
+
                 <div class="form-actions">
                     <a href="{{ path('fos_user_profile_list') }}" class="btn btn-small">Volver</a>
                 </div>
-                
-            </div>    
+            </div>
+            <form style="margin-top: -64px; margin-right: 200px;" class="pull-right" action="{{ path('fos_user_profile_delete') }}" method="post">
+                {{ form_widget(delete_form) }}
+                {% if is_granted('ROLE_USUARIOS_DELETE') %}
+                    <button class="btn btn-small btn-danger" type="submit"><i class="icon-remove icon-white"></i>Eliminar</button>
+                {% endif %}
+            </form>
         </div>
-    </div>        
+    </div>
 </div>
 {% endblock %}

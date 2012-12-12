@@ -1,15 +1,21 @@
 {% extends 'T42UserBundle::layout.html.twig' %}
 
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li class="active">Usuarios</li>
+{% endblock %}
+
 {% block content %}
 <div class="row">
-    <div class="span12"> 
+    <div class="span12">
         <h2>Usuarios</h2>
         <div class="row">
             <div class="span3">
                 <ul class="nav nav-tabs nav-stacked">
                     {% if is_granted('ROLE_USUARIOS_ADD') %}
                         <li><a href="{{ path('t42_user_invitation_new') }}"><i class="icon-user"></i> Enviar invitaci&oacute;n a usuario</a></li>
-                    {% endif %}    
+                    {% endif %}
                     <li><a href="{{ path('t42_backend_dashboard_index') }}"><i class="icon-arrow-left"></i> Volver</a></li>
                 </ul>
             </div>
@@ -43,9 +49,9 @@
                                         {% elseif  entity.lastname is not empty and entity.firstname is empty %}
                                             {{ entity.lastname }}
                                         {% elseif  entity.lastname is empty and entity.firstname is empty %}
-                                            <i> {{ n/d }} </i> 
+                                            <i> {{ n/d }} </i>
                                         {% endif %}
-                                        
+
                                     </td>
                                 {% endspaceless %}
                                 <td>{{ entity.email }}</td>
@@ -54,9 +60,6 @@
                                     {% if is_granted('ROLE_USUARIOS_EDIT') %}
                                         <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
                                     {% endif %}
-                                    {% if is_granted('ROLE_USUARIOS_DELETE') %}
-                                        <a href="{{ path('fos_user_profile_delete', { 'id': entity.id }) }}"><i class="icon-remove"></i></a>
-                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
@@ -64,7 +67,7 @@
                 </table>
                 <div class="row-fluid">
                     <div class="span12">{{ pagination.render()|raw }}</div>
-                </div>                    
+                </div>
             </div>
         </div>
     </div>

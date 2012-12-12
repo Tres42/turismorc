@@ -1,5 +1,13 @@
 {% extends 'T42UserBundle::layout.html.twig' %}
 
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li><a href="{{ path('fos_user_profile_list') }}">Usuarios</a></li>
+    <li class="divider">/</li>
+    <li class="active">Invitaci&oacute;n</li>
+{% endblock %}
+
 {% block content %}
 <div class="row-fluid">
     <div class="span6 offset3">
@@ -7,8 +15,8 @@
             <legend> Enviar Invitaci&oacute;n </legend>
             {{ form_widget(form) }}
             <div class="form-actions">
-                <button class="btn btn-primary" type="submit">Enviar</button>                
-                <a class="btn " href="{{ path('fos_user_profile_list') }}" >Volver</a>
+                <button class="btn btn-primary" type="submit">Enviar</button>
+                <a class="btn btn-small" href="{{ path('fos_user_profile_list') }}" >Cancelar</a>
             </div>
         </form>
     </div>
