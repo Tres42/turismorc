@@ -95,7 +95,7 @@ trsteel_ckeditor:
         basicstyles: ['Bold','Italic','Underline','Strike','-','RemoveFormat']
         paragraph: ['NumberedList','BulletedList','-','Outdent','Indent','-','JustifyLeft', 'JustifyCenter','JustifyRight','JustifyBlock']
     startup_outline_blocks: false
-    width: 82%
+    width: 90%
     height: 300
     language: %locale%
 
