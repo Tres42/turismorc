@@ -69,14 +69,14 @@ fos_user:
         group_class: T42\UserBundle\Entity\Group
         form:
             type: t42_user_group
-            
+
     registration:
         form:
             type: t42_user_registration
     profile:
         form:
             type: t42_user_profile
-  
+
 knp_snappy:
     pdf:
         enabled:    true
@@ -87,7 +87,7 @@ t42_backend:
     twig:
         globals:
             brand: 'Administración Turismo Río Cuarto'
-            
+
 trsteel_ckeditor:
     toolbar: ['clipboard', 'basicstyles', 'paragraph']
     toolbar_groups:
@@ -95,10 +95,10 @@ trsteel_ckeditor:
         basicstyles: ['Bold','Italic','Underline','Strike','-','RemoveFormat']
         paragraph: ['NumberedList','BulletedList','-','Outdent','Indent','-','JustifyLeft', 'JustifyCenter','JustifyRight','JustifyBlock']
     startup_outline_blocks: false
-    width: 100%
+    width: 82%
     height: 300
     language: %locale%
-    
+
 knp_paginator:
     page_range: 8
     template:
