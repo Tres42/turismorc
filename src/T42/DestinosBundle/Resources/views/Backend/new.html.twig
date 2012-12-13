@@ -36,7 +36,28 @@
     <script type="text/javascript">
         (function ($) {
             $(document).ready(function () {
+                var collectionLabel = $('label.collection-label');
+                var $addLink = $('<a href="#" class="add-link"><i class="icon-plus"></i></a>');
+
+                function addFieldToCollection(collectionHolder) {
+                    var prototype = collectionHolder.attr('data-prototype');
+                    var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+                    var $newFormLi = $('<li></li>').append(newForm);
+
+                    collectionHolder.append($newFormLi);
+                }
+
                 $(".select2").select2();
+
+                collectionLabel.append($addLink);
+
+                $('form').on('click', 'a.add-link', function (event) {
+                    var collectionHolder = $(this).parent().next('.controls').find('ul.collection');
+
+                    addFieldToCollection(collectionHolder);
+
+                    return false;
+                });
             });
         })(jQuery);
     </script>

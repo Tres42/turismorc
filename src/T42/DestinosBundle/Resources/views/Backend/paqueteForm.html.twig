@@ -1,12 +1,14 @@
 {{ form_row(form.titulo) }}
 <div class="control-group{% if form.fechasDeSalida.vars.errors|length > 0 %} error{% endif %}">
-    {{ form_label(form.fechasDeSalida, null, { 'label_attr': {'class': 'control-label'} }) }}
+    {{ form_label(form.fechasDeSalida, null, { 'label_attr': {'class': 'control-label collection-label'} }) }}
     <div class="controls">
-        <ul class="unstyled inline" data-prototype="{{ form_widget(form.fechasDeSalida.vars.prototype)|e }}">
+        {% spaceless %}
+        <ul class="inline collection" data-prototype="{{ form_widget(form.fechasDeSalida.vars.prototype, {'attr': {'class': 'span6'} })|e }}">
         {% for fecha in form.fechasDeSalida %}
             <li>{{ form_widget(fecha, {'attr': {'class': 'span6'} }) }}</li>
         {% endfor %}
         </ul>
+        {% endspaceless %}
         {{ form_errors(form.fechasDeSalida) }}
     </div>
 </div>
@@ -16,21 +18,21 @@
 {{ form_row(form.esPromocion) }}
 {{ form_row(form.observaciones) }}
 <div class="control-group{% if form.tarifas.vars.errors|length > 0 %} error{% endif %}">
-    {{ form_label(form.tarifas, null, { 'label_attr': {'class': 'control-label'} }) }}
+    {{ form_label(form.tarifas, null, { 'label_attr': {'class': 'control-label collection-label'} }) }}
     <div class="controls">
-        <ul class="unstyled" data-prototype="{{ form_widget(form.tarifas.vars.prototype.descripcion, {'attr': {'placeholder': 'Descripción', 'class': 'span7'} })|e }}&nbsp;&nbsp;&nbsp;&nbsp;<div class='input-append'>{{ form_widget(form.tarifas.vars.prototype.precio, {'attr': {'placeholder': 'Precio', 'class': 'span5'} })|e }}<span class='add-on'>U$S</span></div>">
+        {% spaceless %}
+        <ul class="unstyled collection" data-prototype="{{ form_widget(form.tarifas.vars.prototype.descripcion, {'attr': {'placeholder': 'Descripción', 'class': 'span7'} })|e }}<div class='input-append'>{{ form_widget(form.tarifas.vars.prototype.precio, {'attr': {'placeholder': 'Precio', 'class': 'span5'} })|e }}<span class='add-on'>U$S</span></div>">
         {% for tarifa in form.tarifas %}
             <li>
-                {% spaceless %}
-                {{ form_widget(tarifa.descripcion, {'attr': {'placeholder': 'Descripción', 'class': 'span7'} }) }}&nbsp;&nbsp;&nbsp;&nbsp;
+                {{ form_widget(tarifa.descripcion, {'attr': {'placeholder': 'Descripción', 'class': 'span7'} }) }}
                 <div class="input-append">
                     {{ form_widget(tarifa.precio, {'attr': {'placeholder': 'Precio', 'class': 'span5'} }) }}
                     <span class="add-on">U$S</span>
                 </div>
-                {% endspaceless %}
             </li>
         {% endfor %}
         </ul>
+        {% endspaceless %}
         {{ form_errors(form.tarifas) }}
     </div>
 </div>
