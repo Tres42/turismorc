@@ -33,9 +33,7 @@ class ProfileController extends BaseProfileController
         $paginator = $this->container->get('knp_paginator');
 
         $pagination = $paginator->paginate(
-            $entities,
-            $this->container->get('request')->query->get('page', 1),
-            10
+                $entities, $this->container->get('request')->query->get('page', 1), 10
         );
 
 
@@ -59,7 +57,7 @@ class ProfileController extends BaseProfileController
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.' . $this->container->getParameter('fos_user.template.engine'), array('user' => $user, 'delete_form'=>$deleteForm->createView()));
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Profile:show.html.' . $this->container->getParameter('fos_user.template.engine'), array('user' => $user, 'delete_form' => $deleteForm->createView()));
     }
 
     /**
@@ -92,7 +90,7 @@ class ProfileController extends BaseProfileController
         }
 
         return $this->container->get('templating')->renderResponse(
-                        'FOSUserBundle:Profile:edit.html.' . $this->container->getParameter('fos_user.template.engine'), array('form' => $form->createView(), 'user' => $user, 'delete_form'=>$deleteForm->createView())
+                        'FOSUserBundle:Profile:edit.html.' . $this->container->getParameter('fos_user.template.engine'), array('form' => $form->createView(), 'user' => $user, 'delete_form' => $deleteForm->createView())
         );
     }
 
@@ -103,15 +101,16 @@ class ProfileController extends BaseProfileController
     public function deleteAction(Request $request)
     {
         //Get the id of the form
-        $form_request = $request->get('form');
-        $id = $form_request['id'];
-
-        $form = $this->createDeleteForm($id);
+        $form = $this->createDeleteForm();
         $form->bind($request);
 
-        if($form->isValid()){
+        if ($form->isValid()) {
             //Get the UserManager of FOSUserBundle
             $userManager = $this->container->get('fos_user.user_manager');
+            
+            //Get the id
+            $data = $form->getData();
+            $id = $data['id'];
 
             //Get the user from database
             $user = $userManager->findUserBy(array('id' => $id));
@@ -157,12 +156,15 @@ class ProfileController extends BaseProfileController
     /**
      * Create a new Package removal form.
      */
-    private function createDeleteForm($id)
+    private function createDeleteForm($id = null)
     {
-        return $this->container->get('form.factory')->createBuilder('form', array('id' => $id))
-                        ->add('id', 'hidden')
-                        ->getForm()
-        ;
+        if ($id) {
+            $formBuilder = $this->container->get('form.factory')->createBuilder('form', array('id' => $id));
+        } else {
+            $formBuilder = $this->container->get('form.factory')->createBuilder('form');
+        }
+
+        return $formBuilder->add('id', 'hidden')->getForm();
     }
 
 }
