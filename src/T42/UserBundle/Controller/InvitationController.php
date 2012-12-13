@@ -12,7 +12,7 @@ use T42\UserBundle\Form\Type\InvitationFormType;
 
 /**
  * T42\UserBundle\Controller;
- * 
+ *
  * Controller invitations.
  *
  * @author Cristian Tosco <ctosco@tres42.com.ar>
@@ -33,7 +33,7 @@ class InvitationController extends Controller
         $invitation = new Invitation();
 
         $form = $this->createFormBuilder($invitation)
-                ->add('email', 'email', array('label' => 'E-Mail'))
+                ->add('email', 'email', array('label' => 'E-Mail', 'attr'=>array('class' => 'span9')))
                 ->getForm();
 
         return array(
@@ -44,7 +44,7 @@ class InvitationController extends Controller
 
     /**
      * Method the sending of the invitation
-     * 
+     *
      * @Route("/")
      * @Method("POST")
      * @Template("T42UserBundle:Invitation:new.html.twig")
@@ -67,7 +67,7 @@ class InvitationController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($invitation);
             $em->flush();
-            
+
             //Send e-mail
             $mensaje = \Swift_Message::newInstance()
                     ->setSubject('Bienvenido a Turismo Rio Cuarto!')
