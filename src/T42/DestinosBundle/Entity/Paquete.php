@@ -443,6 +443,35 @@ class Paquete
     }
 
     /**
+     * Get próxima fechasDeSalida
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getProximaSalida()
+    {
+        $salidas = array();
+        $now = new \DateTime();
+
+        $this->fechasDeSalida->forAll(function ($key, $value) use (&$salidas, $now) {
+            $fecha = $value->getFecha();
+
+            if ($fecha >= $now)
+                $salidas[] = $fecha;
+
+            return true;
+        });
+
+        if (!$salidas)
+            return;
+
+        sort($salidas);
+
+        $proxSalida = $salidas[0];
+
+        return $proxSalida;
+    }
+
+    /**
      * Get fechasDeSalida
      *
      * @return Doctrine\Common\Collections\Collection 
