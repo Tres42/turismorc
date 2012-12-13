@@ -23,6 +23,8 @@ class PaqueteType extends AbstractType
         $attr = array('class' => 'span10');
         $builder
             ->add('titulo', null, array('attr'=> $attr))
+            ->add('segmento', null, array('attr'=> $attr))
+            ->add('lugares', null, array('attr'=> $attr))
             ->add('fechasDeSalida', 'collection', array(
                     'label'=>'Fechas de Salida',
                     'type' => 'fecha_de_salida',
@@ -55,8 +57,6 @@ class PaqueteType extends AbstractType
             ->add('serviciosNoIncluidos', null, array('label'=>'Servicios No Incluidos', 'attr'=> $attr))
             ->add('itinerario', 'ckeditor')
             ->add('resumen', 'textarea', array('attr'=> $attr))
-            ->add('segmento', null, array('attr'=> $attr))
-            ->add('lugares', null, array('attr'=> $attr))
         ;
     }
 
