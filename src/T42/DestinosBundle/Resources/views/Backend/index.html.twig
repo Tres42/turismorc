@@ -77,9 +77,13 @@
                                 {% endif%}                                    
                             </td>
                             <td>
-                                {% for fecha in paquete.fechasDeSalida %}
-                                    {{ fecha.fecha|date('d/m/Y') }}
-                                {% endfor %}
+                                {% spaceless %}
+                                {% if paquete.getProximaSalida %}
+                                    {{ paquete.getProximaSalida|date('d/m/Y') }}
+                                {% else %}
+                                    N/D
+                                {% endif %}
+                                {% endspaceless %}
                             </td>
                             <td>{% if paquete.esGrupal %} Si {% else %} No {% endif %}</td>
                             <td>{% if paquete.esPromocion %} Si {% else %} No {% endif %}</td>
