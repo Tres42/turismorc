@@ -39,10 +39,49 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="{{ asset('bundles/t42backend/js/lib/select2/select2.min.js') }}" type="text/javascript"></script>
-    <script type="text/javascript">
+        <script type="text/javascript">
         (function ($) {
             $(document).ready(function () {
+                var collectionLabel = $('label.collection-label');
+                var collectionsHolder = $('ul.collection');
+                var $addLink = $('<a href="#" class="add-to-col"><i class="icon-plus"></i></a>');
+                var $removeLink = $('<a href="#" class="remove-from-col"><i class="icon-minus"></i></a>');
+
+                function addFieldToCollection(collectionHolder) {
+                    var prototype = collectionHolder.attr('data-prototype');
+                    var newField = prototype.replace(/__name__/g, collectionHolder.children().length);
+                    var $newFieldLi = $('<li></li>').append(newField).append($removeLink.clone());
+
+                    collectionHolder.append($newFieldLi);
+                }
+
+                function removeFieldFromCollection($field) {
+                    $field.remove();
+                }
+
                 $(".select2").select2();
+
+                collectionLabel.append($addLink);
+
+                collectionsHolder.find('li').each(function() {
+                    $(this).append($removeLink.clone());
+                });
+
+                $('form').on('click', 'a.add-to-col', function (event) {
+                    var collectionHolder = $(this).parent().next('.controls').find('ul.collection');
+
+                    addFieldToCollection(collectionHolder);
+
+                    return false;
+                });
+
+                $('form').on('click', 'a.remove-from-col', function (event) {
+                    var $field = $(this).parent('li');
+
+                    removeFieldFromCollection($field);
+
+                    return false;
+                });
             });
         })(jQuery);
     </script>
