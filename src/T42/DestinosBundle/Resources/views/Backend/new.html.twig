@@ -37,24 +37,42 @@
         (function ($) {
             $(document).ready(function () {
                 var collectionLabel = $('label.collection-label');
-                var $addLink = $('<a href="#" class="add-link"><i class="icon-plus"></i></a>');
+                var collectionsHolder = $('ul.collection');
+                var $addLink = $('<a href="#" class="add-to-col"><i class="icon-plus"></i></a>');
+                var $removeLink = $('<a href="#" class="remove-from-col"><i class="icon-minus"></i></a>');
 
                 function addFieldToCollection(collectionHolder) {
                     var prototype = collectionHolder.attr('data-prototype');
-                    var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
-                    var $newFormLi = $('<li></li>').append(newForm);
+                    var newField = prototype.replace(/__name__/g, collectionHolder.children().length);
+                    var $newFieldLi = $('<li></li>').append(newField).append($removeLink.clone());
 
-                    collectionHolder.append($newFormLi);
+                    collectionHolder.append($newFieldLi);
+                }
+
+                function removeFieldFromCollection($field) {
+                    $field.remove();
                 }
 
                 $(".select2").select2();
 
                 collectionLabel.append($addLink);
 
-                $('form').on('click', 'a.add-link', function (event) {
+                collectionsHolder.find('li').each(function() {
+                    $(this).append($removeLink.clone());
+                });
+
+                $('form').on('click', 'a.add-to-col', function (event) {
                     var collectionHolder = $(this).parent().next('.controls').find('ul.collection');
 
                     addFieldToCollection(collectionHolder);
+
+                    return false;
+                });
+
+                $('form').on('click', 'a.remove-from-col', function (event) {
+                    var $field = $(this).parent('li');
+
+                    removeFieldFromCollection($field);
 
                     return false;
                 });
