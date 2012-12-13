@@ -94,7 +94,7 @@ class BackendController extends Controller
         }
 
         $pagination = $paginator->paginate(
-                $qb->getQuery(), $this->get('request')->query->get('page', 1), 10
+                $qb->orderBy('p.id', 'DESC')->getQuery(), $this->get('request')->query->get('page', 1), 10
         );
 
         return array(
