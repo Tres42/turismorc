@@ -7,7 +7,13 @@
             <div class="form-actions">
                 <input class="btn btn-primary" type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
                 <a href="{{ path('fos_user_profile_list') }}" class="btn btn-small">Cancelar</a>
-            </div>    
+            </div>
+        </form>
+        <form style="margin-top: -66px; margin-right: 50px;" class="pull-right" action="{{ path('fos_user_profile_delete') }}" method="post">
+            {{ form_widget(delete_form) }}
+            {% if is_granted('ROLE_USUARIOS_DELETE') %}
+                <button class="btn btn-small btn-danger" type="submit"><i class="icon-remove icon-white"></i>Eliminar</button>
+            {% endif %}
         </form>
     </div>
 </div>

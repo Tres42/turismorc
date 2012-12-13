@@ -2,6 +2,14 @@
 
 {% block title %}Editar {{user}} | {{ parent() }}{% endblock %}
 
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li><a href="{{ path('fos_user_profile_list') }}">Usuarios</a></li>
+    <li class="divider">/</li>
+    <li class="active">Editar</li>
+{% endblock %}
+
 {% block fos_user_content %}
 {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
 {% endblock fos_user_content %}

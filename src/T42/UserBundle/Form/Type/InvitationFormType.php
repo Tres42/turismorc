@@ -9,19 +9,20 @@ use Doctrine\ORM\EntityRepository;
 use T42\UserBundle\Form\DataTransformer\InvitationToCodeTransformer;
 
 /**
+ * T42\UserBundle\Form\Type\InvitationFormType
+ *
  * Class for creating the invitation field
  *
  * @author Cristian Tosco <ctosco@tres42.com.ar>
  */
-class InvitationFormType extends AbstractType 
+class InvitationFormType extends AbstractType
 {
-
     protected $invitationTransformer;
 
     /**
      * Constructor
-     * 
-     * @param InvitationToCodeTransformer $invitationTransformer 
+     *
+     * @param InvitationToCodeTransformer $invitationTransformer
      */
     public function __construct(InvitationToCodeTransformer $invitationTransformer) {
         $this->invitationTransformer = $invitationTransformer;
@@ -45,5 +46,4 @@ class InvitationFormType extends AbstractType
     public function getName() {
         return 't42_invitation_type';
     }
-
 }
