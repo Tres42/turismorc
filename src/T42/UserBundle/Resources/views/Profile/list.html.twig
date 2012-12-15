@@ -55,7 +55,13 @@
                                     </td>
                                 {% endspaceless %}
                                 <td>{{ entity.email }}</td>
-                                <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('d-m-Y H:i:s') }}{% endif %}</td>
+                                <td>
+                                    {% if entity.lastLogin is not empty %}
+                                        {{ entity.lastLogin|date('d-m-Y H:i:s') }}
+                                    {% else %}
+                                        <i>n/d</i>
+                                    {% endif %}
+                                </td>
                                 <td>
                                     {% if is_granted('ROLE_USUARIOS_EDIT') %}
                                         <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
