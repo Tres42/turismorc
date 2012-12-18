@@ -49,13 +49,13 @@
                                         {% elseif  entity.lastname is not empty and entity.firstname is empty %}
                                             {{ entity.lastname }}
                                         {% elseif  entity.lastname is empty and entity.firstname is empty %}
-                                            <i> {{ n/d }} </i>
+                                            {{ n/d }}
                                         {% endif %}
 
                                     </td>
                                 {% endspaceless %}
                                 <td>{{ entity.email }}</td>
-                                <td>{% if entity.lastLogin %}{{ entity.lastLogin|date('d-m-Y H:i:s') }}{% endif %}</td>
+                                <td>{{ entity.lastLogin is empty ? "n/d" : entity.lastLogin|date('d-m-Y H:i:s') }}</td>
                                 <td>
                                     {% if is_granted('ROLE_USUARIOS_EDIT') %}
                                         <a href="{{ path('fos_user_profile_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
