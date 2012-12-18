@@ -20,7 +20,7 @@
     <div class="span7 offset1">
         <h3>Fechas de Salida</h3>
         {% if entity.fechasDeSalida is empty%}
-            <p class="lead"><i>n/d</i></p>
+            <p class="lead">n/d</p>
         {% endif %}
         {% for fecha in entity.fechasDeSalida %}
             <p class="lead"> {{ fecha.fecha|date("d/m/Y") }} </p>
@@ -46,16 +46,12 @@
 <div class="row">
     <div class="span5 offset1">
         <h3>Observaciones</h3>
-        {% if entity.observaciones is not empty%}
-            <p> {{ entity.observaciones}}</p>
-        {% else %}
-            <i>n/d</i>
-        {%endif%}
+        <p>{{ entity.observaciones|default('n/d') }}</p>
     </div>
     <div class="span5">
         <h3>Tarifas</h3>
         {% if entity.tarifas is empty %}
-            <i>n/d</i>
+            <p>n/d</p>
         {% endif %}
         {% for tarifa in entity.tarifas %}
             {{tarifa.descripcion~'-'~tarifa.precio}}
@@ -65,19 +61,11 @@
 <div class="row">
     <div class="span5 offset1">
         <h3>Servicios Incluidos</h3>
-        {% if entity.serviciosIncluidos is not empty %}
-            <p>{{entity.serviciosIncluidos}}</p>
-        {% else %}
-            <i>n/d</i>
-        {% endif %}
+            <p>{{entity.serviciosIncluidos|default('n/d')}}</p>
     </div>
     <div class="span5">
         <h3>Servicios No Incluidos</h3>
-        {% if entity.serviciosNoIncluidos is not empty %}
-            <p>{{entity.serviciosNoIncluidos}}</p>
-        {% else %}
-            <i>n/d</i>
-        {% endif %}
+            <p>{{entity.serviciosNoIncluidos|default('n/d')}}</p>
     </div>
 </div>
 <div class="row">
@@ -103,13 +91,7 @@
 <div class="row">
     <div class="span11 offset1" style="text-align: justify">
         <h3>Itinerario</h3>
-        {% if entity.itinerario is not empty %}
-            <p>
-                {{ entity.itinerario|raw() }}
-            </p>
-        {% else %}
-            <i>n/d</i>
-        {% endif%}
+            <p>{{ entity.itinerario|default('n/d')|raw() }}</p>
     </div>
 </div>
 <div class="form-actions">
