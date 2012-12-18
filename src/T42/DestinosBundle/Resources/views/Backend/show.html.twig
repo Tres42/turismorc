@@ -13,16 +13,19 @@
 {% block content %}
 <div class="row">
     <div class="span11 offset1">
-        <h2>{{ entity.titulo }}</h2>                
+        <h2>{{ entity.titulo }}</h2>
     </div>
 </div>
 <div class="row">
     <div class="span7 offset1">
         <h3>Fechas de Salida</h3>
+        {% if entity.fechasDeSalida is empty%}
+            <p class="lead">n/d</p>
+        {% endif %}
         {% for fecha in entity.fechasDeSalida %}
             <p class="lead"> {{ fecha.fecha|date("d/m/Y") }} </p>
         {% endfor %}
-    </div>        
+    </div>
     <div class="span1">
         <h3>Grupal</h3>
         {% if entity.esGrupal %}
@@ -30,7 +33,7 @@
         {% else %}
             <p class="lead"> No </p>
         {% endif %}
-    </div>        
+    </div>
     <div class="span1">
         <h3>Promoci&oacute;n</h3>
         {% if entity.esPromocion %}
@@ -38,16 +41,19 @@
         {% else %}
             <p class="lead"> No </p>
         {% endif %}
-    </div>        
+    </div>
 </div>
 <div class="row">
     <div class="span5 offset1">
         <h3>Observaciones</h3>
-        <p> {{ entity.observaciones}}</p>
+        <p>{{ entity.observaciones|default('n/d') }}</p>
     </div>
     <div class="span5">
         <h3>Tarifas</h3>
-        {% for tarifa in entity.tarifas%}
+        {% if entity.tarifas is empty %}
+            <p>n/d</p>
+        {% endif %}
+        {% for tarifa in entity.tarifas %}
             {{tarifa.descripcion~'-'~tarifa.precio}}
         {% endfor %}
     </div>
@@ -55,11 +61,11 @@
 <div class="row">
     <div class="span5 offset1">
         <h3>Servicios Incluidos</h3>
-        <p>{{entity.serviciosIncluidos}}</p>
+            <p>{{entity.serviciosIncluidos|default('n/d')}}</p>
     </div>
     <div class="span5">
         <h3>Servicios No Incluidos</h3>
-        <p>{{entity.serviciosNoIncluidos}}</p>
+            <p>{{entity.serviciosNoIncluidos|default('n/d')}}</p>
     </div>
 </div>
 <div class="row">
@@ -85,9 +91,7 @@
 <div class="row">
     <div class="span11 offset1" style="text-align: justify">
         <h3>Itinerario</h3>
-        <p>
-            {{ entity.itinerario|raw() }}
-        </p>
+            <p>{{ entity.itinerario|default('n/d')|raw() }}</p>
     </div>
 </div>
 <div class="form-actions">
@@ -99,7 +103,7 @@
         <a class="btn btn-small" href="{{ path('t42_destinos_backend_index') }}">Volver</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {% if is_granted('ROLE_PAQUETES_DELETE') %}
             <button class="btn btn-danger btn-small" type="submit"><i class="icon-remove icon-white"></i> Eliminar</button>
-        {% endif %}            
+        {% endif %}
     </form>
 </div>
 {% endblock %}
