@@ -11,87 +11,96 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-    <div class="span11 offset1">
-        <h2>{{ entity.titulo }}</h2>
-    </div>
-</div>
-<div class="row">
-    <div class="span7 offset1">
-        <h3>Fechas de Salida</h3>
-        {% if entity.fechasDeSalida is empty%}
-            <p class="lead">n/d</p>
-        {% endif %}
-        {% for fecha in entity.fechasDeSalida %}
-            <p class="lead"> {{ fecha.fecha|date("d/m/Y") }} </p>
+<div class="row-fluid">
+    <div class="span12">
+    {% if entity.segmento %}
+        <h2>{{ entity.segmento.descripcion }}</h2>
+    {% endif %}
+        <h1>{{ entity.titulo }}</h1>
+    {% if entity.lugares is not empty %}
+        <ul class="inline">
+        {% for lugar in entity.lugares %}
+            <li>{{ lugar.nombre }}</li>
+            {% if not loop.last and loop.length > 1 %}
+                <li>&mdash;</li>
+            {% endif %}
         {% endfor %}
-    </div>
-    <div class="span1">
-        <h3>Grupal</h3>
-        {% if entity.esGrupal %}
-            <p class="lead"> Si </p>
-        {% else %}
-            <p class="lead"> No </p>
-        {% endif %}
-    </div>
-    <div class="span1">
-        <h3>Promoci&oacute;n</h3>
-        {% if entity.esPromocion %}
-            <p class="lead"> Si </p>
-        {% else %}
-            <p class="lead"> No </p>
-        {% endif %}
-    </div>
-</div>
-<div class="row">
-    <div class="span5 offset1">
-        <h3>Observaciones</h3>
-        <p>{{ entity.observaciones|default('n/d') }}</p>
-    </div>
-    <div class="span5">
-        <h3>Tarifas</h3>
-        {% if entity.tarifas is empty %}
-            <p>n/d</p>
-        {% endif %}
-        {% for tarifa in entity.tarifas %}
-            {{tarifa.descripcion~'-'~tarifa.precio}}
-        {% endfor %}
-    </div>
-</div>
-<div class="row">
-    <div class="span5 offset1">
-        <h3>Servicios Incluidos</h3>
-            <p>{{entity.serviciosIncluidos|default('n/d')}}</p>
-    </div>
-    <div class="span5">
-        <h3>Servicios No Incluidos</h3>
-            <p>{{entity.serviciosNoIncluidos|default('n/d')}}</p>
-    </div>
-</div>
-<div class="row">
-    <div class="span5 offset1">
-        <h3>Segmento</h3>
-        <p>{{entity.segmento.descripcion}}</p>
-    </div>
-    <div class="span5">
-        <h3>Lugares</h3>
-        <p>
-            {% for lugar in entity.lugares %}
-                {{lugar.nombre}}
-            {% endfor %}
-        </p>
-    </div>
-</div>
-<div class="row">
-    <div class="span11 offset1">
-        <h3>Resumen</h3>
-        <p>{{entity.resumen}}</p>
-    </div>
-</div>
-<div class="row">
-    <div class="span11 offset1" style="text-align: justify">
-        <h3>Itinerario</h3>
-            <p>{{ entity.itinerario|default('n/d')|raw() }}</p>
+        </ul>
+    {% endif %}
+        <div class="row-fluid">
+            <div class="span8">
+            {% if entity.resumen %}
+                <div>
+                    <h3>Resumen</h3>
+                    <p>{{ entity.resumen }}</p>
+                </div>
+            {% endif %}
+            {% if entity.itinerario %}
+                <div>
+                    <h3>Itinerario</h3>
+                    {{ entity.itinerario|raw() }}
+                </div>
+            {% endif %}
+            {% if entity.tarifas is not empty %}
+                <div>
+                    <h3>Tarifas</h3>
+                    <ul>
+                        {% for tarifa in entity.tarifas %}
+                            <li>{{ tarifa.descripcion}}: {{ tarifa.precio }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            </div>
+            <div class="span3 offset1">
+            {% if entity.esGrupal or entity.esPromocion %}
+                <div>
+                    <h3>+ Información</h3>
+                    <ul>
+                    {% if entity.esGrupal %}
+                        <li><strong>Grupal</strong></li>
+                    {% endif %}
+                    {% if entity.esPromocion %}
+                        <li><strong>Promoción</strong></li>
+                    {% endif %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% if entity.fechasDeSalida is not empty%}
+                <div>
+                    <h3>Fechas de Salida</h3>
+                    {% if entity.fechasDeSalida|length > 1 %}
+                        <ul>
+                        {% for fecha in entity.fechasDeSalida %}
+                            <li>{{ fecha.fecha|date("d/m/Y") }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>{{ entity.fechasDeSalida[0].fecha|date("d/m/Y") }}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
+                <div>
+                    <h3>Servicios</h3>
+                    <h4>Inclu&iacute;dos</h4>
+                    <ul>
+                        {# TODO: Integrar con servicios includ&iacute;dos como array #}
+                        <li>Servicio A</li>
+                    </ul>
+                    <h4>No inclu&iacute;dos</h4>
+                    <ul>
+                        {# TODO: Integrar con servicios no includ&iacute;dos como array #}
+                        <li>Servicio A</li>
+                    </ul>
+                </div>
+            {% if entity.observaciones %}
+                <div>
+                    <h3>Observaciones</h3>
+                    <p>{{ entity.observaciones }}</p>
+                </div>
+            {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 <div class="form-actions">
