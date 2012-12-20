@@ -28,11 +28,11 @@
         </ul>
     {% endif %}
         <div class="row-fluid">
-            <div class="span8">
+            <div class="span9">
             {% if entity.resumen %}
                 <div>
                     <h3>Resumen</h3>
-                    <p>{{ entity.resumen }}</p>
+                    <p class="lead">{{ entity.resumen }}</p>
                 </div>
             {% endif %}
             {% if entity.itinerario %}
@@ -52,7 +52,7 @@
                 </div>
             {% endif %}
             </div>
-            <div class="span3 offset1">
+            <div class="span3">
             {% if entity.esGrupal or entity.esPromocion %}
                 <div>
                     <h3>+ Información</h3>
@@ -80,19 +80,23 @@
                     {% endif %}
                 </div>
             {% endif %}
+            {% if entity.serviciosIncluidos or entity.serviciosNoIncluidos %}
                 <div>
                     <h3>Servicios</h3>
                     <h4>Inclu&iacute;dos</h4>
                     <ul>
-                        {# TODO: Integrar con servicios includ&iacute;dos como array #}
-                        <li>Servicio A</li>
+                        {% for servicio in entity.serviciosIncluidos %}
+                            <li>{{servicio}}</li>
+                        {% endfor %}
                     </ul>
                     <h4>No inclu&iacute;dos</h4>
                     <ul>
-                        {# TODO: Integrar con servicios no includ&iacute;dos como array #}
-                        <li>Servicio A</li>
+                        {% for servicio in entity.serviciosNoIncluidos %}
+                            <li>{{servicio}}</li>
+                        {% endfor %}
                     </ul>
                 </div>
+            {% endif %}
             {% if entity.observaciones %}
                 <div>
                     <h3>Observaciones</h3>
