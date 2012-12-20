@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use T42\DestinosBundle\Form\FechaDeSalidaType;
 use T42\DestinosBundle\Form\Type\TarifaType;
+use T42\DestinosBundle\Form\Type\LinesToArrayFieldType;
 
 /**
  * T42\DestinosBundle\Form\PaqueteType
@@ -53,8 +54,8 @@ class PaqueteType extends AbstractType
                     'allow_delete' => true
                 )
              )
-            ->add('serviciosIncluidos', null, array('label'=>'Servicios Incluidos', 'attr'=> $attr))
-            ->add('serviciosNoIncluidos', null, array('label'=>'Servicios No Incluidos', 'attr'=> $attr))
+            ->add('serviciosIncluidos', new LinesToArrayFieldType(), array('label'=>'Servicios Incluidos', 'attr'=> $attr))
+            ->add('serviciosNoIncluidos', new LinesToArrayFieldType(), array('label'=>'Servicios No Incluidos', 'attr'=> $attr))
             ->add('itinerario', 'ckeditor')
             ->add('resumen', 'textarea', array('attr'=> $attr))
         ;

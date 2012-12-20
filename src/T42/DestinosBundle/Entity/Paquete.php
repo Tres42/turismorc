@@ -10,11 +10,11 @@ use T42\DestinosBundle\Entity\Segmento;
 
 /**
  * T42\DestinosBundle\Entity\Paquete
- * 
+ *
  * Representa un paquete de viajes.
- * 
+ *
  * @author Cristian Tosco <ctosco@tres42.com.ar>
- * 
+ *
  * @ORM\Entity
  * @ORM\Table(name="paquete")
  * @ORM\HasLifecycleCallbacks()
@@ -51,12 +51,12 @@ class Paquete
     private $observaciones;
 
     /**
-     * @ORM\Column(type="text", length=255, name="servicios_incluidos", nullable=true)
+     * @ORM\Column(type="array", name="servicios_incluidos", nullable=true)
      */
     private $serviciosIncluidos;
 
     /**
-     * @ORM\Column(type="text", name="servicios_no_incluidos", nullable=true)
+     * @ORM\Column(type="array", name="servicios_no_incluidos", nullable=true)
      */
     private $serviciosNoIncluidos;
 
@@ -74,7 +74,7 @@ class Paquete
     /**
      * @ORM\ManyToOne(targetEntity="T42\DestinosBundle\Entity\Segmento")
      * @ORM\JoinColumn()
-     **/    
+     **/
     private $segmento;
 
     /**
@@ -108,7 +108,7 @@ class Paquete
     /**
      * Retorna el id del paquete.
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -131,7 +131,7 @@ class Paquete
     /**
      * Retorna el titulo del paquete.
      *
-     * @return string 
+     * @return string
      */
     public function getTitulo()
     {
@@ -139,7 +139,7 @@ class Paquete
     }
 
     /**
-     * Asigna un valor de verdad si el paquete es o 
+     * Asigna un valor de verdad si el paquete es o
      * no grupal.
      *
      * @param boolean $esGrupal
@@ -153,10 +153,10 @@ class Paquete
     }
 
     /**
-     * Retorna un valor de verdad si el paquete es o 
+     * Retorna un valor de verdad si el paquete es o
      * no grupal.
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEsGrupal()
     {
@@ -179,7 +179,7 @@ class Paquete
     /**
      * Retorna un valor de verdad si el paquete es una promocion.
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getEsPromocion()
     {
@@ -202,7 +202,7 @@ class Paquete
     /**
      * Retorna las observaciones del paquete de viajes.
      *
-     * @return string 
+     * @return string
      */
     public function getObservaciones()
     {
@@ -225,7 +225,7 @@ class Paquete
     /**
      * Retorna las tarifas del paquete de viajes.
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getTarifas()
     {
@@ -257,7 +257,7 @@ class Paquete
 
     /**
      * Remove the null tarifas
-     * 
+     *
      * @ORM\PrePersist
      */
     public function removeNullTarifas()
@@ -270,10 +270,10 @@ class Paquete
     }
 
     /**
-     * Removes the tarifas in parameter which are in the same and in the 
+     * Removes the tarifas in parameter which are in the same and in the
      * tarifas of the actual instance.
-     *       
-     * @param Array $originaltarifas 
+     *
+     * @param Array $originaltarifas
      */
     public function toDeleteTarifas($originalTarifas)
     {
@@ -292,9 +292,9 @@ class Paquete
     }
 
     /**
-     * Retorna los servicios incluidos del paquete de viajes.
+     * Set serviciosIncluidos
      *
-     * @param string $serviciosIncluidos
+     * @param array $serviciosIncluidos
      * @return Paquete
      */
     public function setServiciosIncluidos($serviciosIncluidos)
@@ -305,10 +305,9 @@ class Paquete
     }
 
     /**
-     * Retorna un string con los servicios que incluye el paquete de 
-     * viajes.
+     * Get serviciosIncluidos
      *
-     * @return string 
+     * @return array
      */
     public function getServiciosIncluidos()
     {
@@ -316,10 +315,9 @@ class Paquete
     }
 
     /**
-     * Asigna un string con los servicios que no incluye el paquete de 
-     * viajes.
+     * Set serviciosNoIncluidos
      *
-     * @param string $serviciosNoIncluidos
+     * @param array $serviciosNoIncluidos
      * @return Paquete
      */
     public function setServiciosNoIncluidos($serviciosNoIncluidos)
@@ -330,10 +328,9 @@ class Paquete
     }
 
     /**
-     * Retorna un string con los servicios que no incluye el paquete de 
-     * viajes.
+     * Get serviciosNoIncluidos
      *
-     * @return string 
+     * @return array
      */
     public function getServiciosNoIncluidos()
     {
@@ -356,7 +353,7 @@ class Paquete
     /**
      * Retorna el string con el itinerario del paquete.
      *
-     * @return string 
+     * @return string
      */
     public function getItinerario()
     {
@@ -372,20 +369,20 @@ class Paquete
     public function setSegmento(\T42\DestinosBundle\Entity\Segmento $segmento = null)
     {
         $this->segmento = $segmento;
-    
+
         return $this;
     }
 
     /**
      * Get segmento
      *
-     * @return \T42\DestinosBundle\Entity\Segmento 
+     * @return \T42\DestinosBundle\Entity\Segmento
      */
     public function getSegmento()
     {
         return $this->segmento;
     }
-    
+
     /**
      * Asigna el resumen del paquete.
      *
@@ -402,7 +399,7 @@ class Paquete
     /**
      * Retorna el resumen del paquete.
      *
-     * @return string 
+     * @return string
      */
     public function getResumen()
     {
@@ -435,7 +432,7 @@ class Paquete
     /**
      * Get fechasDeSalida
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getFechasDeSalida()
     {
@@ -445,7 +442,7 @@ class Paquete
     /**
      * Get próxima fechasDeSalida
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getProximaSalida()
     {
@@ -474,7 +471,7 @@ class Paquete
     /**
      * Get fechasDeSalida
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function setFechasDeSalida($fechasDeSalida)
     {
@@ -502,7 +499,7 @@ class Paquete
     public function addLugar(\T42\DestinosBundle\Entity\Lugar $lugar)
     {
         $this->lugares[] = $lugar;
-    
+
         return $this;
     }
 
@@ -519,10 +516,33 @@ class Paquete
     /**
      * Get lugares
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getLugares()
     {
         return $this->lugares;
+    }
+
+    /**
+     * Add lugares
+     *
+     * @param \T42\DestinosBundle\Entity\Lugar $lugares
+     * @return Paquete
+     */
+    public function addLugare(\T42\DestinosBundle\Entity\Lugar $lugares)
+    {
+        $this->lugares[] = $lugares;
+
+        return $this;
+    }
+
+    /**
+     * Remove lugares
+     *
+     * @param \T42\DestinosBundle\Entity\Lugar $lugares
+     */
+    public function removeLugare(\T42\DestinosBundle\Entity\Lugar $lugares)
+    {
+        $this->lugares->removeElement($lugares);
     }
 }
