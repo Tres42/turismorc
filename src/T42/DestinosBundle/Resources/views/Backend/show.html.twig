@@ -115,7 +115,7 @@
         {% endif %}
         <a class="btn btn-small" href="{{ path('t42_destinos_backend_index') }}">Volver</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {% if is_granted('ROLE_PAQUETES_DELETE') %}
-            <button class="btn btn-danger btn-small" type="submit"><i class="icon-remove icon-white"></i> Eliminar</button>
+        <button class="btn btn-danger btn-small" onclick="javascript: return confirm('Está seguro que desea eliminarlo?');" type="submit"><i class="icon-remove icon-white"></i> Eliminar</button>
         {% endif %}
     </form>
 </div>

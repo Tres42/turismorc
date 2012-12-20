@@ -18,7 +18,7 @@
             <form style="margin-top: -64px; margin-right: 200px;" class="pull-right" action="{{ path('fos_user_profile_delete') }}" method="post">
                 {{ form_widget(delete_form) }}
                 {% if is_granted('ROLE_USUARIOS_DELETE') %}
-                    <button class="btn btn-small btn-danger" type="submit"><i class="icon-remove icon-white"></i>Eliminar</button>
+                    <button class="btn btn-small btn-danger" onclick="javascript: return confirm('Está seguro que desea eliminarlo?');" type="submit"><i class="icon-remove icon-white"></i>Eliminar</button>
                 {% endif %}
             </form>
         </div>

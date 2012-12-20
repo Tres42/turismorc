@@ -17,17 +17,17 @@
                 <legend>Editar Testimonio</legend>
                 {{ form_widget(edit_form) }}
                 <div class="form-actions">
-                    <button class="btn btn-primary" type="submit">Guardar</button> 
+                    <button class="btn btn-primary" type="submit">Guardar</button>
                     <a href="{{ path('t42_testimonios_backend_index') }}" class="btn btn-small">Cancelar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </div>
             </form>
             <form style="margin-top: -67px; margin-right: 50px;" class="pull-right" action="{{ path('t42_testimonios_backend_delete', { 'id': entity.id }) }}" method="post">
                 {{ form_widget(delete_form) }}
                 {% if is_granted('ROLE_TESTIMONIOS_DELETE') %}
-                    <button class="btn btn-small btn-danger" type="submit"><i class="icon-remove icon-white"></i> Eliminar</button>                
+                    <button class="btn btn-small btn-danger" onclick="javascript: return confirm('Está seguro que desea eliminarlo?');" type="submit"><i class="icon-remove icon-white"></i> Eliminar</button>
                 {% endif %}
-            </form>            
-                
+            </form>
+
         </div>
     </div>
 {% endblock %}
