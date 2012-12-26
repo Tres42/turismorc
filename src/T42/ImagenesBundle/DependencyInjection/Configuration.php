@@ -1,6 +1,6 @@
 <?php
 
-namespace T42\ImagenBundle\DependencyInjection;
+namespace T42\ImagenesBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -18,12 +18,11 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('t42_imagen');
+        $rootNode = $treeBuilder->root('t42_imagenes');
 
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
-
         return $treeBuilder;
     }
 }

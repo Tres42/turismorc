@@ -1,6 +1,6 @@
 <?php
 
-namespace T42\ImagenBundle\DependencyInjection;
+namespace T42\ImagenesBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;

@@ -1,5 +1,5 @@
-t42_imagen:
-    resource: "@T42ImagenBundle/Controller/"
+t42_imagenes:
+    resource: "@T42ImagenesBundle/Controller/"
     type:     annotation
     prefix:   /
 

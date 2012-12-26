@@ -1,0 +1,16 @@
+<h1>Imagen creation</h1>
+
+<form action="{{ path('t42_imagenes_backend_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('t42_imagenes_backend_index') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
