@@ -93,7 +93,7 @@ class BackendController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('imagenes_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('t42_imagenes_backend_index'));
         }
 
         return array(
@@ -153,7 +153,7 @@ class BackendController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('imagenes_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('t42_imagenes_backend_index'));
         }
 
         return array(
@@ -186,7 +186,7 @@ class BackendController extends Controller
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('imagenes'));
+        return $this->redirect($this->generateUrl('t42_imagenes_backend_index'));
     }
 
     private function createDeleteForm($id)

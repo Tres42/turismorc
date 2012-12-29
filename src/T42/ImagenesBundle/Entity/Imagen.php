@@ -4,6 +4,9 @@ namespace T42\ImagenesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Imagine\Gd\Imagine;
+use Imagine\Image\Box;
+use Imagine\Image\Point;
 
 /**
  * T42\ImagenesBundle\Entity\Imagen
@@ -14,6 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Entity
  * @ORM\Table(name="imagen")
+ * @ORM\HasLifecycleCallbacks
  */
 class Imagen
 {
@@ -124,6 +128,16 @@ class Imagen
         return $this->path;
     }
 
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile($file)
+    {
+        $this->imageFile = $file;
+    }
+
     public function getAbsolutePath()
     {
         return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
@@ -134,17 +148,19 @@ class Imagen
         return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
     }
 
+    /**
+     * Retorna el camino absoluto adonde se guarda la imagen.
+     */
     protected function getUploadRootDir()
     {
-        // the absolute directory path where uploaded
-        // documents should be saved
-        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+        return __DIR__.'/../../../../web/'.$this->getUploadDir();
     }
 
+    /**
+     * Retorna el directorio adonde se almacenan las imagenes.
+     */
     protected function getUploadDir()
     {
-        // get rid of the __DIR__ so it doesn't screw up
-        // when displaying uploaded doc/image in the view.
         return 'uploads/images';
     }
 
@@ -154,10 +170,20 @@ class Imagen
      */
     public function preUpload()
     {
-        if (null !== $this->file) {
-            // do whatever you want to generate a unique name
-            $filename = sha1(uniqid(mt_rand(), true));
-            $this->path = $filename.'.'.$this->file->guessExtension();
+        if (null !== $this->imageFile) {
+            // TODO Hacer el pre-procesamiento de la imagen
+            $imagine = new Imagine();
+            $image = $imagine->open($this->imageFile->getRealPath())
+                        ->resize(new Box(1000, 500))
+                        ->save($this->imageFile->getRealPath().'jpeg');
+            //-------FIN TRATAMIENTO IMAGEN
+            if (!empty($this->titulo)) {
+                $this->path = $this->getUploadDir().'/'.$this->titulo.'.'.$this->imageFile->guessExtension();
+            } else {
+                // Genera un nombre unico al archivo
+                $filename = sha1(uniqid(mt_rand(), true));
+                $this->path = $this->getUploadDir().'/'.$filename.'.'.$this->imageFile->guessExtension();
+            }
         }
     }
 
@@ -167,16 +193,16 @@ class Imagen
      */
     public function upload()
     {
-        if (null === $this->file) {
+        if (null === $this->imageFile) {
             return;
         }
 
         // if there is an error when moving the file, an exception will
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
-        $this->file->move($this->getUploadRootDir(), $this->path);
+        $this->imageFile->move($this->getUploadRootDir(), $this->path);
 
-        unset($this->file);
+        unset($this->imageFile);
     }
 
     /**
