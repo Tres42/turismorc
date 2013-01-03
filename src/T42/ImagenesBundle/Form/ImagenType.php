@@ -15,7 +15,7 @@ class ImagenType extends AbstractType
                 'required'=>false)
             )
             ->add('descripcion')
-            ->add('imageFile')
+            ->add('imageFile','file')
         ;
     }
 

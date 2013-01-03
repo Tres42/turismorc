@@ -29,8 +29,14 @@ class BackendController extends Controller
 
         $entities = $em->getRepository('T42ImagenesBundle:Imagen')->findAll();
 
+        $paginator = $this->container->get('knp_paginator');
+
+        $pagination = $paginator->paginate(
+                $entities, $this->container->get('request')->query->get('page', 1), 10
+        );
+
         return array(
-            'entities' => $entities,
+            'pagination' => $pagination,
         );
     }
 
@@ -80,7 +86,7 @@ class BackendController extends Controller
      *
      * @Route("/create")
      * @Method("POST")
-     * @Template("T42ImagenesBundle:Imagen:new.html.twig")
+     * @Template("T42ImagenesBundle:Backend:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -92,6 +98,8 @@ class BackendController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'La imagen fue guardada correctamente');
 
             return $this->redirect($this->generateUrl('t42_imagenes_backend_index'));
         }
@@ -133,7 +141,7 @@ class BackendController extends Controller
      *
      * @Route("/{id}/update")
      * @Method("POST")
-     * @Template("T42ImagenesBundle:Imagen:edit.html.twig")
+     * @Template("T42ImagenesBundle:Backend:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -152,6 +160,8 @@ class BackendController extends Controller
         if ($editForm->isValid()) {
             $em->persist($entity);
             $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'Los cambios fueron guardados correctamente');
 
             return $this->redirect($this->generateUrl('t42_imagenes_backend_index'));
         }
@@ -184,6 +194,8 @@ class BackendController extends Controller
 
             $em->remove($entity);
             $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'La imagen fue eliminada correctamente');
         }
 
         return $this->redirect($this->generateUrl('t42_imagenes_backend_index'));

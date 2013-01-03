@@ -42,9 +42,32 @@ class Imagen
     private $path;
 
     /**
-     * @Assert\File(maxSize="6000000")
+     * @Assert\File(maxSize="10M")
      */
     private $imageFile;
+
+    /**
+     * Constante que representa el ancho y alto maximo de pixels.
+     */
+    const MAX_PIXELS = 1600;
+
+    /**
+     * Constante que representa la accion de disminucion del
+     * ancho de la imagen.
+     */
+    const WIDTH = 0;
+
+    /**
+     * Constante que representa la accion de disminucion del
+     * alto de la imagen.
+     */
+    const HEIGHT = 1;
+
+    /**
+     * Constante que representa la accion de disminucion del
+     * ancho y alto de la imagen.
+     */
+    const BOTH = 2;
 
     /**
      * Retorna el id del paquete.
@@ -57,7 +80,7 @@ class Imagen
     }
 
     /**
-     * Set titulo
+     * Asigna el titulo de la imagen.
      *
      * @param  string $titulo
      * @return Imagen
@@ -70,7 +93,7 @@ class Imagen
     }
 
     /**
-     * Get titulo
+     * Retorna el titulo de la imagen.
      *
      * @return string
      */
@@ -80,7 +103,7 @@ class Imagen
     }
 
     /**
-     * Set descripcion
+     * Asigna la descripcion de la imagen.
      *
      * @param  string $descripcion
      * @return Imagen
@@ -93,7 +116,7 @@ class Imagen
     }
 
     /**
-     * Get descripcion
+     * Retorna la descripcion de la imagen.
      *
      * @return string
      */
@@ -103,7 +126,7 @@ class Imagen
     }
 
     /**
-     * Set path
+     * Asigna el path o ubicacion de la imagen.
      *
      * @param  string $path
      * @return Imagen
@@ -116,7 +139,7 @@ class Imagen
     }
 
     /**
-     * Get path
+     * Retorna el path o ubicacion de la imagen.
      *
      * @return string
      */
@@ -125,28 +148,53 @@ class Imagen
         return $this->path;
     }
 
+    /**
+     * Retorna el archivo de imagen subido en el
+     * formulario.
+     *
+     * @return UploadedFile imageFile Archivo de imagen.
+     */
     public function getImageFile()
     {
         return $this->imageFile;
     }
 
+    /**
+     * Asigna el archivo de imagen.
+     *
+     * @param UploadedFile $file Archivo de imagen.
+     */
     public function setImageFile($file)
     {
         $this->imageFile = $file;
     }
 
+    /**
+     * Retorna el camino absoluto incluyendo el nombre del archivo donde
+     * se guarda la imagen.
+     *
+     * @return String
+     */
     public function getAbsolutePath()
     {
         return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
     }
 
+    /**
+     * Retorna el nombre del directorio web donde se almacena la imagen
+     * incluyendo el nombre del archivo.
+     *
+     * @return String
+     */
     public function getWebPath()
     {
         return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
     }
 
     /**
-     * Retorna el camino absoluto adonde se guarda la imagen.
+     * Retorna el camino completo donde se guarda la imagen.
+     *
+     * @return String
      */
     protected function getUploadRootDir()
     {
@@ -154,7 +202,10 @@ class Imagen
     }
 
     /**
-     * Retorna el directorio adonde se almacenan las imagenes.
+     * Retorna el nombre del directorio donde se almacenan
+     * las imagenes.
+     *
+     * @return String
      */
     protected function getUploadDir()
     {
@@ -174,7 +225,7 @@ class Imagen
             }
             // Genera un nombre unico al archivo
             $filename = sha1(uniqid(mt_rand(), true));
-            $this->path = $this->getUploadDir() . '/' . $filename . '.' . $this->imageFile->guessExtension();
+            $this->path = $filename . '.' . $this->imageFile->guessExtension();
         }
     }
 
@@ -188,7 +239,18 @@ class Imagen
             return;
         }
 
-        $this->resizeImage();
+        //Obtenemos el ancho y alto de la imagen subida
+        list($width, $height) = getimagesize($this->imageFile);
+
+        //Verificamos si el alto o el ancho son mayores a los maximos pixels permitidos.
+        if ($width>Imagen::MAX_PIXELS && $height>Imagen::MAX_PIXELS) {
+            $this->resizeAndSaveImage($this->imageFile, Imagen::BOTH, $this->imageFile->getRealPath());
+        } elseif ($width>Imagen::MAX_PIXELS || $height>Imagen::MAX_PIXELS) {
+            $accion = ($width>Imagen::MAX_PIXELS) ? Imagen::WIDTH : Imagen::HEIGHT;
+            $this->resizeAndSaveImage($this->imageFile, $accion, $this->imageFile->getRealPath());
+        } else {
+            $this->imageFile->move($this->getUploadRootDir(), $this->path);
+        }
 
         unset($this->imageFile);
     }
@@ -198,34 +260,49 @@ class Imagen
      */
     public function removeUpload()
     {
-        if ($file = $this->getAbsolutePath()) {
+        $file = $this->getAbsolutePath();
+        if ($file) {
             unlink($file);
         }
     }
 
     /**
      * Realiza el procesamiento de la imagen utilizando la libreria
-     * imagine.
+     * imagine y realiza el guardado de la imagen en el servidor.
+     *
+     * @param UploadedFile $imagen El archivo subido en el formulario.
+     * @param int          $accion Numero de accion a realizar (Los valores son los definidos
+     *                    por las constantes WIDTH, HEIGHT y BOTH)
+     * @param String $tmpPath El camino absoluto al directorio temporario donde se guarda la
+     *                        imagen al subirse en un formulario.
      */
-    private function resizeImage()
+    private function resizeAndSaveImage($imagen, $accion, $tmpPath)
     {
-        //Obtenemos el ancho y alto de la imagen subida
-        list($width, $height) = getimagesize($this->imageFile);
-
         $imagine = new Imagine();
-        $imageOpen = $imagine->open($this->imageFile->getRealPath());
-        if ($width>$height) {
-            $image = $imageOpen
-                    ->getSize()
-                    ->widen($height);
-
-        } else {
-            $image = $imageOpen
-                    ->getSize()
-                    ->heighten($width);
+        $imageOpen = $imagine->open($imagen);
+        //Verificamos que accion aplicar
+        switch ($accion) {
+            case Imagen::WIDTH:
+                $image = $imageOpen
+                        ->getSize()
+                        ->widen(Imagen::MAX_PIXELS);
+                break;
+            case Imagen::HEIGHT:
+                $image = $imageOpen
+                        ->getSize()
+                        ->heighten(Imagen::MAX_PIXELS);
+            case Imagen::BOTH:
+                $image = $imageOpen
+                        ->getSize()
+                        ->widen(Imagen::MAX_PIXELS)
+                        ->heighten(Imagen::MAX_PIXELS);
+                break;
         }
+        //Realiza el redimensionado de la imagen pasando como parametro el
+        //objeto de tipo Box.
         $imageOpen->resize($image);
-        $imageOpen->save($this->path);
+        $imageOpen->save($this->getAbsolutePath());
+        unlink($tmpPath);
     }
 
 }
