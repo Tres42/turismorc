@@ -66,7 +66,7 @@
                     </ul>
                 </div>
             {% endif %}
-            {% if entity.fechasDeSalida is not empty%}
+            {% if entity.fechasDeSalida is not empty %}
                 <div>
                     <h3>Fechas de Salida</h3>
                     {% if entity.fechasDeSalida|length > 1 %}
@@ -83,18 +83,22 @@
             {% if entity.serviciosIncluidos or entity.serviciosNoIncluidos %}
                 <div>
                     <h3>Servicios</h3>
+                    {% if entity.serviciosIncluidos %}
                     <h4>Inclu&iacute;dos</h4>
                     <ul>
                         {% for servicio in entity.serviciosIncluidos %}
-                            <li>{{servicio}}</li>
+                            <li>{{ servicio }}</li>
                         {% endfor %}
                     </ul>
+                    {% endif %}
+                    {% if entity.serviciosNoIncluidos %}
                     <h4>No inclu&iacute;dos</h4>
                     <ul>
                         {% for servicio in entity.serviciosNoIncluidos %}
-                            <li>{{servicio}}</li>
+                            <li>{{ servicio }}</li>
                         {% endfor %}
                     </ul>
+                    {% endif %}
                 </div>
             {% endif %}
             {% if entity.observaciones %}
