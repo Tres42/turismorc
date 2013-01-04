@@ -1,41 +1,59 @@
-<h1>Imagen</h1>
+{% extends 'T42ImagenesBundle::layout.html.twig' %}
 
-<table class="record_properties">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ entity.id }}</td>
-        </tr>
-        <tr>
-            <th>Titulo</th>
-            <td>{{ entity.titulo }}</td>
-        </tr>
-        <tr>
-            <th>Descripcion</th>
-            <td>{{ entity.descripcion }}</td>
-        </tr>
-        <tr>
-            <th>Path</th>
-            <td>{{ entity.path }}</td>
-        </tr>
-    </tbody>
-</table>
+{% block title %}{{entity.titulo}} | {{ parent() }}{% endblock %}
 
-<ul class="record_actions">
-    <li>
-        <a href="{{ path('t42_imagenes_backend_index') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('t42_imagenes_backend_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('t42_imagenes_backend_delete', { 'id': entity.id }) }}" method="post">
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li><a href="{{ path('t42_imagenes_backend_index') }}">Imagenes</a></li>
+    <li class="divider">/</li>
+    <li class="active">{{ entity.titulo }}</li>
+{% endblock %}
+    
+{% block content %}
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>T&iacute;tulo</th>
+                        <td>{{ entity.titulo }}</td>
+                    </tr>
+                    <tr>
+                        <th>Descripci&oacute;n</th>
+                        <td>{{ entity.descripcion }}</td>
+                    </tr>
+                    <tr>
+                        <th>Path</th>
+                        <td>{{ entity.path }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-actions">
+                <a class="btn btn-primary" href="{{ path('t42_imagenes_backend_edit', { 'id': entity.id }) }}">Editar</a>
+                <a href="{{ path('t42_imagenes_backend_index') }}" class="btn btn-small">Volver</a>
+            </div>                
+        </div>
+    </div>
+{#     
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('t42_imagenes_backend_index') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('t42_imagenes_backend_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>
+            <form action="{{ path('t42_imagenes_backend_delete', { 'id': entity.id }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </ul>
+#}
+{% endblock %}

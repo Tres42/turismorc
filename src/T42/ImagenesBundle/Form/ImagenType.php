@@ -10,12 +10,17 @@ class ImagenType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $attr = array('class' => 'span10');
         $builder
             ->add('titulo', null, array(
-                'required'=>false)
+                'required'=>false,
+                'attr'=>$attr)
             )
-            ->add('descripcion')
-            ->add('imageFile','file')
+            ->add('descripcion', null, array(
+                'attr'=>$attr))
+            ->add('imageFile','file', array(
+                'label'=>'Archivo',
+                'attr'=>$attr))
         ;
     }
 

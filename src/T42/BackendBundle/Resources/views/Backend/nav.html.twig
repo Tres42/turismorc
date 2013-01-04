@@ -8,4 +8,7 @@
     {% if is_granted('ROLE_USUARIOS_VIEW') %}
         <li><a href="{{ path("fos_user_profile_list") }}">Usuarios</a></li>
     {% endif %}
+    {% if is_granted('ROLE_IMAGENES_VIEW') %}
+        <li><a href="{{ path("t42_imagenes_backend_index") }}">Imagenes</a></li>
+    {% endif %}
 </ul>
