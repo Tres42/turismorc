@@ -2,6 +2,16 @@
 
 {% block title %}Nuevo | {{ parent() }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter="cssrewrite"
+        "bundles/t42backend/js/lib/select2/select2.css"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/datepicker.css"
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block breadcrumb %}
     <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
     <li class="divider">/</li>
@@ -25,14 +35,15 @@
 </div>
 {% endblock %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('bundles/t42backend/js/lib/select2/select2.css') }}" />
-{% endblock %}
-
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/t42backend/js/lib/select2/select2.min.js') }}" type="text/javascript"></script>
+    {% javascripts
+        "bundles/t42backend/js/lib/select2/select2.min.js"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/bootstrap-datepicker.js"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/locales/bootstrap-datepicker.es.js"
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script type="text/javascript">
         (function ($) {
             $(document).ready(function () {
@@ -41,12 +52,22 @@
                 var $addLink = $('<a href="#" class="add-to-col"><i class="icon-plus"></i></a>');
                 var $removeLink = $('<a href="#" class="remove-from-col"><i class="icon-minus"></i></a>');
 
+                $('.date').datepicker({
+                    format: 'dd/mm/yyyy',
+                    language: 'es'
+                });
+
                 function addFieldToCollection(collectionHolder) {
                     var prototype = collectionHolder.attr('data-prototype');
                     var newField = prototype.replace(/__name__/g, collectionHolder.children().length);
+
                     var $newFieldLi = $('<li></li>').append(newField).append($removeLink.clone());
 
                     collectionHolder.append($newFieldLi);
+                    $('.date').datepicker({
+                        format: 'dd/mm/yyyy',
+                        language: 'es'
+                    });
                 }
 
                 function removeFieldFromCollection($field) {

@@ -1,5 +1,14 @@
 {% extends 'T42DestinosBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter="cssrewrite"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/datepicker.css"
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block breadcrumb %}
     <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
     <li class="divider">/</li>
@@ -53,6 +62,7 @@
                                 {% endif %}
                             {% endfor %}
                             <button class="btn btn-primary btn-block" type="submit">Filtrar</button>
+                            <a href="{{ path('t42_destinos_backend_index') }}" class="btn btn-inverse btn-block">Reestablecer</a>
                         </form>
                     </div>
                 </div>
@@ -105,4 +115,22 @@
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        "bundles/t42backend/js/lib/bootstrap-datepicker/bootstrap-datepicker.js"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/locales/bootstrap-datepicker.es.js"
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+        <script type="text/javascript">
+            $(function () {
+                $('.date').datepicker({
+                    format: 'dd/mm/yyyy',
+                    language: 'es'
+                });
+            });
+        </script>
 {% endblock %}
