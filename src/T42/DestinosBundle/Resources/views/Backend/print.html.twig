@@ -1,85 +1,95 @@
-<h1 class="text-align: center;">{{ entity.titulo }}</h1>
-{% if entity.segmento %}
-    <h2 class="text-align: center;">{{ entity.segmento.descripcion }}</h2>
-{% endif %}
-
-{% if entity.lugares is not empty %}
-    <div style="text-align: center;">
-    {% spaceless %}
-    {% for lugar in entity.lugares %}
-        {{ lugar.nombre }}
-        {% if not loop.last and loop.length > 1 %}
-            &nbsp;&mdash;&nbsp;
-        {% endif %}
-    {% endfor %}
-    {% endspaceless %}
-    </div>
-{% endif %}
-
-{% if entity.resumen %}
-    <div>
-        <h3>Resumen</h3>
-        <p class="lead">{{ entity.resumen }}</p>
-    </div>
-{% endif %}
-
-{% if entity.itinerario %}
-    <div>
-        <h3>Itinerario</h3>
-        {{ entity.itinerario|raw() }}
-    </div>
-{% endif %}
-
-{% if entity.fechasDeSalida is not empty%}
-    <div>
-        {% spaceless %}
-        <h3>Fechas de Salida</h3>
-        {% for fecha in entity.fechasDeSalida %}
-            {{ fecha.fecha|date("d/m/Y") }}
-            {% if not loop.last and loop.length > 1 %}
-                ,&mdash;&nbsp;
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{{ entity.titulo }} - Turismo Río Cuarto</title>
+    </head>
+    <body>
+        <div style="text-align: center; padding: 25px 20px 20px;">
+            <h1>{{ entity.titulo }}</h1>
+            {% if entity.segmento %}
+                <h2>{{ entity.segmento.descripcion }}</h2>
             {% endif %}
-        {% endfor %}
-        {% endspaceless %}
-    </div>
-{% endif %}
-
-{% if entity.serviciosIncluidos or entity.serviciosNoIncluidos %}
-    <div>
-        <h3>Servicios</h3>
-        {% if entity.serviciosIncluidos %}
-        <h4>Inclu&iacute;dos</h4>
-        <ul>
-            {% for servicio in entity.serviciosIncluidos %}
-                <li>{{ servicio }}</li>
+            <img src="http://ec2-177-71-236-114.sa-east-1.compute.amazonaws.com/images/wlogo.jpg" alt="Turismo R&iacute;o Cuarto" style="float: left;" />
+        </div>
+        {% if entity.lugares is not empty %}
+            <div style="text-align: center;">
+            {% spaceless %}
+            {% for lugar in entity.lugares %}
+                {{ lugar.nombre }}
+                {% if not loop.last and loop.length > 1 %}
+                    &nbsp;&mdash;&nbsp;
+                {% endif %}
             {% endfor %}
-        </ul>
+            {% endspaceless %}
+            </div>
         {% endif %}
-        {% if entity.serviciosNoIncluidos %}
-        <h4>No inclu&iacute;dos</h4>
-        <ul>
-            {% for servicio in entity.serviciosNoIncluidos %}
-                <li>{{ servicio }}</li>
-            {% endfor %}
-        </ul>
+
+        {% if entity.resumen %}
+            <div>
+                <h3>Resumen</h3>
+                <p class="lead">{{ entity.resumen }}</p>
+            </div>
         {% endif %}
-    </div>
-{% endif %}
 
-{% if entity.tarifas is not empty %}
-    <div>
-        <h3>Tarifas</h3>
-        <ul>
-            {% for tarifa in entity.tarifas %}
-                <li>{{ tarifa.descripcion}}: {{ tarifa.precio }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-{% endif %}
+        {% if entity.itinerario %}
+            <div>
+                <h3>Itinerario</h3>
+                {{ entity.itinerario|raw() }}
+            </div>
+        {% endif %}
 
-{% if entity.observaciones %}
-    <div>
-        <h3>Observaciones</h3>
-        <p>{{ entity.observaciones }}</p>
-    </div>
-{% endif %}
+        {% if entity.fechasDeSalida is not empty%}
+            <div>
+                {% spaceless %}
+                <h3>Fechas de Salida</h3>
+                {% for fecha in entity.fechasDeSalida %}
+                    {{ fecha.fecha|date("d/m/Y") }}
+                    {% if not loop.last and loop.length > 1 %}
+                        ,&mdash;&nbsp;
+                    {% endif %}
+                {% endfor %}
+                {% endspaceless %}
+            </div>
+        {% endif %}
+
+        {% if entity.serviciosIncluidos or entity.serviciosNoIncluidos %}
+            <div>
+                <h3>Servicios</h3>
+                {% if entity.serviciosIncluidos %}
+                <h4>Inclu&iacute;dos</h4>
+                <ul>
+                    {% for servicio in entity.serviciosIncluidos %}
+                        <li>{{ servicio }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if entity.serviciosNoIncluidos %}
+                <h4>No inclu&iacute;dos</h4>
+                <ul>
+                    {% for servicio in entity.serviciosNoIncluidos %}
+                        <li>{{ servicio }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if entity.tarifas is not empty %}
+            <div>
+                <h3>Tarifas</h3>
+                <ul>
+                    {% for tarifa in entity.tarifas %}
+                        <li>{{ tarifa.descripcion}}: <strong>{{ tarifa.precio }}</strong></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if entity.observaciones %}
+            <div class="margin-top: 25px;">
+                <small>{{ entity.observaciones }}</small>
+            </div>
+        {% endif %}
+    </body>
+</html>
