@@ -46,7 +46,7 @@
                 {% for fecha in entity.fechasDeSalida %}
                     {{ fecha.fecha|date("d/m/Y") }}
                     {% if not loop.last and loop.length > 1 %}
-                        ,&mdash;&nbsp;
+                        ,&nbsp;
                     {% endif %}
                 {% endfor %}
                 {% endspaceless %}
