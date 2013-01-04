@@ -333,7 +333,7 @@ class BackendController extends Controller
                         200,
                         array(
                             'Content-Type' => 'application/pdf',
-                            'Content-Disposition' => 'attachment; filename="Destinos.pdf"'
+                            'Content-Disposition' => 'attachment; filename="'. md5($entity->getTitulo()) .'.pdf"'
                         )
         );
     }
