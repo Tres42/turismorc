@@ -34,7 +34,7 @@ class RegistrationFormType extends BaseRegistrationFormType
             ->add('birthDate', 'date', array('label' => 'Fecha de Nacimiento', 'widget' => 'single_text', 'format' => 'dd/MM/y'))
             ->add('address', null, array('label' => 'Dirección', 'attr' => $attr,))
             ->add('phoneNumber', null, array('label' => 'Numero de Telefono', 'attr' => $attr,))
-            ->add('alternativeEmail', 'email', array('label' => 'Email Alternativo', 'attr' => $attr,))
+            ->add('alternativeEmail', 'email', array('label' => 'Email Alternativo', 'attr' => $attr, 'required' => False))
             ->add('invitation', 't42_invitation_type')
         ;
         
