@@ -18,12 +18,25 @@ class RegistrationFormType extends BaseRegistrationFormType
     
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-        $builder->add('lastname', null, array('label' => 'Apellido'))
-                ->add('firstname', null, array('label' => 'Nombre'))
-                ->add('address', null, array('label' => 'Dirección'))
-                ->add('phone_number', null, array('label' => 'Numero de Telefono'))
-                ->add('invitation', 't42_invitation_type');
+        $attr = array('class' => 'span10');
+        $builder
+            ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle', 'attr' => $attr))
+            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle', 'attr' => $attr))
+            ->add('plainPassword', 'repeated', array(
+                'type' => 'password',
+                'options' => array('translation_domain' => 'FOSUserBundle', 'attr' => $attr,),
+                'first_options' => array('label' => 'form.password'),
+                'second_options' => array('label' => 'form.password_confirmation'),
+                'invalid_message' => 'fos_user.password.mismatch',
+            ))
+            ->add('lastname', null, array('label' => 'Apellido', 'attr' => $attr,))
+            ->add('firstname', null, array('label' => 'Nombre', 'attr' => $attr,))
+            ->add('birthDate', 'date', array('label' => 'Fecha de Nacimiento', 'widget' => 'single_text', 'format' => 'dd/MM/y'))
+            ->add('address', null, array('label' => 'Dirección', 'attr' => $attr,))
+            ->add('phoneNumber', null, array('label' => 'Numero de Telefono', 'attr' => $attr,))
+            ->add('alternativeEmail', 'email', array('label' => 'Email Alternativo', 'attr' => $attr,))
+            ->add('invitation', 't42_invitation_type')
+        ;
         
     }
 

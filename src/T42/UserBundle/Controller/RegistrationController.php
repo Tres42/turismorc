@@ -30,7 +30,7 @@ class RegistrationController extends BaseRegistrationController
         $form->get('invitation')->setData($invitation);
 
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('T42UserBundle:Registration:register_with_code.html.' . $this->getEngine(), array(
                     'form' => $form->createView(),
                 ));
     }

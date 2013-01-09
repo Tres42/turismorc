@@ -1,10 +1,45 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+{% block title %}Registro | {{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter="cssrewrite"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/datepicker.css"
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
 {% block fos_user_content %}
-<form action="{{ path('fos_user_registration_register_with_code') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-    {{ form_widget(form) }}
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+<div class="row-fluid">
+    <div class="span6 offset3">
+        <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-horizontal">
+            {{ form_widget(form) }}
+            <div class="form-actions">
+                <input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+            </div>
+        </form>
     </div>
-</form>
+</div>
 {% endblock fos_user_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        "bundles/t42backend/js/lib/bootstrap-datepicker/bootstrap-datepicker.js"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/locales/bootstrap-datepicker.es.js"
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+        <script type="text/javascript">
+            $(function () {
+                $('.date').datepicker({
+                    format: 'dd/mm/yyyy',
+                    language: 'es'
+                });
+            });
+        </script>
+{% endblock %}

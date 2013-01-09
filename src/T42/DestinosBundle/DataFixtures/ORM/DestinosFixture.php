@@ -89,7 +89,7 @@ class DestinosFixture implements FixtureInterface
         
         $paquete1->setEsGrupal(true);
         
-        $paquete1->setEsPromocion(true);
+        $paquete1->setEsDestacado(true);
 
         $fechaDeSalida = new FechaDeSalida();
 
@@ -239,7 +239,7 @@ Llegada a Córdoba, traslado a Río Cuarto y fin de nuestros servicios. ');
             $paquete->setTitulo('Paquete Nº '.$i);
             $paquete->setSegmento($segmento);
             $paquete->setEsGrupal(true);
-            $paquete->setEsPromocion(true);
+            $paquete->setEsDestacado(true);
             $paquete->setResumen('Resumen...');
                     
             $manager->persist($paquete);

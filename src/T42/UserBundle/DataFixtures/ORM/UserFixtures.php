@@ -25,15 +25,23 @@ class UserFixtures implements FixtureInterface, ContainerAwareInterface
     
     public function load(ObjectManager $manager)
     {
+        $now = new \DateTime();
         // Get the UserManager from fos_user.group_manager service
         $groupManager = $this->container->get('fos_user.group_manager');
         
         $groupSuperAdmin = $groupManager->createGroup('Administradores');
         $groupSuperAdmin->addRole('ROLE_SUPER_ADMIN');
         
-        $groupAdmin = $groupManager->createGroup('Usuarios Registrados');
-        //$groupAdmin->addRole('ROLE_ADMIN');
-        $groupAdmin->addRole('ROLE_USUARIOS_VIEW');
+        $groupGerencia = $groupManager->createGroup('Gerencia');
+        $groupGerencia->addRole('ROLE_TESTIMONIOS')
+            ->addRole('ROLE_PAQUETES')
+            ->addRole('ROLE_USUARIOS');
+
+        $groupVendedores = $groupManager->createGroup('Vendedores');
+        $groupVendedores->addRole('ROLE_TESTIMONIOS_ADD')
+            ->addRole('ROLE_TESTIMONIOS_EDIT')
+            ->addRole('ROLE_PAQUETES_ADD')
+            ->addRole('ROLE_PAQUETES_EDIT');
         
         // Get the UserManager from fos_user.user_manager service
         $userManager = $this->container->get('fos_user.user_manager');
@@ -47,16 +55,18 @@ class UserFixtures implements FixtureInterface, ContainerAwareInterface
         $user->setUsername('admin');
         $user->setEmail('cgonzales@gmail.com');
         $user->setEnabled(true);
+        $user->setBirthDate($now);
         
         $user2 = $userManager->createUser();
         $user2->setLastName('Rodriguez');
         $user2->setFirstName('Jose');
         $user2->setAddress('Lamadrid 335');
         $user2->setPhoneNumber('0351-455544');
-        $user2->addGroup($groupAdmin);
-        $user2->setUserName('usuario');
+        $user2->addGroup($groupGerencia);
+        $user2->setUserName('gerencia');
         $user2->setEmail('jrodriguez@hotmail.com');
         $user2->setEnabled(true);
+        $user2->setBirthDate($now);
         
         // Get encoder factory
         $factory = $this->container->get('security.encoder_factory');
@@ -65,25 +75,27 @@ class UserFixtures implements FixtureInterface, ContainerAwareInterface
         $user->setPassword($password);
         
         $encoder = $factory->getEncoder($user2);
-        $password2 = $encoder->encodePassword('user', $user2->getSalt());
+        $password2 = $encoder->encodePassword('gerencia', $user2->getSalt());
         $user2->setPassword($password2);
         
         $manager->persist($groupSuperAdmin);        
-        $manager->persist($groupAdmin);
+        $manager->persist($groupGerencia);
+        $manager->persist($groupVendedores);
         $manager->persist($user);
         $manager->persist($user2);
         
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 6; $i++) {
             $user3 = $userManager->createUser();
             $user3->setLastName('Apellido '.$i);
             $user3->setFirstName('Nombre '.$i);
             $user3->setAddress('Direccion '.$i);
             $user3->setPhoneNumber('0351-'.$i);
-            $user3->addGroup($groupAdmin);
+            $user3->addGroup($groupVendedores);
             $user3->setUserName('usuario'.$i);
             $user3->setEmail($i.'@hotmail.com');
             $user3->setEnabled(true);
             $user3->setPassword($password2);
+            $user3->setBirthDate($now);
             
             $manager->persist($user3);
         }        

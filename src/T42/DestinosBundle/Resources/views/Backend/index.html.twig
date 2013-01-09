@@ -75,7 +75,7 @@
                             <td>Titulo</td>
                             <td>Proxima Salida</td>
                             <td>Grupal</td>
-                            <td>Promocion</td>
+                            <td>Destacado</td>
                             <td>Segmento</td>
                         </tr>
                     </thead>
@@ -97,7 +97,7 @@
                                 {% endspaceless %}
                             </td>
                             <td>{% if paquete.esGrupal %} Si {% else %} No {% endif %}</td>
-                            <td>{% if paquete.esPromocion %} Si {% else %} No {% endif %}</td>
+                            <td>{% if paquete.esDestacado %} Si {% else %} No {% endif %}</td>
                             <td>{{ paquete.segmento }}</td>
                             <td>
                                 {% if is_granted('ROLE_PAQUETES_EDIT') %}

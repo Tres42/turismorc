@@ -36,14 +36,14 @@ class Paquete
     private $titulo;
 
     /**
-     * @ORM\Column(type="boolean", length=100, name="es_grupal", nullable=true)
+     * @ORM\Column(type="boolean", name="es_grupal", nullable=true)
      */
     private $esGrupal;
 
     /**
-     * @ORM\Column(type="boolean", length=100, name="es_promocion", nullable=true)
+     * @ORM\Column(type="boolean", name="es_destacado", nullable=true)
      */
-    private $esPromocion;
+    private $esDestacado;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -95,6 +95,11 @@ class Paquete
     private $tarifas;
 
     /**
+     * @ORM\Column(type="boolean", name="desactivar", nullable=true)
+     */
+    private $desactivar;
+
+    /**
      * Constructor del objeto paquete de viajes.
      */
     public function __construct()
@@ -123,7 +128,7 @@ class Paquete
      */
     public function setTitulo($titulo)
     {
-        $this->titulo = $titulo;
+        $this->titulo = strtoupper($titulo);
 
         return $this;
     }
@@ -164,26 +169,26 @@ class Paquete
     }
 
     /**
-     * Asigna un valor de verdad si el paquete es una promocion.
+     * Asigna un valor de verdad si el paquete es una destacado.
      *
-     * @param boolean $esPromocion
+     * @param boolean $esDestacado
      * @return Paquete
      */
-    public function setEsPromocion($esPromocion)
+    public function setEsDestacado($esDestacado)
     {
-        $this->esPromocion = $esPromocion;
+        $this->esDestacado = $esDestacado;
 
         return $this;
     }
 
     /**
-     * Retorna un valor de verdad si el paquete es una promocion.
+     * Retorna un valor de verdad si el paquete es una destacado.
      *
      * @return boolean
      */
-    public function getEsPromocion()
+    public function getEsDestacado()
     {
-        return $this->esPromocion;
+        return $this->esDestacado;
     }
 
     /**
@@ -544,5 +549,28 @@ class Paquete
     public function removeLugare(\T42\DestinosBundle\Entity\Lugar $lugares)
     {
         $this->lugares->removeElement($lugares);
+    }
+
+    /**
+     * Asigna un valor de verdad si el paquete esta desactivado.
+     *
+     * @param boolean $desactivar
+     * @return Paquete
+     */
+    public function setDesactivar($desactivar)
+    {
+        $this->desactivar = $desactivar;
+
+        return $this;
+    }
+
+    /**
+     * getDesactivar
+     *
+     * @return boolean
+     */
+    public function getDesactivar()
+    {
+        return $this->desactivar;
     }
 }

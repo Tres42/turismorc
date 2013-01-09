@@ -54,15 +54,15 @@ class BackendController extends Controller
                     'expanded' => true,
                     'required' => false,
                 ))
-                ->add('promocion', 'checkbox', array(
-                    'label' => 'Promocion',
+                ->add('destacado', 'checkbox', array(
+                    'label' => 'Destacado',
                     'required' => false,
                 ))
                 ->add('fecha', 'date', array(
                     'label' => 'Fecha de Salida',
                     'widget' => 'single_text',
                     'required' => false,
-                    'format' => 'd/M/y',
+                    'format' => 'dd/MM/y',
                     'attr' => array('class' => 'span10'),
                 ))
                 ->getForm();
@@ -87,8 +87,8 @@ class BackendController extends Controller
                     }
                 }
 
-                if ($data['promocion']) {
-                    $qb->andWhere($qb->expr()->eq('p.esPromocion', 'true'));
+                if ($data['destacado']) {
+                    $qb->andWhere($qb->expr()->eq('p.esDestacado', 'true'));
                 }
             }
         }
