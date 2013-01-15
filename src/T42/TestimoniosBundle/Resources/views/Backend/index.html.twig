@@ -20,6 +20,7 @@
                     </ul>
                 </div>
                 <div class="span5 offset2">
+                {% if pagination is not empty %}
                     <table class="table table-condensed table-striped">
                         <thead>
                             <tr>
@@ -51,7 +52,13 @@
                     </table>
                     <div class="row-fluid">
                         <div class="span12">{{ pagination.render()|raw }}</div>
-                    </div>                        
+                    </div>
+                {% else %}
+                    <div class="alert alert-error alert-block">
+                        <h4>Oops!</h4>
+                        <p>No se han encontrado art&iacute;culos en la base de datos...</p>
+                    </div>
+                {% endif %}
                 </div>
             </div>
         </div>

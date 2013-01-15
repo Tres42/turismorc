@@ -1,0 +1,17 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block title %}Registrado | {{ parent() }}{% endblock %}
+
+{% block nav %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+
+{% block fos_user_content %}
+<div class="row-fluid">
+    <div class="span12">
+        <div>
+            <h1>Se ha registrado con éxito</h1>
+            <p>Ahora deberá esperar a que le asignen los permisos adecuados. Luego podrá iniciar sesión en <a href="{{ url('fos_user_security_login') }}">{{ url('fos_user_security_login') }}</a>.
+        </div>
+    </div>
+</div>
+{% endblock fos_user_content %}

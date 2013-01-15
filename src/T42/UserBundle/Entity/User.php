@@ -29,23 +29,35 @@ class User extends BaseUser
     
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     */    
+     */
     protected $lastname;
     
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
-     */    
+     */
     protected $firstname;
+
+    /**
+     * @ORM\Column(type="date", name="birth_date")
+     */
+    protected $birthDate;
     
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */    
     protected $address;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $alternativeEmail;
     
     /**
      * @ORM\Column(type="string", length=100, name="phone_number", nullable=true)
      */
     protected $phoneNumber;
+
+
 
     /**
      * @ORM\ManyToMany(targetEntity="T42\UserBundle\Entity\Group")
@@ -207,4 +219,50 @@ class User extends BaseUser
     {
         return $this->invitation;
     }    
+
+    /**
+     * Set birthDate
+     *
+     * @param \DateTime $birthDate
+     * @return User
+     */
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get birthDate
+     *
+     * @return \DateTime 
+     */
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    /**
+     * Set alternativeEmail
+     *
+     * @param string $alternativeEmail
+     * @return User
+     */
+    public function setAlternativeEmail($alternativeEmail)
+    {
+        $this->alternativeEmail = $alternativeEmail;
+    
+        return $this;
+    }
+
+    /**
+     * Get alternativeEmail
+     *
+     * @return string 
+     */
+    public function getAlternativeEmail()
+    {
+        return $this->alternativeEmail;
+    }
 }

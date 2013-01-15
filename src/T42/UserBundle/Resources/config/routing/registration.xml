@@ -8,6 +8,10 @@
         <default key="_controller">FOSUserBundle:Registration:register</default>
     </route>
 
+    <route id="fos_user_registration_registered" pattern="/registered">
+        <default key="_controller">FOSUserBundle:Registration:registered</default>
+    </route>
+
     <route id="fos_user_registration_register_with_code" pattern="/{code}">
         <default key="_controller">FOSUserBundle:Registration:registerWithCode</default>
     </route>

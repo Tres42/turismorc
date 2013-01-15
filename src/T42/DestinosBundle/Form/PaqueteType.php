@@ -26,6 +26,7 @@ class PaqueteType extends AbstractType
             ->add('titulo', null, array('attr'=> $attr))
             ->add('segmento', null, array('attr'=> $attr))
             ->add('lugares', null, array('attr'=> $attr))
+            ->add('resumen', 'textarea', array('attr'=> $attr))
             ->add('fechasDeSalida', 'collection', array(
                     'label'=>'Fechas de Salida',
                     'type' => 'fecha_de_salida',
@@ -33,7 +34,7 @@ class PaqueteType extends AbstractType
                         'label' => 'Fecha',
                         'required' => false,
                         'widget' => 'single_text',
-                        'format' => 'd/M/y'
+                        'format' => 'dd/MM/y'
                     ),
                     'allow_add' => true,
                     'allow_delete' => true,
@@ -41,7 +42,7 @@ class PaqueteType extends AbstractType
                 )
             )
             ->add('esGrupal', null, array('label'=>'Viaje Grupal'))
-            ->add('esPromocion', null, array('label'=>'Viaje Promocional'))
+            ->add('esDestacado', null, array('label'=>'Viaje Destacado'))
             ->add('observaciones', null, array('attr'=> $attr))
             ->add('tarifas', 'collection', array(
                     'label'=>'Tarifas',
@@ -57,7 +58,7 @@ class PaqueteType extends AbstractType
             ->add('serviciosIncluidos', new LinesToArrayFieldType(), array('label'=>'Servicios Incluidos', 'attr'=> $attr))
             ->add('serviciosNoIncluidos', new LinesToArrayFieldType(), array('label'=>'Servicios No Incluidos', 'attr'=> $attr))
             ->add('itinerario', 'ckeditor')
-            ->add('resumen', 'textarea', array('attr'=> $attr))
+            ->add('desactivar', null, array('label'=>'Desactivar'))
         ;
     }
 

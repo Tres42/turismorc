@@ -1,46 +1,95 @@
-<h1>Impresion de destinos</h1>
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{{ entity.titulo }} - Turismo Río Cuarto</title>
+    </head>
+    <body>
+        <img src="http://trc.t42.com.ar/images/wlogo.jpg" alt="Turismo R&iacute;o Cuarto" style="float: left;" />
+        <div style="text-align: center; padding: 25px 20px 20px;">
+            <h1>{{ entity.titulo }}</h1>
+            {% if entity.segmento %}
+                <h2>{{ entity.segmento.descripcion }}</h2>
+            {% endif %}
+        </div>
+        {% if entity.lugares is not empty %}
+            <div style="text-align: center;">
+            {% spaceless %}
+            {% for lugar in entity.lugares %}
+                {{ lugar.nombre }}
+                {% if not loop.last and loop.length > 1 %}
+                    &nbsp;&mdash;&nbsp;
+                {% endif %}
+            {% endfor %}
+            {% endspaceless %}
+            </div>
+        {% endif %}
 
-<table class="table">
-    <tbody>
-        <tr>
-            <th>Titulo</th>
-            <td>{{ entity.titulo }}</td>
-        </tr>
-        <tr>
-            <th>Fecha de Salida</th>
-            <td>{{ entity.fechaSalida|date('d/m/Y') }}</td>
-        </tr>
-        <tr>
-            <th>Es Grupal</th>
-            <td>{% if entity.esGrupal %} Si {% else %} No {% endif %}</td>
-        </tr>
-        <tr>
-            <th>Es Promocion</th>
-            <td>{% if entity.esPromocion %} Si {% else %} No {% endif %}</td>
-        </tr>
-        <tr>
-            <th>Observaciones</th>
-            <td>{{ entity.observaciones }}</td>
-        </tr>
-        <tr>
-            <th>Servicios Incluido</th>
-            <td>{{ entity.serviciosIncluidos }}</td>
-        </tr>
-        <tr>
-            <th>Servicios No Incluido</th>
-            <td>{{ entity.serviciosNoIncluidos }}</td>
-        </tr>
-        <tr>
-            <th>Itinerario</th>
-            <td>{{ entity.itinerario }}</td>
-        </tr>
-        <tr>
-            <th>Resumen</th>
-            <td>{{ entity.resumen }}</td>
-        </tr>
-        <tr>
-            <th>Categoria</th>
-            <td>{{ entity.categoria }}</td>
-        </tr>
-    </tbody>
-</table>
+        {% if entity.resumen %}
+            <div>
+                <h3>Resumen</h3>
+                <p class="lead">{{ entity.resumen }}</p>
+            </div>
+        {% endif %}
+
+        {% if entity.itinerario %}
+            <div>
+                <h3>Itinerario</h3>
+                {{ entity.itinerario|raw() }}
+            </div>
+        {% endif %}
+
+        {% if entity.fechasDeSalida is not empty%}
+            <div>
+                {% spaceless %}
+                <h3>Fechas de Salida</h3>
+                {% for fecha in entity.fechasDeSalida %}
+                    {{ fecha.fecha|date("d/m/Y") }}
+                    {% if not loop.last and loop.length > 1 %}
+                        ,&nbsp;
+                    {% endif %}
+                {% endfor %}
+                {% endspaceless %}
+            </div>
+        {% endif %}
+
+        {% if entity.serviciosIncluidos or entity.serviciosNoIncluidos %}
+            <div>
+                <h3>Servicios</h3>
+                {% if entity.serviciosIncluidos %}
+                <h4>Inclu&iacute;dos</h4>
+                <ul>
+                    {% for servicio in entity.serviciosIncluidos %}
+                        <li>{{ servicio }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if entity.serviciosNoIncluidos %}
+                <h4>No inclu&iacute;dos</h4>
+                <ul>
+                    {% for servicio in entity.serviciosNoIncluidos %}
+                        <li>{{ servicio }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        {% endif %}
+
+        {% if entity.tarifas is not empty %}
+            <div>
+                <h3>Tarifas</h3>
+                <ul>
+                    {% for tarifa in entity.tarifas %}
+                        <li>{{ tarifa.descripcion}}: <strong>{{ tarifa.precio }}</strong></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if entity.observaciones %}
+            <div class="margin-top: 25px;">
+                <small>{{ entity.observaciones }}</small>
+            </div>
+        {% endif %}
+    </body>
+</html>

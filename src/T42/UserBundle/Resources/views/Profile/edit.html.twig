@@ -2,6 +2,15 @@
 
 {% block title %}Editar {{user}} | {{ parent() }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter="cssrewrite"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/datepicker.css"
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block breadcrumb %}
     <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
     <li class="divider">/</li>
@@ -13,3 +22,21 @@
 {% block fos_user_content %}
 {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
 {% endblock fos_user_content %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        "bundles/t42backend/js/lib/bootstrap-datepicker/bootstrap-datepicker.js"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/locales/bootstrap-datepicker.es.js"
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+        <script type="text/javascript">
+            $(function () {
+                $('.date').datepicker({
+                    format: 'dd/mm/yyyy',
+                    language: 'es'
+                });
+            });
+        </script>
+{% endblock %}

@@ -37,6 +37,8 @@ class ProfileFormType extends BaseProfileFormType
                 ))
                 ->add('lastname', null, array('label' => 'Apellido', 'attr'=>$attr))
                 ->add('firstname', null, array('label' => 'Nombre', 'attr'=>$attr))
+                ->add('alternativeEmail', 'email', array('label' => 'Email Alternativo', 'attr'=>$attr, 'required' => False))
+                ->add('birthDate', 'date', array('label' => 'Fecha de Nacimiento', 'widget' => 'single_text', 'format' => 'dd/MM/y'))
                 ->add('address', null, array('label' => 'Direccion', 'attr'=>$attr))
                 ->add('phoneNumber', null, array('label' => 'Numero de Telefono', 'attr'=>$attr))
                 ->add('groups', null, array('label'=>'Grupos', 'attr'=>$attr))

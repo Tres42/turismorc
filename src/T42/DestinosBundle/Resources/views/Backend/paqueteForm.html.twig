@@ -1,4 +1,7 @@
 {{ form_row(form.titulo) }}
+{{ form_row(form.resumen) }}
+{{ form_row(form.segmento, {'attr': {'class': 'select2 span8'} }) }}
+{{ form_row(form.lugares, {'attr': {'class': 'select2 span8'} }) }}
 <div class="control-group{% if form.fechasDeSalida.vars.errors|length > 0 %} error{% endif %}">
     {{ form_label(form.fechasDeSalida, null, { 'label_attr': {'class': 'control-label collection-label'} }) }}
     <div class="controls">
@@ -12,10 +15,8 @@
         {{ form_errors(form.fechasDeSalida) }}
     </div>
 </div>
-{{ form_row(form.segmento, {'attr': {'class': 'select2 span8'} }) }}
-{{ form_row(form.lugares, {'attr': {'class': 'select2 span8'} }) }}
 {{ form_row(form.esGrupal) }}
-{{ form_row(form.esPromocion) }}
+{{ form_row(form.esDestacado) }}
 {{ form_row(form.observaciones) }}
 <div class="control-group{% if form.tarifas.vars.errors|length > 0 %} error{% endif %}">
     {{ form_label(form.tarifas, null, { 'label_attr': {'class': 'control-label collection-label'} }) }}

@@ -1,5 +1,14 @@
 {% extends 'T42DestinosBundle::layout.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets filter="cssrewrite"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/datepicker.css"
+    %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
 {% block breadcrumb %}
     <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
     <li class="divider">/</li>
@@ -53,18 +62,20 @@
                                 {% endif %}
                             {% endfor %}
                             <button class="btn btn-primary btn-block" type="submit">Filtrar</button>
+                            <a href="{{ path('t42_destinos_backend_index') }}" class="btn btn-inverse btn-block">Reestablecer</a>
                         </form>
                     </div>
                 </div>
             </div>
             <div class="span9">
+            {% if pagination is not empty %}                
                 <table class="table table-condensed table-striped">
                     <thead>
                         <tr>
                             <td>Titulo</td>
                             <td>Proxima Salida</td>
                             <td>Grupal</td>
-                            <td>Promocion</td>
+                            <td>Destacado</td>
                             <td>Segmento</td>
                         </tr>
                     </thead>
@@ -86,7 +97,7 @@
                                 {% endspaceless %}
                             </td>
                             <td>{% if paquete.esGrupal %} Si {% else %} No {% endif %}</td>
-                            <td>{% if paquete.esPromocion %} Si {% else %} No {% endif %}</td>
+                            <td>{% if paquete.esDestacado %} Si {% else %} No {% endif %}</td>
                             <td>{{ paquete.segmento }}</td>
                             <td>
                                 {% if is_granted('ROLE_PAQUETES_EDIT') %}
@@ -100,9 +111,33 @@
                 </table>
                 <div class="row-fluid">
                     <div class="span12">{{ pagination.render()|raw }}</div>
-                </div>                    
+                </div>
+            {% else %}
+                <div class="alert alert-error alert-block">
+                    <h4>Oops!</h4>
+                    <p>No se han encontrado art&iacute;culos en la base de datos...</p>
+                </div>
+            {% endif %}
             </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        "bundles/t42backend/js/lib/bootstrap-datepicker/bootstrap-datepicker.js"
+        "bundles/t42backend/js/lib/bootstrap-datepicker/locales/bootstrap-datepicker.es.js"
+    %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+        <script type="text/javascript">
+            $(function () {
+                $('.date').datepicker({
+                    format: 'dd/mm/yyyy',
+                    language: 'es'
+                });
+            });
+        </script>
 {% endblock %}

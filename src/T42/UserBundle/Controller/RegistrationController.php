@@ -30,7 +30,7 @@ class RegistrationController extends BaseRegistrationController
         $form->get('invitation')->setData($invitation);
 
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('T42UserBundle:Registration:register_with_code.html.' . $this->getEngine(), array(
                     'form' => $form->createView(),
                 ));
     }
@@ -55,9 +55,8 @@ class RegistrationController extends BaseRegistrationController
                 $this->container->get('session')->set('fos_user_send_confirmation_email/email', $user->getEmail());
                 $route = 'fos_user_registration_check_email';
             } else {
-                $authUser = true;
                 // Change the path to t42_backend_dashboard_index
-                $route = 't42_backend_dashboard_index';
+                $route = 'fos_user_registration_registered';
             }
 
             $message = $this->container->get('translator')->trans('registration.flash.user_created', array(), 'FOSUserBundle');
@@ -65,16 +64,17 @@ class RegistrationController extends BaseRegistrationController
             $url = $this->container->get('router')->generate($route);
             $response = new RedirectResponse($url);
 
-            if ($authUser) {
-                $this->authenticateUser($user, $response);
-            }
-
             return $response;
         }
 
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.' . $this->getEngine(), array(
                     'form' => $form->createView(),
                 ));
+    }
+
+
+    public function registeredAction() {
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:registered.html.' . $this->getEngine(), array());
     }
 
 }
