@@ -305,4 +305,12 @@ class Imagen
         unlink($tmpPath);
     }
 
+    /**
+     * Metodo necesario para mostrar el titulo de las imagenes
+     * en el campo imagenes del form de paquetes.
+     */
+    public function __toString()
+    {
+        return $this->titulo;
+    }
 }
