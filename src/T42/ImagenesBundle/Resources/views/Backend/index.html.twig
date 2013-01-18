@@ -6,14 +6,16 @@
     <li class="active">Imagenes</li>
 {% endblock %}
 
-{% block content %}    
+{% block content %}
     <div class="row">
         <div class="span12">
             <h2>Imagenes</h2>
             <div class="row">
                 <div class="span2">
                     <ul class="nav nav-tabs nav-stacked">
-                        <li><a href="{{ path('t42_imagenes_backend_new') }}"><i class="icon-plus"></i> Agregar nueva</a></li>
+                        {% if is_granted('ROLE_IMAGENES_ADD') %}
+                            <li><a href="{{ path('t42_imagenes_backend_new') }}"><i class="icon-plus"></i> Agregar nueva</a></li>
+                        {% endif %}
                         <li><a href="{{ path('t42_backend_dashboard_index') }}"><i class="icon-arrow-left"></i> Volver</a></li>
                     </ul>
                 </div>
@@ -30,17 +32,19 @@
                         <tr>
                             <td><a href="{{ path('t42_imagenes_backend_show', { 'id': entity.id }) }}">{{ entity.titulo }}</a></td>
                             <td>{{ entity.descripcion }}</td>
-                            <td>
-                                <a href="{{ path('t42_imagenes_backend_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
-                            </td>
+                            {% if is_granted('ROLE_IMAGENES_EDIT') %}
+                                <td>
+                                    <a href="{{ path('t42_imagenes_backend_edit', { 'id': entity.id }) }}"><i class="icon-pencil"></i></a>
+                                </td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
                 <div class="row-fluid">
                     <div class="span12">{{ pagination.render()|raw }}</div>
-                </div>                                        
-            </div>                                
+                </div>
+            </div>
             </div>
         </div>
     </div>

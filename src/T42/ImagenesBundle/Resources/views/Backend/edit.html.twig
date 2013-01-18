@@ -22,7 +22,9 @@
             </form>
             <form style="margin-top: -67px; margin-right: 150px;" class="pull-right" action="{{ path('t42_imagenes_backend_delete', { 'id': entity.id }) }}" method="post">
                 {{ form_widget(delete_form) }}
-                <button class="btn btn-small btn-danger" onclick="javascript: return confirm('Está seguro que desea eliminarlo?');" type="submit">Eliminar</button>
+                {% if is_granted('ROLE_IMAGENES_DELETE') %}                    
+                    <button class="btn btn-small btn-danger" onclick="javascript: return confirm('Está seguro que desea eliminarlo?');" type="submit">Eliminar</button>
+                {% endif %}
             </form>                
         </div>
     </div>       

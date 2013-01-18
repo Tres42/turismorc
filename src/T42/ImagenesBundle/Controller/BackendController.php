@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use JMS\SecurityExtraBundle\Annotation\Secure;
 use T42\ImagenesBundle\Entity\Imagen;
 use T42\ImagenesBundle\Form\ImagenType;
 
@@ -22,6 +23,7 @@ class BackendController extends Controller
      *
      * @Route("/")
      * @Template()
+     * @Secure(roles="ROLE_IMAGENES_VIEW")
      */
     public function indexAction()
     {
@@ -69,6 +71,7 @@ class BackendController extends Controller
      *
      * @Route("/new")
      * @Template()
+     * @Secure(roles="ROLE_IMAGENES_ADD")
      */
     public function newAction()
     {
@@ -115,6 +118,7 @@ class BackendController extends Controller
      *
      * @Route("/{id}/edit")
      * @Template()
+     * @Secure(roles="ROLE_IMAGENES_EDIT")
      */
     public function editAction($id)
     {
@@ -178,6 +182,7 @@ class BackendController extends Controller
      *
      * @Route("/{id}/delete")
      * @Method("POST")
+     * @Secure(roles="ROLE_IMAGENES_DELETE")
      */
     public function deleteAction(Request $request, $id)
     {

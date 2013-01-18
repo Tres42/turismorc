@@ -9,7 +9,7 @@
     <li class="divider">/</li>
     <li class="active">{{ entity.titulo }}</li>
 {% endblock %}
-    
+
 {% block content %}
     <div class="row-fluid">
         <div class="span6 offset3">
@@ -30,12 +30,14 @@
                 </tbody>
             </table>
             <div class="form-actions">
-                <a class="btn btn-primary" href="{{ path('t42_imagenes_backend_edit', { 'id': entity.id }) }}">Editar</a>
+                {% if is_granted('ROLE_IMAGENES_EDIT') %}
+                    <a class="btn btn-primary" href="{{ path('t42_imagenes_backend_edit', { 'id': entity.id }) }}">Editar</a>
+                {% endif %}
                 <a href="{{ path('t42_imagenes_backend_index') }}" class="btn btn-small">Volver</a>
-            </div>                
+            </div>
         </div>
     </div>
-{#     
+{#
 
     <ul class="record_actions">
         <li>
