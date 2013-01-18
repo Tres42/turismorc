@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * Class that inherits from GroupFormType.
  *
- * @author Cristian Tosco <ctosco@tres42.com.ar> 
+ * @author Cristian Tosco <ctosco@tres42.com.ar>
  */
 class GroupFormType extends BaseGroupFormType
 {
@@ -36,14 +36,19 @@ class GroupFormType extends BaseGroupFormType
                             'ROLE_USUARIOS_ADD' => 'Agregar usuarios',
                             'ROLE_USUARIOS_DELETE' => 'Eliminar usuarios',
                             'ROLE_USUARIOS_EDIT' => 'Editar usuarios',
-                            'ROLE_USER' => 'Usuario'
+                            'ROLE_USER' => 'Usuario',
+                            'ROLE_IMAGENES' => 'Administrar imagenes',
+                            'ROLE_IMAGENES_VIEW' => 'Ver imagenes',
+                            'ROLE_IMAGENES_ADD' => 'Agregar imagenes',
+                            'ROLE_IMAGENES_DELETE' => 'Eliminar imagenes',
+                            'ROLE_IMAGENES_EDIT' => 'Editar imagenes'
                         )
         ));
     }
-    
+
     public function getName()
     {
         return 't42_user_group';
     }
-    
+
 }
