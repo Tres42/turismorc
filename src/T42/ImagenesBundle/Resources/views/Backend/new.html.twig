@@ -1,0 +1,26 @@
+{% extends 'T42ImagenesBundle::layout.html.twig' %}
+
+{% block title %}Nuevo | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li><a href="{{ path('t42_imagenes_backend_index') }}">Imagenes</a></li>
+    <li class="divider">/</li>
+    <li class="active">Nuevo</li>
+{% endblock %}
+
+{% block content %}    
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            <form class="form-horizontal" action="{{ path('t42_imagenes_backend_create') }}" method="post" {{ form_enctype(form) }}>
+                <legend>Nueva Imagen</legend>
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <button class="btn btn-primary" type="submit">Guardar imagen</button>                    
+                    <a class="btn" href="{{ path('t42_imagenes_backend_index') }}">Cancelar</a>
+                </div>
+            </form>            
+        </div>
+    </div>
+{% endblock %}

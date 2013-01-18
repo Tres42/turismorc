@@ -1,3 +1,8 @@
+t42_imagenes:
+    resource: "@T42ImagenesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 t42_backend:
     resource: "@T42BackendBundle/Controller/"
     type:     annotation

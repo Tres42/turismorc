@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use T42\DestinosBundle\Entity\FechaDeSalida;
 use T42\DestinosBundle\Entity\Tarifa;
 use T42\DestinosBundle\Entity\Segmento;
+use T42\ImagenesBundle\Entity\Imagen;
 
 /**
  * T42\DestinosBundle\Entity\Paquete
@@ -93,6 +94,12 @@ class Paquete
      * @ORM\OneToMany(targetEntity="T42\DestinosBundle\Entity\Tarifa", mappedBy="paquete", cascade={"all"})
      */
     private $tarifas;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="T42\ImagenesBundle\Entity\Imagen")
+     * @ORM\JoinTable()
+     */
+    private $imagenes;
 
     /**
      * @ORM\Column(type="boolean", name="desactivar", nullable=true)
@@ -529,6 +536,30 @@ class Paquete
     }
 
     /**
+     * Asigna un valor de verdad si el paquete esta desactivado.
+     *
+     * @param boolean $desactivar
+     * @return Paquete
+     */
+    public function setDesactivar($desactivar)
+    {
+        $this->desactivar = $desactivar;
+
+        return $this;
+    }
+
+    /**
+     * getDesactivar
+     *
+     * @return boolean
+     */
+    public function getDesactivar()
+    {
+        return $this->desactivar;
+    }
+
+
+    /**
      * Add lugares
      *
      * @param \T42\DestinosBundle\Entity\Lugar $lugares
@@ -552,25 +583,35 @@ class Paquete
     }
 
     /**
-     * Asigna un valor de verdad si el paquete esta desactivado.
+     * Agrega una imagen al paquete
      *
-     * @param boolean $desactivar
+     * @param \T42\ImagenesBundle\Entity\Imagen $imagen
      * @return Paquete
      */
-    public function setDesactivar($desactivar)
+    public function addImagen(\T42\ImagenesBundle\Entity\Imagen $imagen)
     {
-        $this->desactivar = $desactivar;
+        $this->imagenes[] = $imagen;
 
         return $this;
     }
 
     /**
-     * getDesactivar
+     * Elimina una imagen del paquete
      *
-     * @return boolean
+     * @param \T42\ImagenesBundle\Entity\Imagen $imagen
      */
-    public function getDesactivar()
+    public function removeImagen(\T42\ImagenesBundle\Entity\Imagen $imagen)
     {
-        return $this->desactivar;
+        $this->imagenes->removeElement($imagen);
+    }
+
+    /**
+     * Get imagenes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImagenes()
+    {
+        return $this->imagenes;
     }
 }

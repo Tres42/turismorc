@@ -1,0 +1,31 @@
+{% extends 'T42ImagenesBundle::layout.html.twig' %}
+
+{% block title %}Editar | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li><a href="{{ path('t42_imagenes_backend_index') }}">Imagenes</a></li>
+    <li class="divider">/</li>
+    <li class="active">Editar</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            <form action="{{ path('t42_imagenes_backend_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+                {{ form_widget(edit_form) }}
+                <div class="form-actions">
+                    <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                    <a class="btn" href="{{ path('t42_imagenes_backend_index') }}">Cancelar</a>
+                </div>
+            </form>
+            <form style="margin-top: -67px; margin-right: 150px;" class="pull-right" action="{{ path('t42_imagenes_backend_delete', { 'id': entity.id }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                {% if is_granted('ROLE_IMAGENES_DELETE') %}                    
+                    <button class="btn btn-small btn-danger" onclick="javascript: return confirm('Está seguro que desea eliminarlo?');" type="submit">Eliminar</button>
+                {% endif %}
+            </form>                
+        </div>
+    </div>       
+{% endblock %}

@@ -41,6 +41,7 @@ class PaqueteType extends AbstractType
                     'by_reference' => false
                 )
             )
+            ->add('imagenes', null, array('attr'=> $attr, 'required'=>false))
             ->add('esGrupal', null, array('label'=>'Viaje Grupal'))
             ->add('esDestacado', null, array('label'=>'Viaje Destacado'))
             ->add('observaciones', null, array('attr'=> $attr))

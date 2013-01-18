@@ -1,0 +1,61 @@
+{% extends 'T42ImagenesBundle::layout.html.twig' %}
+
+{% block title %}{{entity.titulo}} | {{ parent() }}{% endblock %}
+
+{% block breadcrumb %}
+    <li><a href="{{ path('t42_backend_dashboard_index') }}">Panel</a></li>
+    <li class="divider">/</li>
+    <li><a href="{{ path('t42_imagenes_backend_index') }}">Imagenes</a></li>
+    <li class="divider">/</li>
+    <li class="active">{{ entity.titulo }}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="row-fluid">
+        <div class="span6 offset3">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>T&iacute;tulo</th>
+                        <td>{{ entity.titulo }}</td>
+                    </tr>
+                    <tr>
+                        <th>Descripci&oacute;n</th>
+                        <td>{{ entity.descripcion }}</td>
+                    </tr>
+                    <tr>
+                        <th>Path</th>
+                        <td>{{ entity.path }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-actions">
+                {% if is_granted('ROLE_IMAGENES_EDIT') %}
+                    <a class="btn btn-primary" href="{{ path('t42_imagenes_backend_edit', { 'id': entity.id }) }}">Editar</a>
+                {% endif %}
+                <a href="{{ path('t42_imagenes_backend_index') }}" class="btn btn-small">Volver</a>
+            </div>
+        </div>
+    </div>
+{#
+
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('t42_imagenes_backend_index') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('t42_imagenes_backend_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>
+            <form action="{{ path('t42_imagenes_backend_delete', { 'id': entity.id }) }}" method="post">
+                {{ form_widget(delete_form) }}
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+    </ul>
+#}
+{% endblock %}
